@@ -4,7 +4,9 @@ import re
 
 class ErrorDeAnalisis(Exception):
     """Error del lexer o del parser. El mensaje dice dónde ocurrió."""
-    # Cada pieza: (nombre del tipo, patrón). EL ORDEN IMPORTA.
+
+
+# Cada pieza: (nombre del tipo, patrón). EL ORDEN IMPORTA.
 TOKENS = [
     ("COMENTARIO", r"//[^\n]*"),          # va ANTES que OP_MULT
     ("NUM",        r"\d+(?:\.\d+)?"),     # 5, 3.14
@@ -28,6 +30,7 @@ PALABRAS_RESERVADAS = {"int", "float", "if", "else", "while"}
 # Une todos los patrones en uno solo: (?P<COMENTARIO>...)|(?P<NUM>...)|...
 PATRON = re.compile("|".join(f"(?P<{nombre}>{regex})" for nombre, regex in TOKENS))
 
+
 class Token:
     def __init__(self, tipo, valor, linea, columna):
         self.tipo = tipo        # por ejemplo "NUM"
@@ -37,6 +40,7 @@ class Token:
 
     def __repr__(self):
         return f"{self.tipo}({self.valor!r})"
+
 
 def tokenizar(codigo):
     """Devuelve la lista de tokens del código. Termina siempre con un token EOF."""
@@ -64,11 +68,12 @@ def tokenizar(codigo):
 
         tokens.append(Token(tipo, valor, linea, columna))
 
-    tokens.append(Token("EOF", "", linea, 0))   # marca de "se acabó el código"
+    columna_final = len(codigo) - inicio_de_linea + 1   # justo después del último carácter
+    tokens.append(Token("EOF", "", linea, columna_final))   # marca de "se acabó el código"
     return tokens
 
 
 if __name__ == "__main__":
-    #Puedes asignar a la variable el codigo que quieras tokenizar.
-    code = "int x = 5; // comentario\nif (x >= 2) x = x * 3;"
-    print(tokenizar(code))
+    # Puedes asignar a la variable el código que quieras tokenizar.
+    codigo = "int x = 5; // comentario\nif (x >= 2) x = x * 3;"
+    print(tokenizar(codigo))
