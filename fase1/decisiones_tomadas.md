@@ -1,6 +1,6 @@
 # TLP02 — Reglas y convenciones (P1)
 
-Oct 21, 2026 · @Carlo
+Oct 25, 2026 · @Carlo
 
 Este documento reúne las reglas y convenciones que el equipo va acordando para la parte de P1 (Parsers). Se actualiza cada vez que se toma una decisión nueva; lo que está aquí es lo vigente.
 
@@ -8,6 +8,9 @@ Este documento reúne las reglas y convenciones que el equipo va acordando para 
 
 | Fecha | Decisión |
 | --- | --- |
+| 2026-10-25 | Pruebas en `test_parser_formal.py`: 24 casos, incluido uno con comentarios `//` |
+| 2026-10-25 | Parser de mini-C: interfaz `parsear_codigo(codigo)`, árbol `nltk.Tree` con un nodo por no terminal y el `else` en un nodo `sino` |
+| 2026-10-25 | Errores del parser: `Línea N: se esperaba X y se encontró Y` |
 | 2026-10-21 | Abreviaturas de categorías del español: oracion, sn, sv, sp, det, n, v, adj, p |
 | 2026-10-21 | Motor genérico: gramática como diccionario, no terminales y palabras en minúscula, símbolo inicial `oracion` |
 | 2026-10-20 | `.venv` en la raíz del repositorio y fuera de Git; dependencias en `requirements.txt` |
@@ -98,6 +101,21 @@ El lexer convierte el código en una lista de tokens con tipo, valor, línea y c
 - **Errores:** un carácter fuera del lenguaje lanza `ErrorDeAnalisis` con el formato `Línea L, columna C: carácter no válido 'x'`. Las líneas y las columnas se cuentan desde 1.
 - **Una sola excepción** para todo el proyecto formal: `ErrorDeAnalisis`, definida en `lexer.py` y usada también por el parser y las pruebas.
 
+## Parser de mini-C (`parser_formal.py`)
+
+Parser descendente recursivo: una función por cada no terminal de la gramática (`programa()`, `sentencia()`, `declaracion()`, `tipo()`, …), con su regla EBNF como comentario encima. Recorre los tokens del lexer con cuatro herramientas: `actual()`, `ver(*tipos)`, `consumir(tipo)` y `error(mensaje)`.
+
+- **Interfaz:** `parsear_codigo(codigo)` devuelve un `nltk.Tree` o lanza `ErrorDeAnalisis`.
+- **Árbol:** cada nodo lleva el nombre de su no terminal; las hojas son los valores de los tokens (`x`, `5`, `+`). Se guardan los nombres, números, operadores (`+`, `*`, `>`, …), el tipo (`int`/`float`) y los `( )` de `factor`; no se guardan `;`, `=`, las llaves, los paréntesis de `if`/`while` ni las palabras `if`, `else`, `while`, porque el nodo ya dice qué regla es. La rama del `else` va dentro de un nodo `sino`, que no es un no terminal de la gramática: solo marca la rama para que se vea a qué `if` quedó pegada.
+- **Ejemplo:** `int x = 2 + 3 * 4;` da `(programa (declaracion (tipo int) x (expr (termino (factor 2)) + (termino (factor 3) * (factor 4)))))`. `3 * 4` queda en un solo `termino`: la multiplicación va primero.
+- **Else colgante:** se resuelve solo; `si()` mira si sigue un `else` justo después de su sentencia, así que el `if` más interno se lo queda.
+- **Errores:** `Línea N: se esperaba X y se encontró Y`. Si se acabó la entrada, dice «se encontró el fin del código». Ejemplo: `int y = 5` → `Línea 1: se esperaba ';' y se encontró el fin del código`.
+- **Sin recuperación de errores:** se detiene en el primer error (el modo pánico es opcional).
+
+### Pruebas (`test_parser_formal.py`)
+
+`pytest -v` dentro de `fase1/` debe dar **24 passed**: 11 códigos válidos (uno con comentarios `//`), 10 inválidos (incluido un carácter que rechaza el lexer), y una prueba cada una para la precedencia, el else colgante y la línea del error.
+
 ## Motor genérico y gramática del español
 
 El motor (`motor.py`) analiza con cualquier gramática escrita como diccionario, usa backtracking y devuelve todos los árboles posibles. P2 edita solo `gramatica_es.py` y prueba con `python motor.py`.
@@ -179,6 +197,6 @@ pip install -r requirements.txt
 
 - [ ] Confirmar con el equipo que los comentarios `//` entran en el alcance de mini-C.
 - [ ] Avisar a P2 de las reglas del motor y de la convención de minúsculas.
-- [ ] Avisar a P4 que el archivo es `parser_formal.py`, para los tests.
+- [ ] Avisar a P4 que el archivo es `parser_formal.py` (interfaz `parsear_codigo`, formato del árbol con nodo `sino`), para los tests.
 - [ ] Fase 2: decidir cómo se maneja la concordancia (duplicar no terminales o rasgos chequeados aparte).
 - [ ] Fase 2: decidir si `parsear_es()` devuelve el primer árbol o todos.
