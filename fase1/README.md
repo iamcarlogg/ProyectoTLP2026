@@ -4,15 +4,17 @@ Lexer y parser de mini-C, motor genérico para analizar oraciones del español y
 
 ## Archivos
 
-| Archivo                 | Qué hace                                                                                                                | Estado               |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------- | -------------------- |
-| `lexer.py`              | Convierte código mini-C en tokens (`tokenizar`) y define `ErrorDeAnalisis`.                                             | Listo (P1)           |
-| `motor.py`              | Motor descendente con backtracking; devuelve todos los árboles (`todos_los_arboles`, `parsear`).                        | Listo (P1)           |
-| `gramatica_es.py`       | Gramática extendida del español, como diccionario (`GRAMATICA`, `INICIAL`): concordancia, subordinadas y modificadores. | Listo: tarea 3 (P2)  |
-| `pruebas_base.py`       | Ejecuta las 20 oraciones y compara aceptación/rechazo con la validez esperada en español.                               | Listo (P2)           |
-| `parser_formal.py`      | Parser descendente recursivo de mini-C.                                                                                 | Listo (P1)           |
-| `test_parser_formal.py` | Pruebas con pytest del lexer y el parser formal (24 casos).                                                             | Listo (P1)           |
-| `decisiones_tomadas.md` | Registra acuerdos de nombres, estructura e interfaz del equipo.                                                         | Documento compartido |
+| Archivo                 | Qué hace                                                                                                                | Estado                 |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| `lexer.py`              | Convierte código mini-C en tokens (`tokenizar`) y define `ErrorDeAnalisis`.                                             | Listo (P1)             |
+| `motor.py`              | Motor descendente con backtracking; devuelve todos los árboles (`todos_los_arboles`, `parsear`).                        | Listo (P1)             |
+| `gramatica_es.py`       | Gramática extendida del español, como diccionario (`GRAMATICA`, `INICIAL`): concordancia, subordinadas y modificadores. | Listo: tarea 3 (P2)    |
+| `pruebas_base.py`       | Ejecuta las 20 oraciones iniciales y compara aceptación/rechazo con la validez esperada.                                | Listo: tareas 1–3 (P2) |
+| `pruebas_fallas.py`     | Ejecuta 24 pruebas adicionales y registra aceptación, número de árboles y fallas.                                       | Listo: tarea 4 (P2)    |
+| `analisis_explosion.py` | Cuenta alternativas, construye un control sin concordancia y cuantifica el crecimiento de reglas.                       | Listo: tarea 5 (P2)    |
+| `parser_formal.py`      | Parser descendente recursivo de mini-C.                                                                                 | Listo (P1)             |
+| `test_parser_formal.py` | Pruebas con pytest del lexer y el parser formal (24 casos).                                                             | Listo (P1)             |
+| `decisiones_tomadas.md` | Registra acuerdos de nombres, estructura e interfaz del equipo.                                                         | Documento compartido   |
 
 ## Entorno
 
@@ -43,6 +45,8 @@ python lexer.py          # tokeniza un ejemplo de mini-C (P1)
 python parser_formal.py  # ejemplo del parser de mini-C (P1)
 python motor.py          # ejemplos del español con la gramática actual (P1 + P2)
 python pruebas_base.py   # las 20 oraciones acordadas con la gramática extendida (P2)
+python pruebas_fallas.py # 24 casos extra para la tabla de fallas (P2)
+python analisis_explosion.py --probar  # crecimiento y pruebas comparativas (P2)
 pytest -v                # pruebas automatizadas del mini-C de P1: 24 passed
 ```
 
@@ -303,14 +307,158 @@ La ambigüedad no es necesariamente un error ni una prueba de que una CFG no pue
 - El vocabulario y los patrones sintácticos son deliberadamente reducidos; las 20 pruebas se eligieron para cubrir el alcance definido.
 - No se incluyen otras personas gramaticales, tiempos verbales, coordinación o todas las construcciones con pronombres relativos.
 - Algunas relaciones semánticas y restricciones de selección verbal no se comprueban.
-- Para la **tarea 4**, es importante agregar casos de estrés fuera del conjunto inicial y diferenciar _regla ausente_ de _limitación formal_. No debemos fabricar fallas ni afirmar que toda subordinación supera a las CFG.
+- En la **tarea 4** se agregaron 24 casos de estrés y se distinguió _regla ausente_ de _limitación formal_, sin inventar fallas ni atribuir a toda subordinación un nivel superior a Tipo 2.
 - Para la **tarea 5**, conservar el recuento de 22 producciones base frente a 93 extendidas, identificando cuáles se añadieron por concordancia y cuáles por otras construcciones.
+
+## Tabla de fallas y análisis formal — P2 (tarea 4, entrega: 28 de octubre de 2026)
+
+### Metodología
+
+Se conservaron **sin cambios las 20 oraciones de la tarea 1**, que la gramática extendida de la tarea 3 clasifica correctamente (16 válidas aceptadas y 4 inválidas rechazadas). Como ese conjunto ya no presenta discrepancias, se ejecutaron **24 casos adicionales** con `pruebas_fallas.py` para estudiar estructuras no cubiertas, controles positivos, errores reales de concordancia y ambigüedad. Las pruebas se realizaron con el mismo `motor.py` de P1, la versión extendida de `gramatica_es.py` y sin añadir reglas de propósito especial para superar los casos.
+
+```powershell
+# Desde la raíz del repositorio
+python fase1/pruebas_base.py
+python fase1/pruebas_fallas.py
+```
+
+| Medida                                    | Resultado de los 24 casos adicionales |
+| ----------------------------------------- | ------------------------------------: |
+| Oraciones gramaticalmente válidas         |                                    21 |
+| Oraciones gramaticalmente inválidas       |                                     3 |
+| Válidas aceptadas                         |                                    11 |
+| **Válidas rechazadas (falsos negativos)** |                                **10** |
+| Inválidas aceptadas (falsos positivos)    |                                     0 |
+| Inválidas rechazadas                      |                                     3 |
+| **Clasificaciones correctas**             |                             **14/24** |
+
+**Precaución metodológica:** la columna de validez se refiere a la _gramaticalidad sintáctica_; el significado puede ser extraño sin dejar de ser gramatical. La regla «implicada» se identificó mediante inspección de las producciones, porque el motor devuelve árboles completos o una lista vacía, pero no señala una producción fallida concreta.
+
+### Tabla de fallas: oraciones correctas rechazadas
+
+| Caso | Oración                              | Regla implicada o ausente                                           | Fenómeno y causa del rechazo                                                                                                                       | Jerarquía de Chomsky                                        |
+| ---: | ------------------------------------ | ------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+|    3 | El perro duerme con la gata.         | `sp → p sn`, pero `p → 'en'`                                        | Falta `con` en el vocabulario de preposiciones.                                                                                                    | **Tipo 2**: ampliable en CFG.                               |
+|    4 | El perro persigue a la gata.         | `sv_s → vt_s sn`                                                    | Falta la variante del objeto directo animado introducido por `a`. No basta con añadir la preposición a `p` sin revisar la construcción del objeto. | **Tipo 2**: ampliable en CFG.                               |
+|    5 | El perro no duerme.                  | `sv_s` y `sv_p` no admiten `no` antes del verbo.                    | Negación verbal ausente.                                                                                                                           | **Tipo 2**: ampliable en CFG.                               |
+|    6 | El perro duerme porque la gata come. | `oracion → sn_* sv_*`; `sv_*` no permite una cláusula causal final. | Subordinación causal no implementada (solo relativas).                                                                                             | **Tipo 2**: ampliable en CFG.                               |
+|    7 | El perro come y la gata duerme.      | `oracion` solo contiene una estructura `sn sv`.                     | Coordinación de dos oraciones ausente.                                                                                                             | **Tipo 2**: ampliable en CFG.                               |
+|    8 | El perro negro y grande duerme.      | `mod_ms` no admite `adj_ms 'y' adj` y no existe `grande`.           | Coordinación de adjetivos y vocabulario insuficiente.                                                                                              | **Tipo 2**: ampliable en CFG.                               |
+|    9 | El perro muy negro duerme.           | `mod_ms → adj_ms` pero no existe estructura `adv_grado adj_ms`.     | Intensificación adjetival no incluida.                                                                                                             | **Tipo 2**: ampliable en CFG.                               |
+|   10 | El perro negro pequeño duerme.       | `mod_ms` admite solo un adjetivo y `pequeño` no está en el léxico.  | Secuencia de adjetivos y vocabulario ausentes.                                                                                                     | **Tipo 2**: ampliable en CFG.                               |
+|   20 | ¿El perro duerme?                    | `motor.py` elimina puntos y comas, pero conserva `¿` y `?`.         | El primer terminal queda `¿el` y el último `duerme?`: problema de normalización; no demuestra un límite de las CFG.                                | **No es un salto de nivel**: problema del preprocesamiento. |
+|   21 | El perro y la gata duermen.          | `sn_ms` / `sn_fs` forman un SN simple, no un sujeto coordinado.     | Coordinación nominal y concordancia plural del conjunto ausentes.                                                                                  | **Tipo 2**: ampliable en CFG.                               |
+
+**Interpretación:** todos los rechazos anteriores se explican por reglas ausentes o por tratamiento de la entrada. No se ha demostrado que un lenguaje de Tipo 2 sea formalmente insuficiente para ninguna de esas oraciones. La longitud de una oración y la existencia de una subordinada, por sí mismas, no prueban que se necesite Tipo 1.
+
+### Rechazos correctos y controles
+
+|                    Caso | Oración                                | Resultado                 | Regla y explicación                                                                                                                                      |
+| ----------------------: | -------------------------------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|                      15 | El perro que la gata persiguen duerme. | Rechazada correctamente   | `rel_obj → 'que' sn_fs vt_s` exige verbo subordinado singular (`persigue`); `persiguen` pertenece a `vt_p`. Es concordancia dentro de la relativa.       |
+|                      16 | Los perros que comen duerme.           | Rechazada correctamente   | `oracion → sn_mp sv_p` obliga a un verbo principal plural, incluso con una relativa intermedia.                                                          |
+|                      24 | El perro duerme la carne.              | Rechazada correctamente   | No existe `sv_s → v_s sn`; `duerme` no está incluido entre los verbos transitivos `vt_s`.                                                                |
+| 1, 2, 11–14, 17, 22, 23 | Oraciones de control                   | Aceptadas                 | Confirman que funcionan ciertas relativas, concordancias, adverbios y preposiciones dentro del alcance.                                                  |
+|                      18 | La carne negra duerme.                 | Aceptada                  | Bien formada sintácticamente bajo nuestras reglas, aunque el significado resulte inusual. El parser **no** comprueba la plausibilidad semántica.         |
+|                      19 | El perro come la carne en la casa.     | Aceptada: **dos árboles** | `sp` puede depender de `sv_s` o de `sn` (objeto). Es **ambigüedad estructural**, no falla de reconocimiento ni evidencia de que la CFG sea insuficiente. |
+
+### Fallas históricas detectadas en la gramática base
+
+La gramática base de la tarea 2 tenía **11 discrepancias** respecto de las 20 oraciones iniciales. La extensión de la tarea 3 solucionó las once:
+
+| Oración original | Resultado de la base         | Motivo inicial                                    | Solución introducida en la tarea 3                                             |
+| ---------------- | ---------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------ |
+| 9                | Rechazada (incorrectamente)  | `sv` no admitía adverbios.                        | `sv_s → v_s adv`.                                                              |
+| 10               | Rechazada (incorrectamente)  | No existía `sp`.                                  | `sv_s → v_s sp`; `sp → p sn`.                                                  |
+| 11               | Rechazada (incorrectamente)  | Faltaban adverbio y frase preposicional juntos.   | `sv_p → v_p adv sp`.                                                           |
+| 12 y 13          | Rechazadas (incorrectamente) | No existían subordinadas relativas.               | `rel_suj_s`.                                                                   |
+| 14               | Rechazada (incorrectamente)  | Faltaban relativa plural y frase preposicional.   | `rel_suj_p` y `sp`.                                                            |
+| 15               | Rechazada (incorrectamente)  | No existía relativa de objeto.                    | `rel_obj`.                                                                     |
+| 16               | Aceptada (incorrectamente)   | `sn → det n` no diferenciaba género.              | `det_fs` y `n_ms` ya no pueden combinarse en `sn`.                             |
+| 17               | Aceptada (incorrectamente)   | `sn → det n adj` no diferenciaba género.          | `mod_ms` solo admite `adj_ms`.                                                 |
+| 18               | Aceptada (incorrectamente)   | `oracion → sn sv` no imponía número sujeto-verbo. | `oracion → sn_ms sv_s` obliga al sujeto singular a usar un predicado singular. |
+| 20               | Rechazada (incorrectamente)  | Sin `sp`, no se podía adjuntar «en la casa».      | `sp` dentro del SN o del SV; dos árboles.                                      |
+
+La oración original 19 («El perro que come la carne duermen») fue rechazada por ambas versiones, pero **solo la versión extendida permite atribuirlo a la concordancia principal** dentro del alcance de sus reglas; la versión base la rechazaba por no reconocer ninguna relativa.
+
+### Relación formal con la jerarquía de Chomsky
+
+- **Tipo 2 (gramáticas libres de contexto, CFG):** nuestras producciones (`A → ...`, con un único no terminal a la izquierda) pertenecen a este nivel. Su vocabulario reducido y las reglas no implementadas explican los falsos negativos documentados. La concordancia finita puede codificarse con categorías como `_ms`, `_fs`, `_mp`, `_fp` sin abandonar Tipo 2.
+- **Tipo 1 (gramáticas sensibles al contexto):** existen lenguajes que necesitan mayor poder expresivo; sin embargo, **ninguno de los ejemplos probados constituye una demostración de que la CFG sea insuficiente como clase formal**. «Concordancia a distancia» en nuestros ejemplos tampoco requiere Tipo 1 porque los rasgos comprobados son finitos.
+- **Ambigüedad:** el caso 19 produce dos análisis bajo una CFG de Tipo 2. Disponer de varios árboles es una propiedad de la gramática, no automáticamente un fallo ni evidencia de Tipo 1.
+- **Semántica y pragmática:** `La carne negra duerme` evidencia que reconocer sintaxis no equivale a entender plausibilidad o significado. Esa distinción no se traduce automáticamente en una categoría distinta de Chomsky.
+- **Dependencias cruzadas:** no se ha implementado ni verificado un caso que pruebe formalmente una dependencia cruzada no expresable por CFG. Debe indicarse como **no demostrado**, no atribuirlo artificialmente a un rechazo.
+
+**Conclusión de la tarea 4:** identificamos reglas ausentes, casos de concordancia que la CFG sí resuelve, ambigüedad reconocida y limitaciones de preprocesamiento. Es evidencia de los límites de _esta gramática controlada_, no una prueba de imposibilidad para todas las CFG. Para la tarea 5 se analizará por separado cuánto creció el conjunto de producciones (22 en la base; 93 en la extendida) y qué parte del crecimiento corresponde a la concordancia.
+
+## Explosión de reglas — P2 (tarea 5, entrega: 28 de octubre de 2026)
+
+### Objetivo y criterio de conteo
+
+Se estudia el crecimiento de **producciones** al ampliar una gramática libre de contexto (CFG) para el español y, especialmente, al codificar **concordancia de género y número** mediante categorías separadas. Para evitar confundir la concordancia con las nuevas subordinadas, los modificadores y el vocabulario, se comparan **tres versiones**:
+
+1. **Base (tarea 2):** gramática original de 7 no terminales, sin concordancia ni construcciones extendidas. El script conserva su diccionario como instantánea histórica, sin alterar el código operativo.
+2. **Control sin concordancia:** derivado **automáticamente de la gramática extendida** al fusionar las categorías de género y número y quitar producciones duplicadas. Retiene las familias de construcciones y las **mismas 25 palabras terminales** de la extendida. No es la misma gramática de la tarea 2.
+3. **Extendida con concordancia (tarea 3):** el contenido real de `gramatica_es.py`, con categorías `_ms`, `_fs`, `_mp`, `_fp`, verbos singulares/plurales y las producciones correspondientes.
+
+Cada alternativa del diccionario cuenta como **una producción**, incluido `[]` (ε). Por ejemplo `sn → det n | det n adj` suma dos. Las reglas de vocabulario también se cuentan: `n → 'perro' | 'gata'` suma dos. No se cuentan los pasos internos que hace el motor durante el backtracking.
+
+### Comparación cuantitativa
+
+| Versión                                  | No terminales | Producciones | Terminales distintos |
+| ---------------------------------------- | ------------: | -----------: | -------------------: |
+| Gramática base, tarea 2                  |             7 |           22 |                   17 |
+| Extendida **sin** concordancia (control) |            15 |           48 |                   25 |
+| Extendida **con** concordancia, tarea 3  |            34 |           93 |                   25 |
+
+**Descomposición:** de **22 a 48** hay **26 producciones adicionales** asociadas a ampliar las estructuras y el vocabulario. Comparando **48 y 93**, con el mismo vocabulario y las mismas familias de construcciones, hay **45 producciones adicionales** por representar rasgos de concordancia en las categorías. El aumento total de **22 a 93** es de **71 producciones**: la gramática final tiene **4,23 veces** tantas producciones como la base. Frente al control sin rasgos, tiene **1,94 veces** tantas.
+
+### ¿Dónde aparecen las 45 producciones adicionales?
+
+| Grupo funcional                               | Sin concordancia | Con concordancia | Aumento |
+| --------------------------------------------- | ---------------: | ---------------: | ------: |
+| Reglas de oración                             |                1 |                4 |      +3 |
+| Sintagma nominal y sus variantes              |                2 |                8 |      +6 |
+| Modificadores nominales                       |                8 |               32 |     +24 |
+| Subordinadas relativas                        |                2 |                6 |      +4 |
+| Sintagmas verbales                            |                8 |               16 |      +8 |
+| Léxico, adverbios y sintagmas preposicionales |               27 |               27 |       0 |
+| **Total**                                     |           **48** |           **93** | **+45** |
+
+La mayor duplicación se produce en los modificadores: la versión sin rasgos tiene **8 alternativas** de `mod` y la extendida necesita repetirlas como **8 por cada una de 4 combinaciones** (`mod_ms`, `mod_fs`, `mod_mp`, `mod_fp`): 32 alternativas. Los sintagmas verbales pasan de 8 a 16 por distinguir singular y plural. Los terminales no aumentan entre las dos gramáticas ampliadas: el aumento se debe a las **reglas de combinación**, no a introducir más palabras.
+
+**Ejemplo concreto de concordancia:**
+
+```text
+# Sin distincion (control)
+oracion → sn_tipo sv
+
+# Con distincion (gramatica extendida)
+oracion → sn_ms sv_s | sn_fs sv_s | sn_mp sv_p | sn_fp sv_p
+```
+
+El segundo caso impide que un sujeto singular se combine con un verbo plural, a costa de enumerar cuatro posibilidades. Esta técnica sigue siendo **CFG de Tipo 2**: cada producción tiene un solo no terminal a la izquierda. La multiplicación observada depende del diseño y del subconjunto de español que hemos elegido; **no demuestra que toda CFG deba crecer a esa tasa** ni que la concordancia finita requiera gramáticas de Tipo 1.
+
+### Cómo reproducir el estudio
+
+Agregar `analisis_explosion.py` junto a `gramatica_es.py` y `pruebas_base.py` en `fase1/`. Desde la raíz del repositorio:
+
+```powershell
+python fase1/analisis_explosion.py
+python fase1/analisis_explosion.py --probar
+```
+
+El primer comando compara tamaños y desglosa los 45 casos adicionales; el segundo además ejecuta las 20 oraciones iniciales con las tres gramáticas. **Resultado de control:** base **9/20**, ampliada sin concordancia **16/20** y extendida con concordancia **20/20** clasificaciones correctas. La versión sin concordancia ya reconoce las subordinadas y los modificadores, pero acepta cuatro oraciones incorrectas por no restringir el acuerdo entre palabras. Es una comprobación experimental sobre el conjunto seleccionado, no una medida de precisión para todo el español.
+
+### Conclusión formal
+
+El problema ilustrado es principalmente el **costo de especificación y mantenimiento**: incluir explícitamente género y número implica repetir alternativas en varias categorías, y ese esfuerzo aumenta al añadir nuevas combinaciones. Las producciones siguen siendo libres de contexto (Tipo 2). La gramática podría organizarse de otras formas y obtener otros conteos; nuestro experimento cuantifica **esta implementación**, no una cota universal para las CFG. Los rechazos documentados en la tarea 4 son mayoritariamente reglas ausentes, no imposibilidades formales demostradas.
 
 ## Limitaciones conocidas y siguientes pasos
 
 - La gramática **base** no controlaba concordancia ni reconocía las relativas, los adverbios y las frases preposicionales; esos casos ya están cubiertos en la **gramática extendida** para el conjunto de 20 pruebas.
 - El backtracking del motor de P1 puede tener costo exponencial en los casos más difíciles; se conserva sin modificar.
 - El parser de mini-C de P1 se detiene al detectar el primer error sintáctico.
-- **Tarea 4 de P2 (28 de octubre):** tabla de fallas y análisis formal de los casos no cubiertos por el subconjunto, además de comparar los resultados de la gramática base y la extendida.
-- **Tarea 5 de P2 (28 de octubre):** documentar sistemáticamente la multiplicación de reglas para concordancia (separándola del aumento por modificadores y subordinadas).
-- **Informe (30 de octubre):** compartir la sección de gramáticas, pruebas y límites con P4.
+- **Tarea 4 de P2:** tabla de fallas y análisis formal documentados en este README; 24 pruebas adicionales reproducibles con `pruebas_fallas.py`.
+- **Tarea 5 de P2 (28 de octubre):** completada; comparación 22/48/93 y desglose reproducible en `analisis_explosion.py`.
+- **Informe (30 de octubre):** compartir con P4 los resultados de las tareas 1–5, las tablas de fallas y la explosión de reglas.
