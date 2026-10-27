@@ -1,26 +1,29 @@
-"""Gramática de ejemplo del español.
-OJO: hay que reemplazarla por la gramática real (la edita P2).
+"""P2 — Producciones base del español (Fase 1).
 
-Cada regla: "nombre": [ [opción 1], [opción 2], ... ]
-Lo que no tiene reglas propias (como "perro") se trata como palabra.
-Sufijos: _ms masculino singular, _fs femenino singular, _mp masculino plural.
+Gramática inicial para el motor descendente recursivo de P1.
+Esta versión comprueba el orden básico de las palabras, pero todavía
+NO controla concordancia, subordinadas ni modificadores adverbiales
+/ preposicionales. Esos fenómenos se incorporan en la siguiente etapa.
+
+Interfaz acordada con P1: GRAMATICA (dict) e INICIAL (str).
+Las categorías y los terminales se escriben en minúsculas.
 """
 
 GRAMATICA = {
-    "oracion": [["sn", "sv"]],                        # sujeto + predicado
-    "sn":      [["sn_ms"], ["sn_fs"], ["sn_mp"]],
-    "sn_ms":   [["det_ms", "n_ms", "adj_ms"], ["det_ms", "n_ms"]],
-    "sn_fs":   [["det_fs", "n_fs"]],
-    "sn_mp":   [["det_mp", "n_mp"]],
-    "sv":      [["v", "sn"], ["v"]],
-    "det_ms":  [["el"]],
-    "det_fs":  [["la"]],
-    "det_mp":  [["los"]],
-    "n_ms":    [["perro"]],
-    "n_fs":    [["carne"]],
-    "n_mp":    [["perros"]],
-    "adj_ms":  [["negro"]],
-    "v":       [["come"], ["duerme"], ["comen"], ["duermen"]],
+    # Estructura de una oración: sujeto y predicado.
+    "oracion": [["sn", "sv"]],
+
+    # Sintagma nominal: determinante + sustantivo (+ adjetivo opcional).
+    "sn": [["det", "n"], ["det", "n", "adj"]],
+
+    # Sintagma verbal: verbo intransitivo o verbo con objeto directo.
+    "sv": [["v"], ["v", "sn"]],
+
+    # Vocabulario de la primera versión.
+    "det": [["el"], ["la"], ["los"], ["las"]],
+    "n": [["perro"], ["perros"], ["gata"], ["gatas"], ["carne"]],
+    "adj": [["negro"], ["negros"], ["negra"], ["negras"]],
+    "v": [["come"], ["comen"], ["duerme"], ["duermen"]],
 }
 
 INICIAL = "oracion"
