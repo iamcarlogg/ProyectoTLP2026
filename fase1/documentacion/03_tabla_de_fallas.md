@@ -66,3 +66,7 @@ python fase1/pruebas_fallas.py
 ## Conclusión
 
 Encontramos reglas ausentes, concordancias que la CFG sí resuelve, ambigüedad reconocida y un problema de preprocesamiento. Es evidencia de los límites de *esta gramática controlada*, no una prueba de que ninguna CFG pueda describir esas oraciones. El costo de la concordancia se mide en el [documento 4](04_explosion_de_reglas.md), y lo que sí rompe a una CFG se explica en el [documento 5](05_donde_si_falla_la_cfg.md).
+
+---
+
+← Anterior: [2. Gramática del español](02_gramatica_espanol.md) · [Índice de la Fase 1](../README.md) · Siguiente: [4. Explosión de reglas](04_explosion_de_reglas.md) →

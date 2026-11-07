@@ -90,3 +90,7 @@ Más precisamente, estos fenómenos caen en los lenguajes **ligeramente sensible
 - Pullum, G. K. y Gazdar, G. (1982). *Natural languages and context-free languages*. Linguistics and Philosophy, 4.
 - Shieber, S. M. (1985). *Evidence against the context-freeness of natural language*. Linguistics and Philosophy, 8.
 - Joshi, A. K. (1985). Lenguajes ligeramente sensibles al contexto y gramáticas de adjunción de árboles.
+
+---
+
+← Anterior: [4. Explosión de reglas](04_explosion_de_reglas.md) · [Índice de la Fase 1](../README.md) · Siguiente: [6. Demo con spaCy](06_demo_nlp.md) →

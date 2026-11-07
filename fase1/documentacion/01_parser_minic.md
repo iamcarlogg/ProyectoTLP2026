@@ -89,3 +89,7 @@ Parser descendente recursivo: una función por cada no terminal de la gramática
 | Precedencia | 1 | `2 + 3 * 4` agrupa `3 * 4` |
 | Else colgante | 1 | el `else` queda en el `if` interno |
 | Línea del error | 1 | el error de la segunda línea dice «Línea 2» |
+
+---
+
+[Índice de la Fase 1](../README.md) · Siguiente: [2. Gramática del español](02_gramatica_espanol.md) →

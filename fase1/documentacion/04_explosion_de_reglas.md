@@ -72,3 +72,7 @@ La versión sin concordancia ya reconoce subordinadas y modificadores, pero acep
 ## Conclusión formal
 
 El problema que se ilustra es el **costo de especificación y mantenimiento**: cada rasgo nuevo (persona, tiempo verbal, más géneros de palabras) multiplica las alternativas en varias categorías. Las producciones siguen siendo libres de contexto (Tipo 2). Otra forma de organizar la gramática daría otros conteos: el experimento mide **esta implementación**, no una cota para toda CFG.
+
+---
+
+← Anterior: [3. Tabla de fallas](03_tabla_de_fallas.md) · [Índice de la Fase 1](../README.md) · Siguiente: [5. Dónde sí falla una CFG](05_donde_si_falla_la_cfg.md) →

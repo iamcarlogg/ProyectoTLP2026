@@ -170,3 +170,7 @@ Dos árboles no es un error ni prueba que la CFG no alcance: son dos derivacione
 ### Precaución
 
 20/20 no significa que la gramática cubra el español: el set es pequeño y controlado. El aumento de 22 a 93 producciones muestra el costo de modelar variantes, pero **por sí solo no demuestra que el español no sea libre de contexto**. Eso se analiza en los documentos 3 y 4.
+
+---
+
+← Anterior: [1. Parser de mini-C](01_parser_minic.md) · [Índice de la Fase 1](../README.md) · Siguiente: [3. Tabla de fallas](03_tabla_de_fallas.md) →

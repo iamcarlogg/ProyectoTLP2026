@@ -147,3 +147,7 @@ La última fila es un punto de comparación: como la mayoría de las oraciones s
 La CFG es **exacta pero rígida**: dentro de su gramática no se equivoca, detecta errores y muestra la ambigüedad, pero cualquier palabra o estructura nueva la rompe. spaCy es **flexible pero aproximado**: procesa todo, incluidas las 9 oraciones correctas que la CFG rechaza, pero nunca rechaza por sí mismo y se equivoca en la estructura de las relativas y con señales superficiales como una mayúscula.
 
 Esto se conecta con el documento 5: la CFG no falla aquí por un límite de la jerarquía de Chomsky, sino por **cobertura**, porque escribir reglas para todo el español es inviable a mano. Los modelos estadísticos resuelven la cobertura aprendiendo de datos, a cambio de perder las garantías de una gramática formal.
+
+---
+
+← Anterior: [5. Dónde sí falla una CFG](05_donde_si_falla_la_cfg.md) · [Índice de la Fase 1](../README.md) · Siguiente: [informe final](../../informe/informe_fase1.pdf) →
