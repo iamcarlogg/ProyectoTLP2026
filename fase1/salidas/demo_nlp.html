@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CFG frente a spaCy</title>
+<!--
+  P3 - Plantilla de la demo. visualizar_nlp.py reemplaza el marcador DATOS
+  (más abajo, en el <script>) por los resultados de la CFG y de spaCy.
+  Todo el dibujo se hace aquí con JavaScript puro: no necesita internet.
+-->
+<style>
+  :root {
+    --fondo: #f4f5f8;
+    --tarjeta: #ffffff;
+    --borde: #e3e6ec;
+    --texto: #1c2233;
+    --suave: #5d6578;
+    --tenue: #9aa1b2;
+    --acento: #4f46e5;
+    --bien: #15803d;
+    --bien-fondo: #e8f6ed;
+    --mal: #c2410c;
+    --mal-fondo: #fdeee6;
+    /* colores por tipo de constituyente */
+    --c-raiz: #4f46e5;
+    --c-nominal: #2563eb;
+    --c-verbal: #059669;
+    --c-circ: #d97706;
+    --c-mod: #9333ea;
+    --c-otro: #64748b;
+    --mono: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  #panel { display: flex; flex-direction: column; gap: 14px; }
+  body { margin: 0; background: var(--fondo); color: var(--texto);
+         font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+
+  /* ---------- cabecera ---------- */
+  header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.92);
+           backdrop-filter: blur(8px); border-bottom: 1px solid var(--borde); }
+  .barra { display: flex; align-items: center; gap: 16px; padding: 12px 28px; flex-wrap: wrap; }
+  .barra h1 { font-size: 17px; margin: 0; font-weight: 700; letter-spacing: -.01em; }
+  .barra h1 span { color: var(--acento); }
+  .chip { font: 12px var(--mono); color: var(--suave); background: var(--fondo);
+          border: 1px solid var(--borde); border-radius: 999px; padding: 2px 10px; }
+  nav { margin-left: auto; display: flex; gap: 6px; align-items: center; }
+  nav button { border: 1px solid var(--borde); background: var(--tarjeta); color: var(--texto);
+               border-radius: 8px; min-width: 34px; height: 34px; font: inherit; font-weight: 600;
+               cursor: pointer; transition: all .15s; }
+  nav button:hover { border-color: var(--acento); color: var(--acento); }
+  nav button.activo { background: var(--acento); border-color: var(--acento); color: #fff; }
+  nav select { height: 34px; border: 1px solid var(--borde); border-radius: 8px; background: var(--tarjeta);
+               font: inherit; font-size: 14px; padding: 0 8px; max-width: 420px; color: var(--texto); }
+  .marcador { font-size: 13px; color: var(--suave); }
+  .marcador b { color: var(--texto); }
+  .atajo { font-size: 12px; color: var(--tenue); margin-left: 6px; }
+  @media (max-width: 1500px) { .atajo { display: none; } }
+
+  /* ---------- distribución ---------- */
+  .pagina { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 24px;
+            padding: 24px 28px 48px; max-width: 1900px; margin: 0 auto; }
+  .contenido { min-width: 0; display: flex; flex-direction: column; gap: 20px; }
+
+  .oracion-titulo { font-size: 30px; font-weight: 700; letter-spacing: -.02em; margin: 0; }
+  .oracion-titulo .num { color: var(--tenue); font-weight: 600; margin-right: 10px; }
+  .idea { margin: 6px 0 0; color: var(--suave); max-width: 900px; }
+
+  /* ---------- veredictos ---------- */
+  .veredictos { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+  .veredicto { background: var(--tarjeta); border: 1px solid var(--borde); border-radius: 14px;
+               padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+  .veredicto .rotulo { font-size: 12px; text-transform: uppercase; letter-spacing: .06em;
+                       color: var(--tenue); font-weight: 600; }
+  .veredicto .valor { font-size: 19px; font-weight: 700; }
+  .veredicto .nota { font-size: 13px; color: var(--suave); }
+  .sello { align-self: flex-start; margin-top: 4px; font-size: 12px; font-weight: 700;
+           border-radius: 999px; padding: 2px 10px; }
+  .sello.bien { color: var(--bien); background: var(--bien-fondo); }
+  .sello.mal { color: var(--mal); background: var(--mal-fondo); }
+
+  /* ---------- tarjetas de árboles ---------- */
+  .comparacion { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  @media (min-width: 1650px) { .comparacion { grid-template-columns: minmax(0,1.25fr) minmax(0,1fr); } }
+  .tarjeta { background: var(--tarjeta); border: 1px solid var(--borde); border-radius: 16px;
+             overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+  .tarjeta-cab { display: flex; align-items: center; gap: 12px; padding: 14px 18px;
+                 border-bottom: 1px solid var(--borde); flex-wrap: wrap; }
+  .tarjeta-cab h2 { margin: 0; font-size: 16px; }
+  .tarjeta-cab .sub { font-size: 13px; color: var(--tenue); }
+  .herramientas { margin-left: auto; display: flex; gap: 6px; align-items: center; }
+  .herramientas button, .selector button {
+    border: 1px solid var(--borde); background: var(--tarjeta); border-radius: 8px; height: 30px;
+    min-width: 30px; padding: 0 10px; font: inherit; font-size: 13px; cursor: pointer; color: var(--texto); }
+  .herramientas button:hover { border-color: var(--acento); color: var(--acento); }
+  .zoom-pct { font: 12px var(--mono); color: var(--tenue); width: 44px; text-align: right; }
+
+  .selector { display: flex; gap: 0; border: 1px solid var(--borde); border-radius: 9px; padding: 2px;
+              background: var(--fondo); }
+  .selector button { border: 0; background: transparent; height: 28px; font-weight: 600; color: var(--suave); }
+  .selector button.activo { background: var(--tarjeta); color: var(--acento); box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+
+  .lienzo { position: relative; height: 470px; background:
+            radial-gradient(circle, #dfe3ea 1px, transparent 1px) 0 0 / 22px 22px; cursor: grab; }
+  .lienzo.arrastrando { cursor: grabbing; }
+  .lienzo svg { width: 100%; height: 100%; display: block; user-select: none; }
+  .diferencia { padding: 10px 18px; font-size: 13px; color: var(--suave); border-top: 1px solid var(--borde);
+                background: #fafbfc; }
+  .diferencia b { color: var(--texto); }
+
+  .leyenda { display: flex; gap: 14px; flex-wrap: wrap; padding: 10px 18px; border-top: 1px solid var(--borde);
+             font-size: 12px; color: var(--suave); }
+  .leyenda i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px;
+               vertical-align: -1px; }
+
+  /* nodos del árbol CFG */
+  .nodo { cursor: pointer; }
+  .nodo rect { transition: filter .15s, stroke-width .15s; }
+  .nodo:hover rect { filter: brightness(1.06) drop-shadow(0 2px 4px rgba(0,0,0,.18)); }
+  .nodo text { font: 600 13px var(--mono); pointer-events: none; }
+  .nodo.palabra text { font: 700 15px system-ui, sans-serif; }
+  .nodo.sel rect { stroke: #111827 !important; stroke-width: 2.5px; }
+  .nodo.camino rect { filter: drop-shadow(0 0 6px rgba(79,70,229,.45)); }
+  .nodo.cubierta rect { fill: #eef2ff !important; stroke: var(--acento) !important; }
+  .rama { fill: none; stroke: #c3c9d5; stroke-width: 1.6; }
+  .rama.camino { stroke: var(--acento); stroke-width: 2.4; }
+  .rama.lexica { stroke-dasharray: 4 4; }
+  .entra { animation: entra .45s cubic-bezier(.2,.8,.2,1.2) both; }
+  .traza { stroke-dasharray: 3000; animation: traza .6s ease-out both; }
+  @keyframes entra { from { opacity: 0; transform: translateY(-10px) scale(.85); } to { opacity: 1; transform: none; } }
+  @keyframes traza { from { stroke-dashoffset: 3000; } to { stroke-dashoffset: 0; } }
+
+  /* estado rechazado */
+  .rechazo { height: 470px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+             gap: 14px; padding: 24px; text-align: center; }
+  .rechazo .icono { width: 64px; height: 64px; border-radius: 50%; background: var(--mal-fondo); color: var(--mal);
+                    display: grid; place-items: center; font-size: 30px; font-weight: 700;
+                    animation: entra .5s both; }
+  .rechazo h3 { margin: 0; font-size: 20px; color: var(--mal); }
+  .rechazo p { margin: 0; color: var(--suave); max-width: 460px; }
+  .fichas { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .ficha { font: 600 15px system-ui; padding: 6px 12px; border-radius: 10px; border: 1px solid var(--borde);
+           background: var(--tarjeta); animation: entra .4s both; }
+  .ficha.fuera { border-color: var(--mal); color: var(--mal); background: var(--mal-fondo); }
+  .ficha small { display: block; font: 11px var(--mono); color: inherit; opacity: .75; }
+
+  /* árbol de dependencias */
+  .dep-lienzo { padding: 8px 12px 4px; overflow-x: auto; }
+  .dep-lienzo svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+  .arco { fill: none; stroke: #94a3b8; stroke-width: 1.6; transition: stroke .15s, opacity .15s; }
+  .flecha { fill: #94a3b8; transition: fill .15s; }
+  .etq-arco rect { fill: #fff; stroke: #e2e8f0; }
+  .etq-arco text { font: 600 11.5px var(--mono); fill: var(--suave); }
+  .dep-palabra { cursor: pointer; }
+  .dep-palabra .caja { fill: transparent; transition: fill .15s; }
+  .dep-palabra:hover .caja { fill: #f1f5f9; }
+  .dep-palabra .txt { font: 700 16px system-ui, sans-serif; fill: var(--texto); }
+  .dep-palabra .pos { font: 600 11px var(--mono); }
+  .dep-palabra.error .txt { fill: var(--mal); }
+  .dep-palabra.sel .caja { fill: #eef2ff; stroke: var(--acento); }
+  .dep-on .arco { opacity: .25; }
+  .dep-on .arco.activo { opacity: 1; stroke: var(--acento); stroke-width: 2.4; }
+  .dep-on .flecha { opacity: .25; }
+  .dep-on .flecha.activo { opacity: 1; fill: var(--acento); }
+  .raiz-marca text { font: 700 11px var(--mono); fill: var(--acento); letter-spacing: .08em; }
+  .dep-pie { padding: 12px 18px; border-top: 1px solid var(--borde); font-size: 13px; color: var(--suave);
+             display: flex; flex-direction: column; gap: 4px; }
+  .dep-pie .err { color: var(--mal); font-weight: 600; }
+
+  /* ---------- panel de detalles ---------- */
+  aside { position: sticky; top: 84px; align-self: start; background: var(--tarjeta); border: 1px solid var(--borde);
+          border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 14px;
+          max-height: calc(100vh - 108px); overflow-y: auto; }
+  aside h2 { margin: 0; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--tenue); }
+  .vacio-panel { color: var(--suave); font-size: 14px; }
+  .vacio-panel ul { padding-left: 18px; margin: 8px 0 0; }
+  .det-titulo { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .insignia { font: 700 14px var(--mono); color: #fff; padding: 4px 10px; border-radius: 8px; }
+  .det-nombre { font-weight: 600; }
+  .bloque h3 { margin: 0 0 6px; font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--tenue); }
+  .regla { font: 13.5px/1.5 var(--mono); background: #f6f7fb; border: 1px solid var(--borde); border-radius: 8px;
+           padding: 8px 10px; word-break: break-word; }
+  .regla .flecha-r { color: var(--acento); font-weight: 700; padding: 0 4px; }
+  .alternativas { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+  .alternativas li { font: 12.5px var(--mono); padding: 5px 8px; border-radius: 6px; color: var(--suave);
+                     border: 1px solid transparent; }
+  .alternativas li.usada { color: var(--texto); background: #eef2ff; border-color: #c7d2fe; font-weight: 700; }
+  .alternativas li.usada::before { content: "✓ "; color: var(--acento); }
+  .tabla-det { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .tabla-det td { padding: 5px 0; border-bottom: 1px solid #f0f1f5; vertical-align: top; }
+  .tabla-det td:first-child { color: var(--tenue); width: 42%; }
+  .tabla-det code { font: 13px var(--mono); }
+
+  @media (max-width: 1100px) {
+    .pagina { grid-template-columns: 1fr; }
+    aside { position: static; max-height: none; }
+    .veredictos { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .barra, .pagina { padding-left: 16px; padding-right: 16px; }
+    .oracion-titulo { font-size: 22px; }
+    nav { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="barra">
+    <h1>CFG <span>frente a</span> spaCy</h1>
+    <span class="chip" id="modelo"></span>
+    <span class="marcador" id="marcador"></span>
+    <nav id="nav"></nav>
+    <span class="atajo">← → para cambiar de oración</span>
+  </div>
+</header>
+
+<div class="pagina">
+  <main class="contenido">
+    <div>
+      <h2 class="oracion-titulo" id="titulo"></h2>
+      <p class="idea" id="idea"></p>
+    </div>
+
+    <section class="veredictos" id="veredictos"></section>
+
+    <section class="comparacion">
+      <article class="tarjeta">
+        <div class="tarjeta-cab">
+          <h2>Nuestra CFG</h2><span class="sub">árbol de constituyentes</span>
+          <div class="selector" id="selector" hidden></div>
+          <div class="herramientas" id="herramientas">
+            <button id="zMenos" title="Alejar">−</button>
+            <span class="zoom-pct" id="zPct">100%</span>
+            <button id="zMas" title="Acercar">+</button>
+            <button id="zAjustar" title="Ajustar a la pantalla">Ajustar</button>
+          </div>
+        </div>
+        <div id="cfg"></div>
+        <div class="diferencia" id="diferencia" hidden></div>
+        <div class="leyenda" id="leyenda"></div>
+      </article>
+
+      <article class="tarjeta">
+        <div class="tarjeta-cab"><h2>spaCy</h2><span class="sub">árbol de dependencias</span></div>
+        <div class="dep-lienzo" id="dep"></div>
+        <div class="dep-pie" id="depPie"></div>
+      </article>
+    </section>
+  </main>
+
+  <aside>
+    <h2>Detalles</h2>
+    <div id="panel"></div>
+  </aside>
+</div>
+
+<script>
+// Los datos los inserta visualizar_nlp.py en lugar de este marcador.
+const DATOS = {"modelo": "es_core_news_md", "titulo": "Oraciones elegidas para la demo", "gramatica": {"oracion": [["sn_ms", "sv_s"], ["sn_fs", "sv_s"], ["sn_mp", "sv_p"], ["sn_fp", "sv_p"]], "sn": [["sn_ms"], ["sn_fs"], ["sn_mp"], ["sn_fp"]], "sn_ms": [["det_ms", "n_ms", "mod_ms"]], "sn_fs": [["det_fs", "n_fs", "mod_fs"]], "sn_mp": [["det_mp", "n_mp", "mod_mp"]], "sn_fp": [["det_fp", "n_fp", "mod_fp"]], "mod_ms": [[], ["adj_ms"], ["sp"], ["adj_ms", "sp"], ["rel_suj_s"], ["rel_obj"], ["adj_ms", "rel_suj_s"], ["adj_ms", "rel_obj"]], "mod_fs": [[], ["adj_fs"], ["sp"], ["adj_fs", "sp"], ["rel_suj_s"], ["rel_obj"], ["adj_fs", "rel_suj_s"], ["adj_fs", "rel_obj"]], "mod_mp": [[], ["adj_mp"], ["sp"], ["adj_mp", "sp"], ["rel_suj_p"], ["rel_obj"], ["adj_mp", "rel_suj_p"], ["adj_mp", "rel_obj"]], "mod_fp": [[], ["adj_fp"], ["sp"], ["adj_fp", "sp"], ["rel_suj_p"], ["rel_obj"], ["adj_fp", "rel_suj_p"], ["adj_fp", "rel_obj"]], "rel_suj_s": [["que", "sv_s"]], "rel_suj_p": [["que", "sv_p"]], "rel_obj": [["que", "sn_ms", "vt_s"], ["que", "sn_fs", "vt_s"], ["que", "sn_mp", "vt_p"], ["que", "sn_fp", "vt_p"]], "sv_s": [["v_s"], ["v_s", "adv"], ["v_s", "sp"], ["v_s", "adv", "sp"], ["vt_s", "sn"], ["vt_s", "sn", "adv"], ["vt_s", "sn", "sp"], ["vt_s", "sn", "adv", "sp"]], "sv_p": [["v_p"], ["v_p", "adv"], ["v_p", "sp"], ["v_p", "adv", "sp"], ["vt_p", "sn"], ["vt_p", "sn", "adv"], ["vt_p", "sn", "sp"], ["vt_p", "sn", "adv", "sp"]], "sp": [["p", "sn"]], "p": [["en"]], "adv": [["lentamente"], ["rápidamente"]], "det_ms": [["el"]], "det_fs": [["la"]], "det_mp": [["los"]], "det_fp": [["las"]], "n_ms": [["perro"], ["jardín"]], "n_fs": [["gata"], ["carne"], ["casa"]], "n_mp": [["perros"]], "n_fp": [["gatas"]], "adj_ms": [["negro"]], "adj_fs": [["negra"]], "adj_mp": [["negros"]], "adj_fp": [["negras"]], "v_s": [["come"], ["duerme"]], "v_p": [["comen"], ["duermen"]], "vt_s": [["come"], ["persigue"]], "vt_p": [["comen"], ["persiguen"]]}, "oraciones": [{"texto": "El perro negra duerme.", "correcta": false, "cfg": {"arboles": [], "desconocidas": []}, "spacy": {"palabras": [{"texto": "El", "pos": "DET", "genero": "Masc", "numero": "Sing", "dep": "det", "cabeza": 1}, {"texto": "perro", "pos": "PROPN", "genero": null, "numero": null, "dep": "nsubj", "cabeza": 3}, {"texto": "negra", "pos": "ADJ", "genero": "Fem", "numero": "Sing", "dep": "amod", "cabeza": 1}, {"texto": "duerme.", "pos": "VERB", "genero": null, "numero": "Sing", "dep": "ROOT", "cabeza": 3}], "arcos": [{"start": 0, "end": 1, "label": "det", "dir": "left"}, {"start": 1, "end": 3, "label": "nsubj", "dir": "left"}, {"start": 1, "end": 2, "label": "amod", "dir": "right"}], "raiz": {"texto": "duerme", "pos": "VERB", "indice": 3}, "errores": ["Gender: El=Masc / negra=Fem"]}, "idea": "Error de concordancia: la CFG la rechaza; spaCy la analiza, pero sus propios rasgos delatan el error."}, {"texto": "La perro come.", "correcta": false, "cfg": {"arboles": [], "desconocidas": []}, "spacy": {"palabras": [{"texto": "La", "pos": "DET", "genero": "Fem", "numero": "Sing", "dep": "det", "cabeza": 1}, {"texto": "perro", "pos": "PROPN", "genero": null, "numero": null, "dep": "nsubj", "cabeza": 2}, {"texto": "come.", "pos": "PROPN", "genero": null, "numero": null, "dep": "ROOT", "cabeza": 2}], "arcos": [{"start": 0, "end": 1, "label": "det", "dir": "left"}, {"start": 1, "end": 2, "label": "nsubj", "dir": "left"}], "raiz": {"texto": "come", "pos": "PROPN", "indice": 2}, "errores": []}, "idea": "Error que spaCy no detecta: toma «perro» por nombre propio y no le asigna género, así que no hay nada que comparar."}, {"texto": "El perro que come duerme.", "correcta": true, "cfg": {"arboles": [{"etiqueta": "oracion", "hijos": [{"etiqueta": "sn_ms", "hijos": [{"etiqueta": "det_ms", "hijos": [{"etiqueta": "el", "hoja": true}]}, {"etiqueta": "n_ms", "hijos": [{"etiqueta": "perro", "hoja": true}]}, {"etiqueta": "mod_ms", "hijos": [{"etiqueta": "rel_suj_s", "hijos": [{"etiqueta": "que", "hoja": true}, {"etiqueta": "sv_s", "hijos": [{"etiqueta": "v_s", "hijos": [{"etiqueta": "come", "hoja": true}]}]}]}]}]}, {"etiqueta": "sv_s", "hijos": [{"etiqueta": "v_s", "hijos": [{"etiqueta": "duerme", "hoja": true}]}]}]}], "desconocidas": []}, "spacy": {"palabras": [{"texto": "El", "pos": "DET", "genero": "Masc", "numero": "Sing", "dep": "det", "cabeza": 1}, {"texto": "perro", "pos": "NOUN", "genero": "Masc", "numero": "Sing", "dep": "ROOT", "cabeza": 1}, {"texto": "que", "pos": "PRON", "genero": null, "numero": null, "dep": "nsubj", "cabeza": 3}, {"texto": "come", "pos": "VERB", "genero": null, "numero": "Sing", "dep": "acl", "cabeza": 1}, {"texto": "duerme.", "pos": "ADJ", "genero": null, "numero": "Sing", "dep": "obj", "cabeza": 3}], "arcos": [{"start": 0, "end": 1, "label": "det", "dir": "left"}, {"start": 2, "end": 3, "label": "nsubj", "dir": "left"}, {"start": 1, "end": 3, "label": "acl", "dir": "right"}, {"start": 3, "end": 4, "label": "obj", "dir": "right"}], "raiz": {"texto": "perro", "pos": "NOUN", "indice": 1}, "errores": []}, "idea": "Relativa: la CFG la analiza bien con rel_suj_s; spaCy pone el sustantivo como raíz y etiqueta «duerme» como adjetivo."}, {"texto": "El perro no duerme.", "correcta": true, "cfg": {"arboles": [], "desconocidas": ["no"]}, "spacy": {"palabras": [{"texto": "El", "pos": "DET", "genero": "Masc", "numero": "Sing", "dep": "det", "cabeza": 1}, {"texto": "perro", "pos": "PROPN", "genero": null, "numero": null, "dep": "nsubj", "cabeza": 3}, {"texto": "no", "pos": "ADV", "genero": null, "numero": null, "dep": "advmod", "cabeza": 3}, {"texto": "duerme.", "pos": "VERB", "genero": null, "numero": "Sing", "dep": "ROOT", "cabeza": 3}], "arcos": [{"start": 0, "end": 1, "label": "det", "dir": "left"}, {"start": 1, "end": 3, "label": "nsubj", "dir": "left"}, {"start": 2, "end": 3, "label": "advmod", "dir": "left"}], "raiz": {"texto": "duerme", "pos": "VERB", "indice": 3}, "errores": []}, "idea": "Oración correcta fuera de la gramática: la CFG la rechaza porque no tiene regla para «no»; spaCy no tiene problema."}, {"texto": "El perro come la carne en la casa.", "correcta": true, "cfg": {"arboles": [{"etiqueta": "oracion", "hijos": [{"etiqueta": "sn_ms", "hijos": [{"etiqueta": "det_ms", "hijos": [{"etiqueta": "el", "hoja": true}]}, {"etiqueta": "n_ms", "hijos": [{"etiqueta": "perro", "hoja": true}]}, {"etiqueta": "mod_ms", "hijos": [{"etiqueta": "ε", "hoja": true, "vacio": true}]}]}, {"etiqueta": "sv_s", "hijos": [{"etiqueta": "vt_s", "hijos": [{"etiqueta": "come", "hoja": true}]}, {"etiqueta": "sn", "hijos": [{"etiqueta": "sn_fs", "hijos": [{"etiqueta": "det_fs", "hijos": [{"etiqueta": "la", "hoja": true}]}, {"etiqueta": "n_fs", "hijos": [{"etiqueta": "carne", "hoja": true}]}, {"etiqueta": "mod_fs", "hijos": [{"etiqueta": "sp", "hijos": [{"etiqueta": "p", "hijos": [{"etiqueta": "en", "hoja": true}]}, {"etiqueta": "sn", "hijos": [{"etiqueta": "sn_fs", "hijos": [{"etiqueta": "det_fs", "hijos": [{"etiqueta": "la", "hoja": true}]}, {"etiqueta": "n_fs", "hijos": [{"etiqueta": "casa", "hoja": true}]}, {"etiqueta": "mod_fs", "hijos": [{"etiqueta": "ε", "hoja": true, "vacio": true}]}]}]}]}]}]}]}]}]}, {"etiqueta": "oracion", "hijos": [{"etiqueta": "sn_ms", "hijos": [{"etiqueta": "det_ms", "hijos": [{"etiqueta": "el", "hoja": true}]}, {"etiqueta": "n_ms", "hijos": [{"etiqueta": "perro", "hoja": true}]}, {"etiqueta": "mod_ms", "hijos": [{"etiqueta": "ε", "hoja": true, "vacio": true}]}]}, {"etiqueta": "sv_s", "hijos": [{"etiqueta": "vt_s", "hijos": [{"etiqueta": "come", "hoja": true}]}, {"etiqueta": "sn", "hijos": [{"etiqueta": "sn_fs", "hijos": [{"etiqueta": "det_fs", "hijos": [{"etiqueta": "la", "hoja": true}]}, {"etiqueta": "n_fs", "hijos": [{"etiqueta": "carne", "hoja": true}]}, {"etiqueta": "mod_fs", "hijos": [{"etiqueta": "ε", "hoja": true, "vacio": true}]}]}]}, {"etiqueta": "sp", "hijos": [{"etiqueta": "p", "hijos": [{"etiqueta": "en", "hoja": true}]}, {"etiqueta": "sn", "hijos": [{"etiqueta": "sn_fs", "hijos": [{"etiqueta": "det_fs", "hijos": [{"etiqueta": "la", "hoja": true}]}, {"etiqueta": "n_fs", "hijos": [{"etiqueta": "casa", "hoja": true}]}, {"etiqueta": "mod_fs", "hijos": [{"etiqueta": "ε", "hoja": true, "vacio": true}]}]}]}]}]}]}], "desconocidas": []}, "spacy": {"palabras": [{"texto": "El", "pos": "DET", "genero": "Masc", "numero": "Sing", "dep": "det", "cabeza": 1}, {"texto": "perro", "pos": "PROPN", "genero": null, "numero": null, "dep": "nsubj", "cabeza": 2}, {"texto": "come", "pos": "VERB", "genero": null, "numero": "Sing", "dep": "ROOT", "cabeza": 2}, {"texto": "la", "pos": "DET", "genero": "Fem", "numero": "Sing", "dep": "det", "cabeza": 4}, {"texto": "carne", "pos": "NOUN", "genero": "Fem", "numero": "Sing", "dep": "obj", "cabeza": 2}, {"texto": "en", "pos": "ADP", "genero": null, "numero": null, "dep": "case", "cabeza": 7}, {"texto": "la", "pos": "DET", "genero": "Fem", "numero": "Sing", "dep": "det", "cabeza": 7}, {"texto": "casa.", "pos": "NOUN", "genero": "Fem", "numero": "Sing", "dep": "obl", "cabeza": 2}], "arcos": [{"start": 0, "end": 1, "label": "det", "dir": "left"}, {"start": 1, "end": 2, "label": "nsubj", "dir": "left"}, {"start": 3, "end": 4, "label": "det", "dir": "left"}, {"start": 2, "end": 4, "label": "obj", "dir": "right"}, {"start": 5, "end": 7, "label": "case", "dir": "left"}, {"start": 6, "end": 7, "label": "det", "dir": "left"}, {"start": 2, "end": 7, "label": "obl", "dir": "right"}], "raiz": {"texto": "come", "pos": "VERB", "indice": 2}, "errores": []}, "idea": "Ambigüedad: «en la casa» puede colgar del verbo (come en la casa) o del objeto (la carne de la casa). La CFG da los dos árboles; spaCy elige uno sin avisar."}]};
+
+// ================== vocabulario para mostrar nombres en español ==================
+const BASES = {
+  oracion: "Oración", sn: "Sintagma nominal", sv: "Sintagma verbal", sp: "Sintagma preposicional",
+  det: "Determinante", n: "Nombre (sustantivo)", v: "Verbo", vt: "Verbo transitivo", adj: "Adjetivo",
+  adv: "Adverbio", p: "Preposición", mod: "Modificadores del nombre",
+  rel_suj: "Relativa de sujeto", rel_obj: "Relativa de objeto",
+};
+const SUFIJOS = { ms: "masculino singular", fs: "femenino singular", mp: "masculino plural",
+                  fp: "femenino plural", s: "singular", p: "plural" };
+const POS = { DET: "Determinante", NOUN: "Sustantivo", PROPN: "Nombre propio", VERB: "Verbo", AUX: "Auxiliar",
+              ADJ: "Adjetivo", ADV: "Adverbio", ADP: "Preposición", PRON: "Pronombre",
+              SCONJ: "Conjunción subordinante", CCONJ: "Conjunción coordinante", NUM: "Número" };
+const DEP = { ROOT: "raíz de la oración", nsubj: "sujeto", obj: "objeto directo", iobj: "objeto indirecto",
+              det: "determinante", amod: "adjetivo que modifica a un nombre", advmod: "adverbio que modifica",
+              obl: "complemento circunstancial", case: "preposición que introduce", acl: "cláusula que modifica a un nombre",
+              xcomp: "complemento predicativo", mark: "marca de subordinación", flat: "parte de un nombre compuesto",
+              advcl: "cláusula adverbial", conj: "elemento coordinado", cc: "conjunción coordinante", nmod: "modificador nominal" };
+const RASGO = { Masc: "masculino", Fem: "femenino", Sing: "singular", Plur: "plural" };
+
+function separar(etiqueta) {             // "rel_suj_s" -> ["rel_suj", "s"]
+  const m = etiqueta.match(/^(.*)_(ms|fs|mp|fp|s|p)$/);
+  return m ? [m[1], m[2]] : [etiqueta, null];
+}
+function nombre(etiqueta) {
+  const [base, suf] = separar(etiqueta);
+  return (BASES[base] || etiqueta) + (suf ? ", " + SUFIJOS[suf] : "");
+}
+function grupo(etiqueta) {               // decide el color del nodo
+  const base = separar(etiqueta)[0];
+  if (base === "oracion") return "raiz";
+  if (["sn", "n", "det", "adj"].includes(base)) return "nominal";
+  if (["sv", "v", "vt"].includes(base)) return "verbal";
+  if (["sp", "p", "adv"].includes(base)) return "circ";
+  if (["mod", "rel_suj", "rel_obj"].includes(base)) return "mod";
+  return "otro";
+}
+const COLOR = {};
+for (const g of ["raiz", "nominal", "verbal", "circ", "mod", "otro"])
+  COLOR[g] = getComputedStyle(document.documentElement).getPropertyValue("--c-" + g).trim();
+const NOMBRE_GRUPO = { raiz: "Oración", nominal: "Nominal", verbal: "Verbal", circ: "Preposicional / adverbial", mod: "Modificador / relativa" };
+
+// ================== utilidades SVG ==================
+const NS = "http://www.w3.org/2000/svg";
+function el(tag, attrs = {}, padre) {
+  const e = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+  if (padre) padre.appendChild(e);
+  return e;
+}
+function h(tag, attrs = {}, ...hijos) {   // crea elementos HTML; el texto va con textContent (seguro)
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") e.className = v; else if (k === "text") e.textContent = v; else e.setAttribute(k, v);
+  }
+  for (const x of hijos) e.append(x);
+  return e;
+}
+function anchoTexto(texto, px = 7.9) { return texto.length * px; }
+
+// ================== estado ==================
+let actual = 0, arbolActual = 0, vista = { x: 0, y: 0, k: 1 }, limites = null;
+
+// ================== árbol de la CFG ==================
+function distribuir(raiz) {
+  // 1) profundidad de cada nodo y lista de hojas en orden
+  const hojas = [], nodos = [];
+  (function recorrer(n, d, padre) {
+    n.d = d; n.padre = padre; nodos.push(n);
+    if (n.hoja) hojas.push(n); else n.hijos.forEach(c => recorrer(c, d + 1, n));
+  })(raiz, 0, null);
+  const prof = Math.max(...hojas.map(x => x.d));
+  // 2) las palabras van todas en la fila de abajo, en el orden de la oración
+  let x = 0;
+  for (const hoja of hojas) {
+    const ancho = Math.max(78, anchoTexto(hoja.etiqueta, 9.5) + 34);
+    hoja.x = x + ancho / 2; x += ancho;
+    hoja.fila = prof;
+  }
+  // 3) cada nodo interno queda centrado sobre sus hijos
+  (function centrar(n) {
+    if (n.hoja) return;
+    n.hijos.forEach(centrar);
+    n.x = (n.hijos[0].x + n.hijos[n.hijos.length - 1].x) / 2;
+    n.fila = n.d;
+  })(raiz);
+  for (const n of nodos) {
+    n.y = n.fila * 78;
+    n.ancho = n.hoja ? anchoTexto(n.etiqueta, 9.5) + 22 : anchoTexto(n.etiqueta) + 22;
+  }
+  return { nodos, ancho: x, alto: prof * 78 };
+}
+
+function palabrasDe(n) {                 // palabras que cubre un nodo
+  if (n.hoja) return n.vacio ? [] : [n.etiqueta];
+  return n.hijos.flatMap(palabrasDe);
+}
+
+function dibujarCFG() {
+  const o = DATOS.oraciones[actual], cont = document.getElementById("cfg");
+  cont.innerHTML = "";
+  const arboles = o.cfg.arboles;
+  document.getElementById("herramientas").style.visibility = arboles.length ? "visible" : "hidden";
+  document.getElementById("leyenda").hidden = !arboles.length;
+
+  // selector de árboles (solo si hay ambigüedad)
+  const sel = document.getElementById("selector");
+  sel.innerHTML = ""; sel.hidden = arboles.length < 2;
+  arboles.forEach((_, i) => {
+    const b = h("button", { class: i === arbolActual ? "activo" : "", text: "Árbol " + (i + 1) });
+    b.onclick = () => { arbolActual = i; dibujarCFG(); mostrarAyuda(); };
+    sel.append(b);
+  });
+  dibujarDiferencia(arboles);
+
+  if (!arboles.length) { dibujarRechazo(o, cont); return; }
+
+  const raiz = JSON.parse(JSON.stringify(arboles[arbolActual]));  // copia: distribuir() agrega campos
+  const { nodos, ancho, alto } = distribuir(raiz);
+  limites = { x: -40, y: -40, w: ancho + 80, h: alto + 80 };
+
+  const lienzo = h("div", { class: "lienzo" });
+  cont.append(lienzo);
+  const svg = el("svg", {}, lienzo);
+  const capa = el("g", {}, svg);
+  const ramas = el("g", {}, capa), capaNodos = el("g", {}, capa);
+
+  for (const n of nodos) {
+    if (!n.padre) continue;
+    const p = n.padre, y1 = p.y + 15, y2 = n.y - 15, ym = (y1 + y2) / 2;
+    n.rama = el("path", {
+      d: `M${p.x},${y1} C${p.x},${ym} ${n.x},${ym} ${n.x},${y2}`,
+      class: "rama traza" + (n.hoja && n.y - p.y > 78 ? " lexica" : ""),
+      style: `animation-delay:${n.d * 70}ms`,
+    }, ramas);
+  }
+  for (const n of nodos) {
+    const g = el("g", { class: "nodo" + (n.hoja ? " palabra" : ""), transform: `translate(${n.x},${n.y})` }, capaNodos);
+    const dentro = el("g", { class: "entra", style: `animation-delay:${n.d * 70}ms` }, g);
+    const color = n.hoja ? null : COLOR[grupo(n.etiqueta)];
+    const preterminal = !n.hoja && n.hijos.every(c => c.hoja);
+    el("rect", {
+      x: -n.ancho / 2, y: -15, width: n.ancho, height: 30, rx: n.hoja ? 8 : 15,
+      fill: n.hoja ? (n.vacio ? "#f8fafc" : "#fff") : preterminal ? color + "1f" : color,
+      stroke: n.hoja ? (n.vacio ? "#cbd5e1" : "#cfd5df") : color, "stroke-width": 1.5,
+      "stroke-dasharray": n.vacio ? "3 3" : "none",
+    }, dentro);
+    const t = el("text", { "text-anchor": "middle", dy: "0.35em",
+      fill: n.hoja ? (n.vacio ? "#94a3b8" : "#1c2233") : preterminal ? color : "#fff" }, dentro);
+    t.textContent = n.etiqueta;
+    n.g = g;
+    g.addEventListener("click", ev => { ev.stopPropagation(); seleccionarNodo(n, nodos); });
+  }
+
+  activarZoom(lienzo, svg, capa);
+  ajustar();
+  dibujarLeyenda();
+}
+
+function dibujarRechazo(o, cont) {
+  const palabras = o.texto.toLowerCase().replace(/[.,]/g, "").split(/\s+/);
+  const fuera = new Set(o.cfg.desconocidas);
+  const fichas = h("div", { class: "fichas" });
+  palabras.forEach((p, i) => {
+    const f = h("span", { class: "ficha" + (fuera.has(p) ? " fuera" : ""), style: `animation-delay:${i * 60}ms` }, p);
+    f.append(h("small", { text: fuera.has(p) ? "fuera del vocabulario" : "en el vocabulario" }));
+    fichas.append(f);
+  });
+  const explicacion = fuera.size
+    ? `La gramática no conoce ${[...fuera].map(p => "«" + p + "»").join(", ")}. Sin una regla que la genere, ninguna derivación puede llegar a esta oración.`
+    : "Todas las palabras están en el vocabulario: el problema es cómo se combinan. Ninguna secuencia de reglas, empezando en «oracion», produce esta oración.";
+  cont.append(h("div", { class: "rechazo" },
+    h("div", { class: "icono", text: "✕" }), h("h3", { text: "Rechazada" }),
+    h("p", { text: explicacion }), fichas));
+}
+
+function dibujarDiferencia(arboles) {
+  // En la ambigüedad, explica de qué nodo cuelga cada sintagma preposicional (sp)
+  const caja = document.getElementById("diferencia");
+  caja.hidden = arboles.length < 2;
+  if (arboles.length < 2) return;
+  const describe = (arbol) => {
+    const res = [];
+    (function buscar(n, padre) {
+      if (n.hoja) return;
+      if (n.etiqueta === "sp" && padre) res.push(padre.etiqueta);
+      n.hijos.forEach(c => buscar(c, n));
+    })(arbol, null);
+    return res;
+  };
+  const frase = (p) => p.startsWith("sv") ? "del verbo (" + p + ")" : p.startsWith("mod") ? "del sustantivo objeto (" + p + ")" : "de " + p;
+  const sp = describe(arboles[arbolActual]);
+  caja.innerHTML = "";
+  caja.append(h("b", { text: `Árbol ${arbolActual + 1} de ${arboles.length}: ` }),
+    sp.length ? `el sintagma preposicional cuelga ${frase(sp[0])}.` : "estructura alternativa.");
+}
+
+function dibujarLeyenda() {
+  const ley = document.getElementById("leyenda");
+  ley.innerHTML = "";
+  for (const [g, txt] of Object.entries(NOMBRE_GRUPO)) {
+    const i = h("i"); i.style.background = COLOR[g];
+    ley.append(h("span", {}, i, txt));
+  }
+  const i1 = h("i"); i1.style.cssText = `background:${COLOR.nominal}1f;border:1.5px solid ${COLOR.nominal}`;
+  ley.append(h("span", {}, i1, "Preterminal (lleva a una palabra)"));
+  ley.append(h("span", { text: "Clic en un nodo para ver su regla · rueda para zoom · arrastrar para mover" }));
+}
+
+// ---------- zoom y desplazamiento ----------
+function aplicarVista() {
+  const capa = document.querySelector("#cfg svg > g");
+  if (capa) capa.setAttribute("transform", `translate(${vista.x},${vista.y}) scale(${vista.k})`);
+  document.getElementById("zPct").textContent = Math.round(vista.k * 100) + "%";
+}
+function ajustar() {
+  const svg = document.querySelector("#cfg svg");
+  if (!svg || !limites) return;
+  const W = svg.clientWidth, H = svg.clientHeight;
+  const k = Math.min(W / limites.w, H / limites.h, 1.5);
+  vista = { k, x: (W - limites.w * k) / 2 - limites.x * k, y: (H - limites.h * k) / 2 - limites.y * k };
+  aplicarVista();
+}
+function zoomEn(factor, cx, cy) {
+  const k = Math.min(4, Math.max(0.2, vista.k * factor));
+  vista.x = cx - (cx - vista.x) * (k / vista.k);
+  vista.y = cy - (cy - vista.y) * (k / vista.k);
+  vista.k = k; aplicarVista();
+}
+function activarZoom(lienzo, svg) {
+  lienzo.addEventListener("wheel", ev => {
+    ev.preventDefault();
+    const r = svg.getBoundingClientRect();
+    zoomEn(ev.deltaY < 0 ? 1.12 : 1 / 1.12, ev.clientX - r.left, ev.clientY - r.top);
+  }, { passive: false });
+  let inicio = null;
+  lienzo.addEventListener("pointerdown", ev => {
+    if (ev.target.closest(".nodo")) return;
+    inicio = { x: ev.clientX - vista.x, y: ev.clientY - vista.y };
+    lienzo.classList.add("arrastrando"); lienzo.setPointerCapture(ev.pointerId);
+  });
+  lienzo.addEventListener("pointermove", ev => {
+    if (!inicio) return;
+    vista.x = ev.clientX - inicio.x; vista.y = ev.clientY - inicio.y; aplicarVista();
+  });
+  const soltar = () => { inicio = null; lienzo.classList.remove("arrastrando"); };
+  lienzo.addEventListener("pointerup", soltar);
+  lienzo.addEventListener("pointercancel", soltar);
+  lienzo.addEventListener("click", ev => { if (!ev.target.closest(".nodo")) { limpiarSeleccion(); mostrarAyuda(); } });
+}
+function centro() { const s = document.querySelector("#cfg svg"); return [s.clientWidth / 2, s.clientHeight / 2]; }
+document.getElementById("zMas").onclick = () => zoomEn(1.25, ...centro());
+document.getElementById("zMenos").onclick = () => zoomEn(1 / 1.25, ...centro());
+document.getElementById("zAjustar").onclick = ajustar;
+window.addEventListener("resize", () => { ajustar(); });
+
+// ---------- selección de un nodo y panel de reglas ----------
+function limpiarSeleccion() {
+  document.querySelectorAll("#cfg .sel, #cfg .camino, #cfg .cubierta").forEach(e => e.classList.remove("sel", "camino", "cubierta"));
+  document.querySelectorAll("#dep .sel").forEach(e => e.classList.remove("sel"));
+  document.getElementById("dep").classList.remove("dep-on");
+  document.querySelectorAll("#dep .activo").forEach(e => e.classList.remove("activo"));
+}
+
+function seleccionarNodo(n, nodos) {
+  limpiarSeleccion();
+  n.g.classList.add("sel");
+  // camino desde la raíz hasta el nodo
+  for (let a = n; a; a = a.padre) { a.g.classList.add("camino"); if (a.rama) a.rama.classList.add("camino"); }
+  // hojas que cubre
+  (function marcar(x) { if (x.hoja) x.g.classList.add("cubierta"); else x.hijos.forEach(marcar); })(n);
+  n.g.classList.remove("cubierta");
+  panelNodo(n);
+}
+
+function panelNodo(n) {
+  const panel = document.getElementById("panel");
+  panel.innerHTML = "";
+  if (n.hoja) {
+    const p = n.padre;
+    panel.append(
+      h("div", { class: "det-titulo" }, h("span", { class: "insignia", text: n.vacio ? "ε" : n.etiqueta, style: "background:#334155" }),
+        h("span", { class: "det-nombre", text: n.vacio ? "Producción vacía" : "Palabra (terminal)" })),
+      bloque("Regla aplicada", regla(p.etiqueta, n.vacio ? [] : ["'" + n.etiqueta + "'"])),
+      h("p", { class: "vacio-panel", text: n.vacio
+        ? `«${p.etiqueta}» no genera ninguna palabra aquí: se usó su alternativa vacía (ε).`
+        : `«${n.etiqueta}» la genera el preterminal ${p.etiqueta}: ${nombre(p.etiqueta).toLowerCase()}.` }),
+    );
+    return;
+  }
+  const usada = n.hijos.filter(c => !c.vacio).map(c => c.hoja ? "'" + c.etiqueta + "'" : c.etiqueta);
+  const crudo = n.hijos.filter(c => !c.vacio).map(c => c.etiqueta);
+  const alternativas = h("ul", { class: "alternativas" });
+  for (const prod of DATOS.gramatica[n.etiqueta] || []) {
+    const esta = prod.length === crudo.length && prod.every((s, i) => s === crudo[i]);
+    const txt = prod.length ? prod.map(s => DATOS.gramatica[s] ? s : "'" + s + "'").join(" ") : "ε";
+    alternativas.append(h("li", { class: esta ? "usada" : "", text: txt }));
+  }
+  const cubre = palabrasDe(n);
+  panel.append(
+    h("div", { class: "det-titulo" },
+      h("span", { class: "insignia", text: n.etiqueta, style: `background:${COLOR[grupo(n.etiqueta)]}` }),
+      h("span", { class: "det-nombre", text: nombre(n.etiqueta) })),
+    bloque("Regla aplicada", regla(n.etiqueta, usada)),
+    bloque("Cubre", h("div", { class: "regla", text: cubre.length ? "«" + cubre.join(" ") + "»" : "(nada: producción vacía)" })),
+    bloque(`Alternativas de ${n.etiqueta} en la gramática (${(DATOS.gramatica[n.etiqueta] || []).length})`, alternativas),
+  );
+}
+
+function regla(izq, der) {
+  const r = h("div", { class: "regla" });
+  r.append(izq, h("span", { class: "flecha-r", text: "→" }), der.length ? der.join(" ") : "ε");
+  return r;
+}
+function bloque(titulo, contenido) { return h("div", { class: "bloque" }, h("h3", { text: titulo }), contenido); }
+
+function mostrarAyuda() {
+  const o = DATOS.oraciones[actual];
+  const panel = document.getElementById("panel");
+  panel.innerHTML = "";
+  const ul = h("ul");
+  ul.append(h("li", { text: "Clic en un nodo de la CFG: la regla que se aplicó y sus alternativas." }),
+            h("li", { text: "Clic en una palabra de spaCy: categoría, rasgos y relación." }),
+            h("li", { text: "← y → cambian de oración." }));
+  panel.append(h("div", { class: "vacio-panel" }, h("b", { text: "Nada seleccionado." }), ul));
+  const t = h("table", { class: "tabla-det" });
+  const fila = (a, b) => t.append(h("tr", {}, h("td", { text: a }), h("td", { text: b })));
+  fila("Palabras", String(o.spacy.palabras.length));
+  fila("Árboles de la CFG", String(o.cfg.arboles.length));
+  fila("Producciones de la gramática", String(Object.values(DATOS.gramatica).reduce((s, p) => s + p.length, 0)));
+  panel.append(bloque("Esta oración", t));
+}
+
+// ================== árbol de dependencias de spaCy ==================
+function dibujarSpacy() {
+  const o = DATOS.oraciones[actual], s = o.spacy, cont = document.getElementById("dep");
+  cont.innerHTML = ""; cont.classList.remove("dep-on");
+  const enError = new Set(s.errores.flatMap(e => [...e.matchAll(/([^\s/:]+)=/g)].map(m => m[1].toLowerCase())));
+
+  const paso = Math.max(108, ...s.palabras.map(p => anchoTexto(p.texto, 10) + 36));
+  const distancias = [...new Set(s.arcos.map(a => a.end - a.start))].sort((a, b) => a - b);
+  const altoArco = a => 34 + distancias.indexOf(a.end - a.start) * 30;
+  const maxAlto = Math.max(60, ...s.arcos.map(altoArco)) + 26;
+  const W = paso * s.palabras.length, base = maxAlto + 22;
+  const svg = el("svg", { viewBox: `0 0 ${W} ${base + 62}`, width: W }, cont);
+  const cx = i => paso * i + paso / 2;
+
+  const arcos = [];
+  s.arcos.forEach((a, k) => {
+    const hacia = a.dir === "left" ? a.start : a.end;        // la flecha apunta al dependiente
+    const x1 = cx(a.start) + (a.dir === "left" ? 0 : 7), x2 = cx(a.end) - (a.dir === "right" ? 0 : 7);
+    const y = base - 6, alto = altoArco(a), r = 10, top = y - alto;
+    const camino = el("path", { class: "arco traza", style: `animation-delay:${k * 80}ms`,
+      d: `M${x1},${y} L${x1},${top + r} Q${x1},${top} ${x1 + r},${top} L${x2 - r},${top} Q${x2},${top} ${x2},${top + r} L${x2},${y}` }, svg);
+    const xf = hacia === a.start ? x1 : x2;
+    const punta = el("path", { class: "flecha", d: `M${xf - 5},${y - 8} L${xf + 5},${y - 8} L${xf},${y}` }, svg);
+    const g = el("g", { class: "etq-arco", transform: `translate(${(x1 + x2) / 2},${top})` }, svg);
+    const w = anchoTexto(a.label, 7.6) + 14;
+    el("rect", { x: -w / 2, y: -10, width: w, height: 20, rx: 10 }, g);
+    const t = el("text", { "text-anchor": "middle", dy: "0.35em" }, g); t.textContent = a.label;
+    arcos.push({ a, camino, punta });
+  });
+
+  // marca de la raíz
+  const xr = cx(s.raiz.indice);
+  const mr = el("g", { class: "raiz-marca" }, svg);
+  el("line", { x1: xr, y1: 14, x2: xr, y2: base - 6, stroke: COLOR.raiz, "stroke-width": 1.6, "stroke-dasharray": "3 4" }, mr);
+  const tr = el("text", { x: xr, y: 10, "text-anchor": "middle" }, mr); tr.textContent = "RAÍZ";
+
+  s.palabras.forEach((p, i) => {
+    const g = el("g", { class: "dep-palabra" + (enError.has(p.texto.replace(/[.,;!?¿¡]/g, "").toLowerCase()) ? " error" : ""),
+                        transform: `translate(${cx(i)},${base})` }, svg);
+    el("rect", { class: "caja", x: -paso / 2 + 6, y: 2, width: paso - 12, height: 54, rx: 10 }, g);
+    const t = el("text", { class: "txt", "text-anchor": "middle", y: 26 }, g); t.textContent = p.texto;
+    const color = p.pos === "PROPN" ? COLOR.mod : (p.pos === "VERB" ? COLOR.verbal : ["NOUN", "DET", "ADJ"].includes(p.pos) ? COLOR.nominal : COLOR.otro);
+    const pt = el("text", { class: "pos", "text-anchor": "middle", y: 46, fill: color }, g); pt.textContent = p.pos;
+    g.addEventListener("click", () => {
+      limpiarSeleccion();
+      g.classList.add("sel"); cont.classList.add("dep-on");
+      for (const x of arcos) if (x.a.start === i || x.a.end === i) { x.camino.classList.add("activo"); x.punta.classList.add("activo"); }
+      panelPalabra(p, i, s);
+    });
+  });
+
+  // pie: raíz y concordancia
+  const pie = document.getElementById("depPie");
+  pie.innerHTML = "";
+  pie.append(h("span", {}, "Raíz: ", h("b", { text: s.raiz.texto }), ` (${s.raiz.pos}${s.raiz.pos === "VERB" ? ", un verbo: bien" : ", no es un verbo"})`));
+  pie.append(s.errores.length
+    ? h("span", { class: "err", text: "Error de concordancia: " + s.errores.join("; ") })
+    : h("span", { text: "Sin errores de concordancia en sus rasgos." }));
+  pie.append(h("span", { text: "Clic en una palabra para ver sus rasgos. Datos de displacy.parse_deps." }));
+}
+
+function panelPalabra(p, i, s) {
+  const panel = document.getElementById("panel");
+  panel.innerHTML = "";
+  const t = h("table", { class: "tabla-det" });
+  const fila = (a, b) => t.append(h("tr", {}, h("td", { text: a }), h("td", {}, b)));
+  fila("Categoría", h("span", {}, h("code", { text: p.pos }), " " + (POS[p.pos] || "")));
+  fila("Género", p.genero ? RASGO[p.genero] + " (" + p.genero + ")" : "— sin dato");
+  fila("Número", p.numero ? RASGO[p.numero] + " (" + p.numero + ")" : "— sin dato");
+  fila("Relación", h("span", {}, h("code", { text: p.dep }), " " + (DEP[p.dep] || "")));
+  fila("Depende de", p.dep === "ROOT" ? "nadie (es la raíz)" : "«" + s.palabras[p.cabeza].texto + "»");
+  const hijos = s.palabras.filter((q, j) => q.cabeza === i && j !== i).map(q => q.texto);
+  fila("Dependen de ella", hijos.length ? hijos.join(", ") : "—");
+  panel.append(
+    h("div", { class: "det-titulo" }, h("span", { class: "insignia", text: p.texto, style: "background:#334155" }),
+      h("span", { class: "det-nombre", text: "Palabra según spaCy" })),
+    t);
+  if (p.pos === "PROPN")
+    panel.append(h("p", { class: "vacio-panel", text: "spaCy la tomó por nombre propio, así que no le asigna género ni número: la regla de concordancia no puede usarla." }));
+}
+
+// ================== veredictos y navegación ==================
+function dibujarVeredictos() {
+  const o = DATOS.oraciones[actual];
+  const aceptaCFG = o.cfg.arboles.length > 0, aceptaSpacy = o.spacy.errores.length === 0;
+  const tarjeta = (rotulo, valor, nota, coincide) => {
+    const t = h("div", { class: "veredicto" }, h("span", { class: "rotulo", text: rotulo }),
+      h("span", { class: "valor", text: valor }), h("span", { class: "nota", text: nota }));
+    if (coincide !== undefined)
+      t.append(h("span", { class: "sello " + (coincide ? "bien" : "mal"), text: coincide ? "✓ Coincide con el español" : "✗ No coincide" }));
+    return t;
+  };
+  const v = document.getElementById("veredictos");
+  v.innerHTML = "";
+  v.append(
+    tarjeta("Respuesta correcta", o.correcta ? "Correcta en español" : "Incorrecta en español", "La decide P2 a mano, no un programa."),
+    tarjeta("Nuestra CFG", aceptaCFG ? `Aceptada · ${o.cfg.arboles.length} árbol${o.cfg.arboles.length > 1 ? "es" : ""}` : "Rechazada",
+      aceptaCFG ? (o.cfg.arboles.length > 1 ? "Ambigua: varias derivaciones válidas." : "Una sola derivación.") :
+      (o.cfg.desconocidas.length ? "Hay palabras fuera del vocabulario." : "Ninguna combinación de reglas la genera."), aceptaCFG === o.correcta),
+    tarjeta("spaCy (con nuestra regla)", aceptaSpacy ? "Sin error de concordancia" : "Detecta un error",
+      `Raíz: «${o.spacy.raiz.texto}» (${o.spacy.raiz.pos})`, aceptaSpacy === o.correcta),
+  );
+}
+
+function ir(i) {
+  actual = (i + DATOS.oraciones.length) % DATOS.oraciones.length;
+  arbolActual = 0;
+  const o = DATOS.oraciones[actual];
+  const titulo = document.getElementById("titulo");
+  titulo.innerHTML = "";
+  titulo.append(h("span", { class: "num", text: (actual + 1) + "." }), o.texto);
+  document.getElementById("idea").textContent = o.idea;
+  document.querySelectorAll("nav .n").forEach((b, j) => b.classList.toggle("activo", j === actual));
+  const lista = document.querySelector("nav select");
+  if (lista) lista.value = String(actual);
+  dibujarVeredictos(); dibujarCFG(); dibujarSpacy(); mostrarAyuda();
+}
+
+function iniciar() {
+  document.getElementById("modelo").textContent = DATOS.modelo;
+  if (DATOS.titulo) document.title = "CFG frente a spaCy · " + DATOS.titulo;
+
+  // Marcador: cuántas acierta cada enfoque en el conjunto de la página
+  const total = DATOS.oraciones.length;
+  const okCFG = DATOS.oraciones.filter(o => (o.cfg.arboles.length > 0) === o.correcta).length;
+  const okSpacy = DATOS.oraciones.filter(o => (o.spacy.errores.length === 0) === o.correcta).length;
+  const marcador = document.getElementById("marcador");
+  marcador.append((DATOS.titulo ? DATOS.titulo + " · " : "") + "Aciertos: CFG ",
+    h("b", { text: `${okCFG}/${total}` }), " · spaCy ", h("b", { text: `${okSpacy}/${total}` }));
+
+  const nav = document.getElementById("nav");
+  nav.append(h("button", { text: "‹", title: "Anterior" }));
+  nav.lastChild.onclick = () => ir(actual - 1);
+  if (total <= 8) {                        // pocas oraciones: un botón por oración
+    DATOS.oraciones.forEach((o, i) => {
+      const b = h("button", { class: "n", text: String(i + 1), title: o.texto });
+      b.onclick = () => ir(i); nav.append(b);
+    });
+  } else {                                 // muchas: una lista desplegable con ✓/✗ de cada enfoque
+    const lista = h("select", { "aria-label": "Elegir oración" });
+    DATOS.oraciones.forEach((o, i) => {
+      const c = (o.cfg.arboles.length > 0) === o.correcta ? "✓" : "✗";
+      const s = (o.spacy.errores.length === 0) === o.correcta ? "✓" : "✗";
+      lista.append(h("option", { value: String(i), text: `${i + 1}. ${o.texto}   CFG ${c} · spaCy ${s}` }));
+    });
+    lista.onchange = () => ir(Number(lista.value));
+    nav.append(lista);
+  }
+  nav.append(h("button", { text: "›", title: "Siguiente" }));
+  nav.lastChild.onclick = () => ir(actual + 1);
+  document.addEventListener("keydown", ev => {
+    if (ev.key === "ArrowRight") ir(actual + 1);
+    if (ev.key === "ArrowLeft") ir(actual - 1);
+    if (ev.key === "Escape") { limpiarSeleccion(); mostrarAyuda(); }
+  });
+  ir(0);
+}
+
+if (DATOS) iniciar();
+else document.body.textContent = "Faltan los datos: genera la página con  python fase1/visualizar_nlp.py";
+</script>
+</body>
+</html>

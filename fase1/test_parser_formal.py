@@ -1,4 +1,4 @@
-"""Pruebas del parser de mini-C. Ejecutar con: pytest -v"""
+"""P1 - Pruebas del parser de mini-C. Ejecutar con: pytest -v"""
 import pytest
 
 from lexer import ErrorDeAnalisis

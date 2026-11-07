@@ -1,4 +1,4 @@
-"""Lexer de mini-C: convierte el código fuente en una lista de tokens."""
+"""P1 - Lexer de mini-C: convierte el código fuente en una lista de tokens."""
 import re
 
 

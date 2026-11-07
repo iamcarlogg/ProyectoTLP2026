@@ -1,7 +1,8 @@
-"""Prueba de la gramática inicial sobre las 20 oraciones acordadas.
+"""P2 - Las 20 oraciones acordadas en la tarea 1, probadas con gramatica_es.py.
 
-Colocar este archivo, motor.py y gramatica_es.py en la misma carpeta
-(`fase1/`) y ejecutar `python pruebas_base.py`.
+Cada oración lleva si es válida en español; el script compara esa
+respuesta con lo que acepta o rechaza el motor de P1.
+Ejecutar desde la raíz: python fase1/pruebas_base.py
 """
 
 from motor import parsear

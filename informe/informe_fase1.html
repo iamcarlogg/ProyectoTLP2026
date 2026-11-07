@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Informe Fase 1 — TLP02-2026</title>
+<!--
+  Fuente del informe de la Fase 1.
+  1. Completar los datos marcados en amarillo (clase "llenar") en la portada.
+  2. Generar el PDF: python informe/generar_pdf.py
+     o abrir este archivo en Chrome/Edge → Imprimir → Guardar como PDF
+     (tamaño Carta, márgenes "Predeterminados", activar "Gráficos de fondo").
+-->
+<style>
+  @page { size: Letter; margin: 2.2cm 2.2cm 2.2cm 2.2cm; }
+  @page portada { margin: 2.5cm; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Cambria", "Caladea", "Georgia", "Times New Roman", serif; font-size: 10.5pt; line-height: 1.38;
+         color: #111; margin: 0; }
+  h1, h2, h3, .portada, th, .tabla, figcaption, .nota { font-family: "Calibri", "Carlito", "Segoe UI", "Helvetica", sans-serif; }
+  h2 { font-size: 13pt; margin: 14pt 0 5pt; color: #000; border-bottom: 1px solid #bbb; padding-bottom: 2pt;
+       break-after: avoid; }
+  h3 { font-size: 11pt; margin: 9pt 0 3pt; color: #000; break-after: avoid; }
+  p { margin: 0 0 5pt; text-align: justify; hyphens: auto; }
+  ul, ol { margin: 0 0 5pt; padding-left: 17pt; }
+  li { margin-bottom: 1.5pt; text-align: justify; }
+  code, pre { font-family: "Consolas", "DejaVu Sans Mono", monospace; font-size: 8.6pt; }
+  code { background: #f1f3f8; padding: 0 2pt; border-radius: 2pt; }
+  pre { background: #f5f6fa; border: 1px solid #dde1ea; border-left: 3px solid #555; padding: 5pt 8pt;
+        margin: 4pt 0 7pt; line-height: 1.3; white-space: pre-wrap; break-inside: avoid; }
+  table { border-collapse: collapse; width: 100%; margin: 4pt 0 3pt; font-size: 9pt; break-inside: avoid; }
+  th, td { border: 1px solid #c9cfe0; padding: 2.5pt 5pt; vertical-align: top; text-align: left; }
+  th { background: #e8ebf4; font-weight: 700; }
+  td.n, th.n { text-align: right; white-space: nowrap; }
+  .tabla td { font-family: inherit; }
+  figcaption, .nota { font-size: 8.8pt; color: #444; margin: 0 0 8pt; }
+  figcaption b { color: #000; }
+  figure { margin: 0; break-inside: avoid; }
+  .dos li { text-align: left; }
+  .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 10pt; }
+  .llenar { background: #fff3a3; padding: 0 3pt; }
+  .arboles { display: grid; grid-template-columns: 1fr 1fr; gap: 8pt; align-items: end; }
+  .arboles img { width: 100%; height: 3.7cm; object-fit: contain; display: block; }
+  .arboles .rot { font-family: "Calibri", "Carlito", sans-serif; font-size: 8.8pt; text-align: center; color: #333; margin-top: 2pt; }
+
+  /* ---------- portada ---------- */
+  .portada { page: portada; height: 22.9cm; display: flex; flex-direction: column; text-align: center;
+             break-after: page; }
+  .portada .inst { font-size: 14pt; font-weight: 700; letter-spacing: .02em; }
+  .portada .fac { font-size: 12pt; margin-top: 4pt; }
+  .portada .asig { font-size: 12pt; margin-top: 18pt; }
+  .portada .linea { width: 60%; margin: 26pt auto; border-top: 2px solid #000; }
+  .portada .proy { font-size: 12pt; color: #000; font-weight: 700; letter-spacing: .08em; }
+  .portada h1 { font-size: 21pt; line-height: 1.2; margin: 10pt 0 6pt; color: #111; }
+  .portada .sub { font-size: 13pt; color: #333; }
+  .portada .fase { font-size: 12pt; margin-top: 14pt; }
+  .portada .equipo { margin: auto auto 0; width: 82%; font-size: 10.5pt; }
+  .portada .equipo th { text-align: center; }
+  .portada .datos { margin-top: 18pt; font-size: 11pt; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<!-- ============================ PORTADA ============================ -->
+<section class="portada">
+  <div class="inst">Universidad Centroamericana José Simeón Cañas</div>
+  <div class="fac">Facultad de Ingeniería y Arquitectura</div>
+  <div class="asig">Teoría de Lenguajes de Programación · TLP02-2026</div>
+  <div class="linea"></div>
+  <div class="proy">INFORME TÉCNICO · FASE 1</div>
+  <h1>Gramáticas formales y lenguaje natural:<br>experimentando los límites de la jerarquía de Chomsky</h1>
+  <div class="sub">Lenguajes formales en la frontera del lenguaje natural</div>
+  <div class="fase">Grupo 8</div>
+
+  <table class="equipo">
+    <tr><th>Integrante</th><th>Carné</th></tr>
+    <tr><td>Carlo Enrique Guerra Vega</td><td>00052220</td></tr>
+    <tr><td>Kelvin Rodrigo Iraheta Morales</td><td>00083121</td></tr>
+    <tr><td>Allan Josué López Escalante</td><td>00049222</td></tr>
+    <tr><td>Federico Josué Calderón Durán</td><td>00215818</td></tr>
+  </table>
+  <div class="datos">
+    Docente: Jaime Roberto Clímaco Navarrete<br>
+    Antiguo Cuscatlán, La Libertad, 7 de noviembre de 2026
+  </div>
+</section>
+
+<!-- ============================ 1. INTRODUCCIÓN ============================ -->
+<h2>1. Introducción</h2>
+<p>Una gramática libre de contexto (CFG) describe con exactitud la sintaxis de un lenguaje de programación como C, pero se queda corta con el español. Este informe busca el punto exacto de esa frontera. Primero implementamos en Python un parser para un subconjunto de C (<em>mini-C</em>). Después extendimos la CFG al español, con concordancia de género y número, relativas y modificadores, y registramos cada falla y su causa. Por último, procesamos las mismas oraciones con spaCy para contrastar la gramática formal con un modelo estadístico.</p>
+
+<!-- ============================ 2. MARCO TEÓRICO ============================ -->
+<h2>2. Marco teórico</h2>
+<h3>2.1 Gramáticas formales: conceptos básicos</h3>
+<p>Una <strong>gramática formal</strong> es un conjunto de reglas que dice qué cadenas de símbolos pertenecen a un lenguaje. Tiene cuatro partes: los <em>terminales</em>, que son las palabras o símbolos que aparecen en el texto final (<code>el</code>, <code>perro</code>, <code>if</code>, <code>;</code>); los <em>no terminales</em>, que son categorías abstractas (<code>oracion</code>, <code>sn</code> para sintagma nominal, <code>sv</code> para sintagma verbal); las <em>producciones</em>, reglas de la forma <code>A → α</code> que indican cómo reemplazar una categoría por una secuencia de símbolos; y un <em>símbolo inicial</em>. Generar una cadena es aplicar producciones hasta que solo quedan terminales; esa secuencia es una <em>derivación</em>:</p>
+<pre>oracion ⇒ sn sv ⇒ det n sv ⇒ el n sv ⇒ el perro sv ⇒ el perro v ⇒ el perro come</pre>
+<p>La derivación se dibuja como un <strong>árbol sintáctico</strong>: la raíz es el símbolo inicial, cada nodo interno es una categoría y las hojas, leídas de izquierda a derecha, forman la oración. El <em>lenguaje</em> de la gramática es el conjunto de todas las cadenas que puede generar. Si una cadena tiene más de un árbol, es <em>ambigua</em>. Un <strong>parser</strong> hace el proceso inverso: recibe una cadena y busca su árbol; si no lo encuentra, la rechaza.</p>
+<p>Un <strong>autómata</strong> es una máquina abstracta que lee una cadena símbolo por símbolo y al final responde «sí» o «no». Los autómatas se distinguen por la memoria que tienen. Un <em>autómata finito</em> solo recuerda en qué estado está, de una lista fija. Un <em>autómata de pila</em> tiene además una pila: puede apilar símbolos y sacarlos después, siempre empezando por el último que entró. Con ella puede contar, por ejemplo, cuántos paréntesis abrió para verificar que se cierren todos.</p>
+
+<h3>2.2 La jerarquía de Chomsky</h3>
+<p>Chomsky (1956) clasificó las gramáticas en cuatro tipos según cuánto se restringen sus producciones. Mientras más libres son las reglas, más lenguajes describen, pero se necesita una máquina más poderosa para reconocerlos (Hopcroft, Motwani y Ullman, 2007). En la Tabla 1, las mayúsculas (<em>A</em>, <em>B</em>) son no terminales, las minúsculas (<em>a</em>) son terminales y las letras griegas (α, β, γ) son secuencias de cualquier tipo de símbolo.</p>
+<p>La notación a<sup>n</sup>b<sup>n</sup> significa «n letras a seguidas de exactamente n letras b» (ab, aabb, aaabbb…), y { <em>ww</em> } es el lenguaje de las cadenas formadas por una secuencia repetida dos veces (abab, abcabc…). Un autómata finito no reconoce a<sup>n</sup>b<sup>n</sup> porque tendría que recordar un número que no tiene límite. Uno de pila sí: apila una marca por cada a y saca una por cada b. En cambio, a<sup>n</sup>b<sup>n</sup>c<sup>n</sup> ya es demasiado para una pila: al comparar las b con las a, la pila queda vacía y no le queda nada para comparar las c. En una gramática <em>libre de contexto</em> (CFG, Tipo 2), cada no terminal se reemplaza igual sin importar lo que lo rodea; en una <em>sensible al contexto</em> (Tipo 1), el reemplazo puede depender de los símbolos vecinos.</p>
+<figure><table>
+  <tr><th>Tipo</th><th>Gramática</th><th>Forma de las producciones</th><th>Autómata</th><th>Ejemplo de lenguaje</th></tr>
+  <tr><td>3</td><td>Regular</td><td><code>A → aB</code> o <code>A → a</code></td><td>Autómata finito</td><td>identificadores, números: <code>[A-Za-z_]\w*</code></td></tr>
+  <tr><td>2</td><td>Libre de contexto</td><td><code>A → α</code> (un solo no terminal a la izquierda)</td><td>Autómata de pila</td><td>a<sup>n</sup>b<sup>n</sup>; paréntesis balanceados</td></tr>
+  <tr><td>1</td><td>Sensible al contexto</td><td><code>αAβ → αγβ</code>, con |γ| ≥ 1</td><td>Autómata linealmente acotado</td><td>a<sup>n</sup>b<sup>n</sup>c<sup>n</sup>; { ww }</td></tr>
+  <tr><td>0</td><td>Sin restricciones</td><td><code>α → β</code></td><td>Máquina de Turing</td><td>lenguajes recursivamente enumerables</td></tr>
+</table>
+<figcaption><b>Tabla 1.</b> Los cuatro niveles de la jerarquía de Chomsky.</figcaption></figure>
+
+<h3>2.3 Por qué las CFG bastan para los lenguajes de programación</h3>
+<p>La sintaxis de un lenguaje de programación se diseña para ser libre de contexto. Su estructura es de anidamiento puro: bloques dentro de bloques, expresiones dentro de paréntesis, un <code>else</code> que se empareja con un <code>if</code>. La pila de un autómata de pila resuelve justamente eso. Además, el diseñador puede eliminar la ambigüedad (precedencia de operadores, regla del <code>else</code> más cercano) y escribir la gramática de modo que se analice en tiempo lineal, por ejemplo con un parser LL(1), que lee de izquierda a derecha y decide qué regla aplicar mirando solo el siguiente símbolo. Lo que una CFG no expresa, como declarar una variable antes de usarla o que los tipos coincidan, se delega al análisis semántico mediante la tabla de símbolos (Aho et al., 2006).</p>
+
+<h3>2.4 Cómo se demuestra que un lenguaje no es libre de contexto</h3>
+<p>La herramienta principal es el <strong>lema de bombeo para lenguajes libres de contexto</strong>. La idea es esta: si una cadena es suficientemente larga, su árbol sintáctico es tan alto que en algún camino de la raíz a una hoja se repite un mismo no terminal. El trozo de cadena que genera esa categoría repetida se puede volver a insertar, o «bombear», cuantas veces se quiera, y el resultado sigue perteneciendo al lenguaje. Formalmente: si <em>L</em> es libre de contexto, existe una constante <em>p</em> tal que toda cadena <em>z</em> ∈ <em>L</em> con |<em>z</em>| ≥ <em>p</em> puede escribirse como <em>z</em> = <em>uvwxy</em>, con |<em>vwx</em>| ≤ <em>p</em> y |<em>vx</em>| ≥ 1, de modo que <em>uv<sup>i</sup>wx<sup>i</sup>y</em> pertenece a <em>L</em> para todo <em>i</em> ≥ 0. Aquí |<em>z</em>| es la longitud de <em>z</em>, y <em>v</em> y <em>x</em> son las dos partes que se repiten juntas.</p>
+<p>Para demostrar que un lenguaje <em>no</em> es libre de contexto se razona por contradicción: se elige una cadena larga del lenguaje y se muestra que, la dividamos como la dividamos, bombearla produce una cadena que ya no pertenece a él. Así se prueba que a<sup>n</sup>b<sup>n</sup>c<sup>n</sup> y { <em>ww</em> } no son libres de contexto. Una segunda herramienta es la <em>intersección con un lenguaje regular</em>: si un lenguaje libre de contexto se intersecta con uno regular, el resultado sigue siendo libre de contexto. Por eso, si al intersectar un lenguaje con uno regular se obtiene algo que no es libre de contexto, el lenguaje original tampoco lo era. La sección 5.3 usa ambas herramientas.</p>
+
+<h3>2.5 Lenguaje formal frente a lenguaje natural</h3>
+<p>Un lenguaje de programación se <em>diseña</em>: su gramática es su definición, y por eso se le quitan la ambigüedad y las excepciones. El español <em>evolucionó</em>, y una gramática solo puede describirlo de forma aproximada (Jurafsky y Martin, 2025). Además, el español tiene tres fenómenos que no existen en la sintaxis de mini-C: ambigüedad constante («come la carne en la casa» admite dos lecturas), <em>concordancia</em> de género y número entre palabras que pueden estar lejos (en «El <u>perro</u> que la gata persigue <u>duerme</u>», el verbo concuerda con «perro») y dependencias entre palabras que pueden anidarse o, en algunos idiomas, cruzarse. Este experimento pone a prueba justamente esos fenómenos.</p>
+
+<!-- ============================ 3. PARSER FORMAL ============================ -->
+<h2>3. Parser del lenguaje formal (mini-C)</h2>
+<p>El subconjunto, aprobado por el docente, incluye declaraciones <code>int</code>/<code>float</code>, asignaciones, <code>if</code>/<code>else</code>, <code>while</code>, bloques, expresiones con precedencia, comparaciones y comentarios. Su gramática, en EBNF:</p>
+<pre>programa    → sentencia* EOF
+sentencia   → declaracion | asignacion | si | mientras | bloque
+declaracion → tipo ID ( '=' expr )? ';'          tipo → 'int' | 'float'
+asignacion  → ID '=' expr ';'
+si          → 'if' '(' condicion ')' sentencia ( 'else' sentencia )?
+mientras    → 'while' '(' condicion ')' sentencia
+bloque      → '{' sentencia* '}'                 condicion → expr OP_REL expr
+expr        → termino ( ( '+' | '-' ) termino )*
+termino     → factor ( ( '*' | '/' ) factor )*
+factor      → NUM | ID | '(' expr ')'</pre>
+<p><strong>Decisiones de diseño.</strong> (1) No hay recursión por la izquierda: <code>expr → expr '+' termino</code> se reescribió con repetición, porque haría entrar al parser descendente en un bucle infinito. (2) La precedencia se obtiene por niveles: <code>termino</code> agrupa <code>*</code> y <code>/</code> dentro de <code>expr</code>. (3) La gramática es casi LL(1): el primer token de cada sentencia (<code>int</code>, ID, <code>if</code>, <code>while</code>, <code>{</code>…) decide qué regla aplicar. (4) El <em>else colgante</em>, única ambigüedad, se resuelve asociando el <code>else</code> al <code>if</code> más cercano, como en C.</p>
+<p><strong>Implementación y pruebas.</strong> El lexer (<code>lexer.py</code>) divide el código en tokens con una expresión regular (probando <code>//</code> antes de <code>/</code> y <code>==</code> antes de <code>=</code>). El parser (<code>parser_formal.py</code>) tiene una función por no terminal y devuelve un árbol; en <code>int x = 2 + 3 * 4;</code>, <code>3 * 4</code> queda agrupado primero. Ante un error indica la línea, por ejemplo «Línea 1: se esperaba ';'». La suite de <code>pytest</code> pasa los 24 casos: 11 válidos, 10 inválidos (falta de <code>;</code>, <code>else</code> sin <code>if</code>, llave sin cerrar…) y pruebas de precedencia, else colgante y línea del error. Sobre un lenguaje diseñado para ser libre de contexto, la CFG funciona sin fallas.</p>
+
+<!-- ============================ 4. EXTENSIÓN AL ESPAÑOL ============================ -->
+<h2>4. Extensión de la CFG al español</h2>
+<p>Para el español se escribió un <strong>motor genérico</strong> (<code>motor.py</code>) que recibe cualquier gramática como diccionario de Python y busca con <em>backtracking</em> todos los árboles posibles. Si no encuentra ninguno, la oración se rechaza; si encuentra más de uno, es ambigua. Se definieron 20 oraciones de prueba (16 correctas, una de ellas ambigua, y 4 con errores de concordancia) y se probaron en dos etapas.</p>
+<p><strong>Gramática base</strong> (7 no terminales, 22 producciones): <code>oracion → sn sv</code>, <code>sn → det n | det n adj</code>, <code>sv → v | v sn</code>, más el léxico. Acierta 9 de 20: acepta «La perro come» porque no controla la concordancia, y rechaza adverbios, frases preposicionales y relativas porque no tiene reglas para ellos.</p>
+<p><strong>Gramática extendida</strong> (34 no terminales, 93 producciones). La concordancia se codifica dividiendo cada categoría según sus rasgos: sufijos <code>_ms</code>, <code>_fs</code>, <code>_mp</code>, <code>_fp</code> para género y número, y <code>_s</code>, <code>_p</code> para el número del verbo. Se agregaron relativas de sujeto y de objeto, adverbios y sintagmas preposicionales:</p>
+<pre>oracion   → sn_ms sv_s | sn_fs sv_s | sn_mp sv_p | sn_fp sv_p
+sn_ms     → det_ms n_ms mod_ms
+mod_ms    → ε | adj_ms | sp | adj_ms sp | rel_suj_s | rel_obj
+          | adj_ms rel_suj_s | adj_ms rel_obj
+rel_suj_s → 'que' sv_s
+sv_s      → v_s | v_s adv | v_s sp | vt_s sn | vt_s sn sp | …</pre>
+<p>Con ella se aciertan las 20 oraciones. «El perro que come la carne duermen» se rechaza porque <code>oracion → sn_ms sv_s</code> exige el verbo principal en singular aunque haya una relativa en medio. «El perro come la carne en la casa» recibe dos árboles, porque el sintagma preposicional puede depender del verbo o del objeto (Figura 1).</p>
+<figure>
+<div class="arboles">
+  <div><img src="figuras/figura1_arbol_a.svg" width="420" height="210" alt="Árbol A"><div class="rot">(a) «en la casa» modifica a «la carne»: la carne que está en la casa</div></div>
+  <div><img src="figuras/figura1_arbol_b.svg" width="460" height="185" alt="Árbol B"><div class="rot">(b) «en la casa» depende del verbo: se come en la casa</div></div>
+</div>
+<figcaption><b>Figura 1.</b> Árboles del motor para «El perro come la carne en la casa» (sin nodos vacíos; «x/y» = nodo con un solo hijo).</figcaption></figure>
+<p><strong>Costo de la concordancia.</strong> Para separar ese costo del de agregar construcciones, se generó automáticamente una versión de control con las mismas construcciones y las mismas 25 palabras, pero con las categorías de género y número fusionadas:</p>
+<div class="dos">
+<div><figure><table>
+  <tr><th>Versión</th><th class="n">No term.</th><th class="n">Producciones</th><th class="n">Aciertos</th></tr>
+  <tr><td>Base</td><td class="n">7</td><td class="n">22</td><td class="n">9/20</td></tr>
+  <tr><td>Extendida sin concordancia</td><td class="n">15</td><td class="n">48</td><td class="n">16/20</td></tr>
+  <tr><td>Extendida con concordancia</td><td class="n">34</td><td class="n">93</td><td class="n">20/20</td></tr>
+</table>
+<figcaption><b>Tabla 2.</b> Tamaño y aciertos de las tres gramáticas.</figcaption></figure></div>
+<div><p>Solo la concordancia agrega 45 producciones (de 48 a 93): la gramática casi se duplica para rechazar cuatro oraciones. Las 8 alternativas de <code>mod</code> se repiten para cada una de las 4 combinaciones de género y número (32 reglas), y cada rasgo nuevo (persona, tiempo) volvería a multiplicarlas. Sigue siendo una CFG de Tipo 2: el problema es de <em>costo de especificación</em>, no de poder expresivo.</p></div>
+</div>
+
+<!-- ============================ 5. ANÁLISIS DE FALLAS ============================ -->
+<h2>5. Análisis formal de los puntos de falla</h2>
+<h3>5.1 Dónde falla la gramática extendida</h3>
+<p>Como las 20 oraciones ya no fallaban, se probaron 24 casos adicionales sin agregar reglas. La gramática acierta 14: rechaza correctamente las 3 inválidas, pero también rechaza 10 oraciones correctas.</p>
+<figure><table>
+  <tr><th>Fenómeno que la rompe</th><th class="n">Casos</th><th>Ejemplos (rechazados siendo correctos)</th><th>Regla implicada</th><th>Nivel de Chomsky</th></tr>
+  <tr><td>Vocabulario ausente</td><td class="n">3</td><td>«duerme <u>con</u> la gata», «negro y <u>grande</u>», «negro <u>pequeño</u>»</td><td><code>p → 'en'</code>; léxico de <code>adj</code></td><td>Tipo 2: ampliable</td></tr>
+  <tr><td>Construcción no implementada</td><td class="n">4</td><td>«<u>no</u> duerme», «<u>muy</u> negro», «persigue <u>a</u> la gata», «<u>porque</u> la gata come»</td><td><code>sv_*</code>, <code>mod_*</code></td><td>Tipo 2: ampliable</td></tr>
+  <tr><td>Coordinación</td><td class="n">2</td><td>«El perro come <u>y</u> la gata duerme», «El perro <u>y</u> la gata duermen»</td><td><code>oracion</code>, <code>sn</code></td><td>Tipo 2: ampliable</td></tr>
+  <tr><td>Preprocesamiento</td><td class="n">1</td><td>«<u>¿</u>El perro duerme<u>?</u>»</td><td>El motor no quita <code>¿ ?</code></td><td>No es un salto de nivel</td></tr>
+  <tr><td>Ambigüedad estructural</td><td class="n">(1)</td><td>«come la carne en la casa» (aceptada con 2 árboles)</td><td><code>sp</code> en <code>sv_s</code> o en <code>mod_fs</code></td><td>Tipo 2: una CFG la representa</td></tr>
+</table>
+<figcaption><b>Tabla 3.</b> Las 10 oraciones correctas rechazadas, por causa. La ambigua no es una falla: se acepta con dos árboles.</figcaption></figure>
+<p><strong>Ninguna de estas fallas demuestra que el español exceda a las CFG:</strong> todas se corrigen agregando producciones, y la concordancia tampoco las excede, porque sus rasgos son finitos (dos géneros, dos números). La gramática acepta «La carne negra duerme» porque la sintaxis no verifica el significado; eso es semántica, no otro nivel de la jerarquía. En cambio, «El perro duerme la carne» se considera incorrecta y se rechaza: rompe la <em>subcategorización</em> del verbo, porque «dormir» es intransitivo y no admite objeto directo. Esa restricción sí es sintáctica: la gramática separa <code>v_s</code> (intransitivos) de <code>vt_s</code> (transitivos).</p>
+
+<h3>5.2 Anidamiento: por qué nuestras oraciones no salen del Tipo 2</h3>
+<p>En «El perro <em>que la gata persigue</em> duerme», la dependencia interna (gata ↔ persigue) se abre y se cierra dentro de la externa (perro ↔ duerme). Al encadenar relativas se obtiene sujeto<sub>1</sub> sujeto<sub>2</sub> sujeto<sub>3</sub> verbo<sub>3</sub> verbo<sub>2</sub> verbo<sub>1</sub>, un patrón de la forma a<sup>n</sup>b<sup>n</sup>. Una pila lo reconoce porque el último sujeto que entra es el primer verbo que sale. Por eso la gramática extendida maneja bien la concordancia dentro de las relativas.</p>
+
+<h3>5.3 Lo que sí excede a una CFG: dependencias cruzadas</h3>
+<p>El límite aparece cuando las dependencias se <em>cruzan</em> (A<sub>1</sub> A<sub>2</sub> B<sub>1</sub> B<sub>2</sub>): el primero que entra debe ser el primero que sale, y una pila devuelve el último. En español, «Juan y Ana son alto y alta, <em>respectivamente</em>» lo ilustra: si la lista no tiene límite, los géneros de los adjetivos deben copiar los de los sustantivos, lo que forma el lenguaje { <em>ww</em> }. Sin embargo, este ejemplo no se acepta como prueba, porque no está claro que esa concordancia sea sintáctica (Pullum y Gazdar, 1982). La prueba aceptada es la de Shieber (1985) sobre el alemán suizo, donde los objetos y los verbos que los rigen aparecen cruzados y el caso gramatical (acusativo o dativo) obliga a emparejarlos. Al intersectar ese fragmento con un lenguaje regular se obtiene L = { a<sup>m</sup>b<sup>n</sup>c<sup>m</sup>d<sup>n</sup> }.</p>
+<p><em>L no es libre de contexto.</em> Supongamos que lo es, con constante de bombeo <em>p</em>, y tomemos <em>z</em> = a<sup>p</sup>b<sup>p</sup>c<sup>p</sup>d<sup>p</sup>. Como |<em>vwx</em>| ≤ <em>p</em>, el tramo bombeado toca a lo sumo dos bloques vecinos, y nunca a la vez las a y las c ni las b y las d. Al bombear con <em>i</em> = 2, como |<em>vx</em>| ≥ 1, cambia la cantidad de al menos una letra y, como mucho, de dos letras vecinas, mientras que L exige que las a y las c (o las b y las d) cambien juntas. Si <em>v</em> o <em>x</em> mezclan letras, además se rompe el orden de los bloques. Es una contradicción. Como los lenguajes libres de contexto son cerrados bajo intersección con regulares, el alemán suizo tampoco puede ser libre de contexto. ∎</p>
+<p>Estas dependencias caen en los lenguajes <em>ligeramente sensibles al contexto</em> (Joshi, 1985), entre el Tipo 2 y el Tipo 1. Si «respectivamente» se limita a <em>k</em> elementos, una CFG puede cubrirlo enumerando las 2<sup><em>k</em></sup> combinaciones de género, con una explosión exponencial de reglas; sin cota, ninguna CFG alcanza.</p>
+
+<!-- ============================ 6. COMPARACIÓN CON SPACY ============================ -->
+<h2>6. Comparación con spaCy</h2>
+<p>Se procesaron las mismas oraciones con spaCy 3.8 (Honnibal et al., 2020) y el modelo <code>es_core_news_md</code>, que asigna a cada palabra una categoría, sus rasgos (género, número) y una relación de dependencia con otra palabra. spaCy nunca rechaza una oración, así que definimos un criterio externo: «rechaza» cuando sus propios rasgos muestran un desacuerdo de género o número dentro del grupo nominal o entre sujeto y verbo.</p>
+<figure><table>
+  <tr><th>Medida</th><th class="n">CFG (20)</th><th class="n">spaCy (20)</th><th class="n">CFG (24)</th><th class="n">spaCy (24)</th><th class="n">CFG (44)</th><th class="n">spaCy (44)</th></tr>
+  <tr><td>Aciertos totales</td><td class="n"><b>20/20</b></td><td class="n">19/20</td><td class="n">14/24</td><td class="n"><b>22/24</b></td><td class="n">34/44</td><td class="n"><b>41/44</b></td></tr>
+  <tr><td>&nbsp;&nbsp;Correctas aceptadas</td><td class="n">16/16</td><td class="n">16/16</td><td class="n">11/21</td><td class="n">20/21</td><td class="n">27/37</td><td class="n"><b>36/37</b></td></tr>
+  <tr><td>&nbsp;&nbsp;Incorrectas rechazadas</td><td class="n">4/4</td><td class="n">3/4</td><td class="n">3/3</td><td class="n">2/3</td><td class="n"><b>7/7</b></td><td class="n">5/7</td></tr>
+  <tr><td><em>Referencia: aceptar todo</em></td><td class="n" colspan="2" style="text-align:center"><em>16/20</em></td><td class="n" colspan="2" style="text-align:center"><em>21/24</em></td><td class="n" colspan="2" style="text-align:center"><em>37/44</em></td></tr>
+</table>
+<figcaption><b>Tabla 4.</b> Resultados de la comparación. La referencia es lo que acertaría un programa que acepte todo.</figcaption></figure>
+<p><strong>La exactitud sola engaña:</strong> como 37 de las 44 oraciones son correctas, aceptar todo ya acierta 37/44, más que la CFG. Separando los aciertos se ve el resultado real: la CFG nunca acepta una incorrecta (7/7), pero cubre poco (27/37); spaCy cubre casi todo (36/37), pero deja pasar «La perro come» y «El perro duerme la carne». Su único rechazo indebido, «El perro y la gata duermen», es un fallo de nuestro criterio: compara «perro» con «duermen» sin ver que el sujeto coordinado es plural.</p>
+<p><strong>Qué captura spaCy que la CFG no:</strong> <em>cobertura</em>, porque procesa 9 de las 10 correctas que la CFG rechaza («no duerme», «persigue a la gata»), y <em>diagnóstico</em>, porque en las incorrectas señala qué palabras no concuerdan, mientras la CFG solo dice «rechazada». <strong>Qué captura la CFG que spaCy no:</strong> <em>rechazo</em>, porque spaCy no distingue por sí mismo lo correcto de lo incorrecto; <em>estructura</em>, porque en las 4 relativas spaCy elige el sustantivo como raíz y en «El perro que come duerme.» etiqueta «duerme» como adjetivo; <em>ambigüedad</em>, porque la CFG muestra los dos árboles y spaCy elige uno sin avisar; e <em>independencia de la forma superficial</em>: por la mayúscula de «El», spaCy toma «perro» por nombre propio y no detecta «La perro come», y sin el punto final sí reconoce «duerme» como verbo. A la CFG no le afectan ni la mayúscula ni el punto.</p>
+
+<!-- ============================ 7. LIMITACIONES ============================ -->
+<h2>7. Limitaciones del experimento</h2>
+<p>Las 44 oraciones las escribió el equipo con 25 palabras, así que no representan el español real. La muestra es pequeña y desbalanceada (7 incorrectas y 37 correctas), el criterio de rechazo de spaCy es nuestro y tiene un fallo conocido, y se probó un solo modelo. Versiones y comandos para reproducir cada resultado: README del repositorio, <a href="https://github.com/iamcarlogg/ProyectoTLP2026">github.com/iamcarlogg/ProyectoTLP2026</a>.</p>
+
+<!-- ============================ 8. CONCLUSIONES ============================ -->
+<h2>8. Conclusiones</h2>
+<ol>
+  <li>Una CFG modela perfectamente un lenguaje de programación, cuya sintaxis se diseñó con anidamiento puro y sin ambigüedad: el parser de mini-C pasa las 24 pruebas.</li>
+  <li>Al extender la CFG al español, todas las fallas observadas son de <em>cobertura</em> (vocabulario y construcciones no escritas) o de preprocesamiento. Ninguna prueba por sí misma que el español no sea libre de contexto.</li>
+  <li>La concordancia cabe en una CFG, pero a un costo creciente (de 48 a 93 producciones solo por género y número). Ese costo es la razón práctica por la que las CFG no escalan al lenguaje natural.</li>
+  <li>El límite teórico está en las dependencias cruzadas sin cota (Shieber, 1985), que exigen más que un autómata de pila.</li>
+  <li>spaCy resuelve la cobertura aprendiendo de datos (acepta 36 de 37 correctas, frente a 27 de la CFG), pero pierde las garantías de la gramática formal: deja pasar errores (rechaza 5 de 7 incorrectas, frente a 7 de 7) y depende de señales superficiales. Medir esta diferencia con más datos es el objetivo de la Fase 2.</li>
+</ol>
+
+<h2>Referencias</h2>
+<p class="nota" style="text-align:left">
+Aho, A. V., Lam, M. S., Sethi, R. y Ullman, J. D. (2006). <em>Compilers: Principles, Techniques, and Tools</em> (2.ª ed.). Addison-Wesley.<br>
+Chomsky, N. (1956). Three models for the description of language. <em>IRE Transactions on Information Theory</em>, 2(3), 113–124.<br>
+Honnibal, M., Montani, I., Van Landeghem, S. y Boyd, A. (2020). <em>spaCy: Industrial-strength Natural Language Processing in Python</em>. Zenodo.<br>
+Hopcroft, J. E., Motwani, R. y Ullman, J. D. (2007). <em>Introduction to Automata Theory, Languages, and Computation</em> (3.ª ed.). Pearson.<br>
+Joshi, A. K. (1985). Tree adjoining grammars: How much context-sensitivity is required to provide reasonable structural descriptions? En D. Dowty, L. Karttunen y A. Zwicky (Eds.), <em>Natural Language Parsing</em>. Cambridge University Press.<br>
+Jurafsky, D. y Martin, J. H. (2025). <em>Speech and Language Processing</em> (3.ª ed., borrador). Stanford University.<br>
+Pullum, G. K. y Gazdar, G. (1982). Natural languages and context-free languages. <em>Linguistics and Philosophy</em>, 4(4), 471–504.<br>
+Shieber, S. M. (1985). Evidence against the context-freeness of natural language. <em>Linguistics and Philosophy</em>, 8(3), 333–343.
+</p>
+
+</body>
+</html>

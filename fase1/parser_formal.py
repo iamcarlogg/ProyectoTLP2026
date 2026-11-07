@@ -1,4 +1,4 @@
-"""Parser descendente recursivo de mini-C. Una función por cada regla de la gramática."""
+"""P1 - Parser descendente recursivo de mini-C. Una función por cada regla de la gramática."""
 from nltk import Tree
 
 from lexer import ErrorDeAnalisis, tokenizar

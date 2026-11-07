@@ -1,4 +1,4 @@
-"""Motor genérico: analiza oraciones con CUALQUIER gramática escrita como diccionario.
+"""P1 - Motor genérico: analiza oraciones con CUALQUIER gramática escrita como diccionario.
 
 Es descendente recursivo con vuelta atrás (backtracking): prueba cada producción en
 orden y, si un camino no funciona, regresa y prueba el siguiente. Devuelve TODOS los
