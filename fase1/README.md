@@ -13,6 +13,7 @@ El panorama del proyecto está en el [README principal](../README.md) y las conv
 | `lexer.py` | Convierte código mini-C en tokens (`tokenizar`). Define `ErrorDeAnalisis`, la única excepción del parser formal. |
 | `parser_formal.py` | Parser descendente recursivo: una función por regla. `parsear_codigo(codigo)` devuelve el árbol. |
 | `test_parser_formal.py` | 24 pruebas con pytest: código válido, inválido, precedencia, else colgante y línea del error. |
+| `analisis_ll1.py` | FIRST, FOLLOW y tabla LL(1) de mini-C y de las dos gramáticas del español: mini-C tiene 1 conflicto (else colgante); el español, 8 y 19. |
 
 ### Parte B — Español · P1 (motor) y P2 (gramática y análisis)
 
@@ -56,6 +57,7 @@ Con el entorno preparado (ver el [README principal](../README.md#preparar-el-ent
 | `python fase1/motor.py` | Cuatro oraciones en español | 2 aceptadas, 2 rechazadas |
 | `python fase1/pruebas_base.py` | Las 20 oraciones | 20/20 coinciden |
 | `python fase1/pruebas_fallas.py` | Los 24 casos extra | 14/24, caso 19 con 2 árboles |
+| `python fase1/analisis_ll1.py --tabla` | Conflictos LL(1) y tabla de mini-C | Mini-C 1, base 8, extendida 19 |
 | `python fase1/analisis_explosion.py --probar` | Crecimiento de reglas | 22 / 48 / 93; 9/20, 16/20, 20/20 |
 | `python fase1/demo_nlp.py` | spaCy sobre las 20 oraciones | Raíz = verbo en 14/20 |
 | `python fase1/tabla_nlp.py` | CFG frente a spaCy | 20/20 frente a 19/20 (`--fallas`: 14/24 frente a 22/24) |
@@ -87,12 +89,14 @@ except ErrorDeAnalisis as e:
 ### Motor del español
 
 ```python
-from motor import parsear, todos_los_arboles
+from motor import normalizar, parsear, todos_los_arboles
 from gramatica_es import GRAMATICA, INICIAL
 
 arbol = parsear("El perro come la carne", GRAMATICA, INICIAL)   # primer árbol o None
 arboles = todos_los_arboles("El perro come la carne", GRAMATICA, INICIAL)
 print(len(arboles))     # 0 = rechazada; más de 1 = ambigua
+
+normalizar("¿El perro duerme?")  # ['¿el', 'perro', 'duerme?']: así ve el motor la oración
 ```
 
 - No lanza excepciones: si la oración no cumple la gramática, `parsear` devuelve `None` y `todos_los_arboles` una lista vacía.

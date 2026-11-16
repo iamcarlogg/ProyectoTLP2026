@@ -42,12 +42,12 @@ Cada persona mantiene el mismo eje en las dos fases. Completen la columna *Integ
 
 ### Fase 2 (aún no empieza en el repositorio)
 
-Alcance ajustado por el docente el 15 de noviembre: ver [docs/alcance_fase2.md](docs/alcance_fase2.md). Fechas propuestas para llegar al jueves 19 a las 17:30:
+Alcance ajustado por el docente el 15 de noviembre: ver [docs/alcance_fase2.md](docs/alcance_fase2.md). Decisiones tomadas y qué debe rehacer cada integrante: [fase2/decisiones_tomadas.md](fase2/decisiones_tomadas.md). Fechas propuestas para llegar al jueves 19 a las 17:30:
 
 | Archivo esperado | Rol | Fecha propuesta |
 | --- | --- | --- |
-| `fase2/corpus.csv` (columnas `id, oracion, nivel, esperado, arbol_esperado`) y reglas de la gramática en texto para el prompt | P2 | 16 nov |
-| `fase2/logs/parser.*` — salida bruta del parser propio sobre el corpus | P1 | 17 nov |
+| `fase2/corpus.csv` (hay un borrador con las 44 oraciones de la Fase 1; columnas `id, oracion, nivel, esperado, arbol_esperado`) y reglas de la gramática en texto para el prompt | P2 | 16 nov |
+| `fase2/logs/parser.json` — salida bruta del parser propio (`python fase2/correr_parser.py`) | P1 | ✅ script listo; se vuelve a correr con el corpus final |
 | `fase2/logs/spacy.*` y `fase2/logs/nltk.*` o `huggingface.*` | P3 | 17 nov |
 | `fase2/logs/llm_zero_shot.*` y `llm_few_shot.*` — prompt, respuesta completa y timestamp de cada llamada | P4 | 17 nov |
 | `fase2/evaluar.py` — lee los logs y produce las tablas y la gráfica | P3 | 18 nov |

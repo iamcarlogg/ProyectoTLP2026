@@ -36,9 +36,17 @@ def _secuencia(simbolos, palabras, i, gramatica):
             yield [arbol] + otros, k
 
 
+def normalizar(oracion):
+    """Texto → lista de palabras: minúsculas, sin puntos ni comas.
+
+    Los signos ¿ ? ¡ ! no se quitan (decisión de la Fase 1): quedan pegados a la palabra.
+    """
+    return oracion.lower().replace(".", "").replace(",", "").split()
+
+
 def todos_los_arboles(oracion, gramatica, inicial):
     """Lista de árboles que cubren la oración completa. Lista vacía = rechazada."""
-    palabras = oracion.lower().replace(".", "").replace(",", "").split()
+    palabras = normalizar(oracion)
     return [arbol for arbol, j in _analizar(inicial, palabras, 0, gramatica)
             if j == len(palabras)]
 

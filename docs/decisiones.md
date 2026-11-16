@@ -6,6 +6,10 @@ Este documento reúne los acuerdos vigentes del equipo. Cuando se toma una decis
 
 | Fecha | Decisión |
 | --- | --- |
+| 2026-11-15 | Formato común de los logs de la Fase 2: JSON con `metadatos` y `resultados`; obligatorios `id, oracion, salida, timestamp`; `salida` = acepta, rechaza o invalida (ver «Formato de los logs») |
+| 2026-11-15 | Log del parser: guarda el primer árbol (en una línea) y `n_arboles` (mide la ambigüedad), más `motivo` del rechazo (vocabulario, estructura o error) |
+| 2026-11-15 | La Fase 2 importa el motor desde `fase1/` (no se copia); `motor.normalizar()` es la única limpieza del texto |
+| 2026-11-15 | Los signos `¿?¡!` no se normalizan (opción A): las oraciones con esos signos se rechazan por vocabulario y así se documenta |
 | 2026-11-15 | Fase 2: la segunda herramienta de NLP es NLTK (etiquetador entrenado con `cess_esp`; misma regla de concordancia que spaCy). El LLM se usa por API, no por el chat |
 | 2026-11-15 | Alcance de la Fase 2 ajustado por el docente ([alcance_fase2.md](alcance_fase2.md)): solo informe con evidencia, 40+ oraciones, 4 enfoques, entrega jueves 19 nov a las 17:30; sin presentación oral. Reemplaza la fecha del 18 de noviembre |
 | 2026-11-05 | P3: spaCy usa el modelo `es_core_news_md`; las oraciones se pasan tal como están escritas |
@@ -30,11 +34,39 @@ Sin estos acuerdos, el trabajo de cada rol no encaja con el de los demás.
 | --- | --- | --- |
 | Formato de árbol común | Notación de corchetes de `nltk.Tree` para el parser, NLP y LLM. Sin esto, las métricas no son comparables. | Todos |
 | Interfaz `parsear(oracion)` | Devuelve el árbol o `None`. | P1 → P3 y P4 |
+| Formato de los logs (Fase 2) | JSON con `metadatos` y `resultados`; ver la sección «Formato de los logs». | P1 → P3 y P4 |
 | Formato del set de prueba | CSV con columnas `id, oracion, nivel, esperado, arbol_esperado` (`esperado` = acepta o rechaza). | P2 → P3 y P4 |
 | Oraciones a tiempo | Fase 1 antes del 22 oct (cumplido); corpus de la Fase 2 (40+) el 16 nov. | P2 → todos |
 | Informe por secciones | Cada integrante redacta la suya; P4 integra y unifica. | Todos → P4 |
 | Revisión cruzada de código | P1 con P2, P3 con P4. | Todos |
 | Asistencia | Fase 1: al menos 3 de 4 en la presentación. Fase 2: al menos uno el 19 nov en clase, capaz de explicar logs, tablas y respuestas del LLM. | Todos |
+
+## Formato de los logs (Fase 2)
+
+Los cinco logs (parser, spaCy, NLTK, LLM zero-shot y LLM few-shot) van en `fase2/logs/` como JSON con dos partes, para que `evaluar.py` los lea igual:
+
+```json
+{
+  "metadatos": {"enfoque": "parser", "fecha": "...", "python": "...", "corpus": "fase2/corpus.csv", "...": "..."},
+  "resultados": [
+    {"id": 1, "oracion": "El perro duerme.", "salida": "acepta", "timestamp": "2026-11-15T19:41:31", "...": "..."}
+  ]
+}
+```
+
+- **Obligatorios en cada resultado:** `id`, `oracion`, `salida`, `timestamp`.
+- **`salida`:** `acepta`, `rechaza` o `invalida` (el LLM no respondió en el formato pedido; `evaluar.py` lo cuenta como error).
+- **`metadatos`:** todo lo que hace falta para la metodología: versiones, modelo, parámetros, gramática usada y fecha de la corrida.
+- **Campos propios de cada enfoque:** se agregan sin romper a los demás. El parser usa `motivo` (`vocabulario`, `estructura`, `error` o `null`), `arbol` (primer árbol, en una línea), `n_arboles`, `palabras_desconocidas`, `tiempo_ms` y `error`. El LLM debería guardar `prompt` y `respuesta_completa`.
+- Se escribe con `ensure_ascii=False` para que las tildes y la ñ se lean.
+
+**Recomendación para los errores de etiquetado** (pendiente de acordar entre P2 y P3). Cada enfoque etiqueta con su propio sistema: el parser con nuestras categorías (`sn`, `det`…), spaCy con Universal Dependencies (`DET`, `NOUN`) y NLTK con EAGLES (`da0ms0`). Por eso no se pueden comparar árboles completos entre los cuatro. Propuesta:
+
+1. En el corpus, para las oraciones aceptadas, P2 anota la **categoría esperada de cada palabra** en nuestra notación (`det n v`…), además de `arbol_esperado`.
+2. Cada enfoque traduce sus etiquetas a esas categorías con una tabla corta (`DET`/`da…` → `det`, `NOUN`/`nc…` → `n`, `VERB`/`v…` → `v`, `ADJ`/`aq…` → `adj`, `ADP`/`sp…` → `p`).
+3. **Error de etiquetado** = la salida (acepta o rechaza) es correcta pero alguna palabra quedó con una categoría distinta de la esperada. Para el parser y el LLM también cuenta si el árbol difiere de `arbol_esperado`.
+
+Así los cuatro enfoques se miden con la misma vara y la tabla de traducción queda documentada en la metodología.
 
 ## Notación de las gramáticas
 
@@ -74,6 +106,7 @@ El motor (`fase1/motor.py`) analiza con cualquier gramática escrita como diccio
 | --- | --- |
 | `todos_los_arboles(oracion, gramatica, inicial)` | lista de todos los árboles que cubren la oración completa; vacía = rechazada; más de uno = ambigua |
 | `parsear(oracion, gramatica, inicial)` | el primer árbol, o `None` si se rechaza |
+| `normalizar(oracion)` | la lista de palabras tal como las ve el motor |
 
 Antes de analizar, el motor pasa la oración a minúsculas y quita puntos y comas (no quita `¿` ni `?`). No lanza excepciones.
 
@@ -115,8 +148,9 @@ Fase 1:
 Fase 2:
 
 - [ ] Decidir cómo se maneja la concordancia: duplicar no terminales (CFG pura, como en la Fase 1) o rasgos chequeados al construir el nodo (ya no es CFG pura; se aclara en el informe).
-- [ ] Decidir si `parsear()` devuelve el primer árbol o todos (devolver todos permite medir cuántas oraciones son ambiguas).
+- [x] Primer árbol o todos: el log guarda el primer árbol y el número de árboles (`n_arboles`).
 - [x] Elegir la segunda herramienta de NLP: **NLTK**.
 - [ ] Modelo de LLM: lo elige P4, que hace el experimento (cualquier proveedor, siempre por API). Debe anotar en la metodología el ID exacto del modelo y sus parámetros.
 - [ ] Decidir el criterio de acierto para el LLM y para NLTK. Para spaCy, la Fase 1 usó una regla de concordancia; revisar si alcanza para la Fase 2.
-- [ ] Decidir cómo importa la Fase 2 el motor de `fase1/` (copiarlo o añadir `fase1/` al `sys.path`).
+- [x] La Fase 2 importa el motor añadiendo `fase1/` al `sys.path`.
+- [ ] Errores de etiquetado: acordar cómo se miden (ver la recomendación en «Formato de los logs»).

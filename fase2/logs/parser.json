@@ -1,0 +1,565 @@
+{
+  "metadatos": {
+    "enfoque": "parser",
+    "fecha": "2026-11-15T19:41:31",
+    "python": "3.14.5",
+    "nltk": "3.10.3",
+    "gramatica": "fase1/gramatica_es.py",
+    "reglas": 93,
+    "vocabulario": 25,
+    "corpus": "fase2/corpus.csv",
+    "oraciones": 44
+  },
+  "resultados": [
+    {
+      "id": 1,
+      "oracion": "El perro duerme.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms )) (sv_s (v_s duerme)))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.035,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 2,
+      "oracion": "Los perros duermen.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_mp (det_mp los) (n_mp perros) (mod_mp )) (sv_p (v_p duermen)))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.024,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 3,
+      "oracion": "Las gatas duermen.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_fp (det_fp las) (n_fp gatas) (mod_fp )) (sv_p (v_p duermen)))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.021,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 4,
+      "oracion": "El perro negro duerme.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms (adj_ms negro))) (sv_s (v_s duerme)))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.034,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 5,
+      "oracion": "La gata negra duerme.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_fs (det_fs la) (n_fs gata) (mod_fs (adj_fs negra))) (sv_s (v_s duerme)))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.033,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 6,
+      "oracion": "Los perros negros duermen.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_mp (det_mp los) (n_mp perros) (mod_mp (adj_mp negros))) (sv_p (v_p duermen)))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.032,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 7,
+      "oracion": "Las gatas negras duermen.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_fp (det_fp las) (n_fp gatas) (mod_fp (adj_fp negras))) (sv_p (v_p duermen)))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.032,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 8,
+      "oracion": "El perro come la carne.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms )) (sv_s (vt_s come) (sn (sn_fs (det_fs la) (n_fs carne) (mod_fs )))))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.071,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 9,
+      "oracion": "La gata come lentamente.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_fs (det_fs la) (n_fs gata) (mod_fs )) (sv_s (v_s come) (adv lentamente)))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.038,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 10,
+      "oracion": "El perro duerme en la casa.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms )) (sv_s (v_s duerme) (sp (p en) (sn (sn_fs (det_fs la) (n_fs casa) (mod_fs ))))))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.035,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 11,
+      "oracion": "Los perros negros comen rápidamente en el jardín.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_mp (det_mp los) (n_mp perros) (mod_mp (adj_mp negros))) (sv_p (v_p comen) (adv rápidamente) (sp (p en) (sn (sn_ms (det_ms el) (n_ms jardín) (mod_ms ))))))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.063,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 12,
+      "oracion": "El perro que come duerme.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms (rel_suj_s que (sv_s (v_s come))))) (sv_s (v_s duerme)))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.056,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 13,
+      "oracion": "La gata que duerme come la carne.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_fs (det_fs la) (n_fs gata) (mod_fs (rel_suj_s que (sv_s (v_s duerme))))) (sv_s (vt_s come) (sn (sn_fs (det_fs la) (n_fs carne) (mod_fs )))))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.09,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 14,
+      "oracion": "Los perros que comen duermen en la casa.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_mp (det_mp los) (n_mp perros) (mod_mp (rel_suj_p que (sv_p (v_p comen))))) (sv_p (v_p duermen) (sp (p en) (sn (sn_fs (det_fs la) (n_fs casa) (mod_fs ))))))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.07,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 15,
+      "oracion": "El perro que la gata persigue duerme.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms (rel_obj que (sn_fs (det_fs la) (n_fs gata) (mod_fs )) (vt_s persigue)))) (sv_s (v_s duerme)))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.046,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 16,
+      "oracion": "La perro come.",
+      "salida": "rechaza",
+      "motivo": "estructura",
+      "arbol": null,
+      "n_arboles": 0,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.005,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 17,
+      "oracion": "El perro negra duerme.",
+      "salida": "rechaza",
+      "motivo": "estructura",
+      "arbol": null,
+      "n_arboles": 0,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.016,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 18,
+      "oracion": "El perro duermen.",
+      "salida": "rechaza",
+      "motivo": "estructura",
+      "arbol": null,
+      "n_arboles": 0,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.016,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 19,
+      "oracion": "El perro que come la carne duermen.",
+      "salida": "rechaza",
+      "motivo": "estructura",
+      "arbol": null,
+      "n_arboles": 0,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.091,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 20,
+      "oracion": "El perro come la carne en la casa.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms )) (sv_s (vt_s come) (sn (sn_fs (det_fs la) (n_fs carne) (mod_fs (sp (p en) (sn (sn_fs (det_fs la) (n_fs casa) (mod_fs )))))))))",
+      "n_arboles": 2,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.139,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 21,
+      "oracion": "El perro que la gata persigue duerme.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms (rel_obj que (sn_fs (det_fs la) (n_fs gata) (mod_fs )) (vt_s persigue)))) (sv_s (v_s duerme)))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.046,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 22,
+      "oracion": "Los perros negros comen rápidamente en el jardín.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_mp (det_mp los) (n_mp perros) (mod_mp (adj_mp negros))) (sv_p (v_p comen) (adv rápidamente) (sp (p en) (sn (sn_ms (det_ms el) (n_ms jardín) (mod_ms ))))))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.062,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 23,
+      "oracion": "El perro duerme con la gata.",
+      "salida": "rechaza",
+      "motivo": "vocabulario",
+      "arbol": null,
+      "n_arboles": 0,
+      "palabras_desconocidas": [
+        "con"
+      ],
+      "tiempo_ms": 0.022,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 24,
+      "oracion": "El perro persigue a la gata.",
+      "salida": "rechaza",
+      "motivo": "vocabulario",
+      "arbol": null,
+      "n_arboles": 0,
+      "palabras_desconocidas": [
+        "a"
+      ],
+      "tiempo_ms": 0.03,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 25,
+      "oracion": "El perro no duerme.",
+      "salida": "rechaza",
+      "motivo": "vocabulario",
+      "arbol": null,
+      "n_arboles": 0,
+      "palabras_desconocidas": [
+        "no"
+      ],
+      "tiempo_ms": 0.016,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 26,
+      "oracion": "El perro duerme porque la gata come.",
+      "salida": "rechaza",
+      "motivo": "vocabulario",
+      "arbol": null,
+      "n_arboles": 0,
+      "palabras_desconocidas": [
+        "porque"
+      ],
+      "tiempo_ms": 0.021,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 27,
+      "oracion": "El perro come y la gata duerme.",
+      "salida": "rechaza",
+      "motivo": "vocabulario",
+      "arbol": null,
+      "n_arboles": 0,
+      "palabras_desconocidas": [
+        "y"
+      ],
+      "tiempo_ms": 0.035,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 28,
+      "oracion": "El perro negro y grande duerme.",
+      "salida": "rechaza",
+      "motivo": "vocabulario",
+      "arbol": null,
+      "n_arboles": 0,
+      "palabras_desconocidas": [
+        "y",
+        "grande"
+      ],
+      "tiempo_ms": 0.027,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 29,
+      "oracion": "El perro muy negro duerme.",
+      "salida": "rechaza",
+      "motivo": "vocabulario",
+      "arbol": null,
+      "n_arboles": 0,
+      "palabras_desconocidas": [
+        "muy"
+      ],
+      "tiempo_ms": 0.016,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 30,
+      "oracion": "El perro negro pequeño duerme.",
+      "salida": "rechaza",
+      "motivo": "vocabulario",
+      "arbol": null,
+      "n_arboles": 0,
+      "palabras_desconocidas": [
+        "pequeño"
+      ],
+      "tiempo_ms": 0.028,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 31,
+      "oracion": "El perro negro que come duerme.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms (adj_ms negro) (rel_suj_s que (sv_s (v_s come))))) (sv_s (v_s duerme)))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.066,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 32,
+      "oracion": "El perro que duerme en la casa come la carne.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms (rel_suj_s que (sv_s (v_s duerme) (sp (p en) (sn (sn_fs (det_fs la) (n_fs casa) (mod_fs )))))))) (sv_s (vt_s come) (sn (sn_fs (det_fs la) (n_fs carne) (mod_fs )))))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.11,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 33,
+      "oracion": "La gata que el perro persigue duerme.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_fs (det_fs la) (n_fs gata) (mod_fs (rel_obj que (sn_ms (det_ms el) (n_ms perro) (mod_ms )) (vt_s persigue)))) (sv_s (v_s duerme)))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.046,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 34,
+      "oracion": "El perro que las gatas persiguen duerme.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms (rel_obj que (sn_fp (det_fp las) (n_fp gatas) (mod_fp )) (vt_p persiguen)))) (sv_s (v_s duerme)))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.045,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 35,
+      "oracion": "El perro que la gata persiguen duerme.",
+      "salida": "rechaza",
+      "motivo": "estructura",
+      "arbol": null,
+      "n_arboles": 0,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.033,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 36,
+      "oracion": "Los perros que comen duerme.",
+      "salida": "rechaza",
+      "motivo": "estructura",
+      "arbol": null,
+      "n_arboles": 0,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.05,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 37,
+      "oracion": "El perro duerme en el jardín.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms )) (sv_s (v_s duerme) (sp (p en) (sn (sn_ms (det_ms el) (n_ms jardín) (mod_ms ))))))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.034,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 38,
+      "oracion": "La carne negra duerme.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_fs (det_fs la) (n_fs carne) (mod_fs (adj_fs negra))) (sv_s (v_s duerme)))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.033,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 39,
+      "oracion": "El perro come la carne en la casa.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms )) (sv_s (vt_s come) (sn (sn_fs (det_fs la) (n_fs carne) (mod_fs (sp (p en) (sn (sn_fs (det_fs la) (n_fs casa) (mod_fs )))))))))",
+      "n_arboles": 2,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.139,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 40,
+      "oracion": "¿El perro duerme?",
+      "salida": "rechaza",
+      "motivo": "vocabulario",
+      "arbol": null,
+      "n_arboles": 0,
+      "palabras_desconocidas": [
+        "¿el",
+        "duerme?"
+      ],
+      "tiempo_ms": 0.003,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 41,
+      "oracion": "El perro y la gata duermen.",
+      "salida": "rechaza",
+      "motivo": "vocabulario",
+      "arbol": null,
+      "n_arboles": 0,
+      "palabras_desconocidas": [
+        "y"
+      ],
+      "tiempo_ms": 0.016,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 42,
+      "oracion": "La gata duerme lentamente.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_fs (det_fs la) (n_fs gata) (mod_fs )) (sv_s (v_s duerme) (adv lentamente)))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.024,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 43,
+      "oracion": "El perro negro duerme en la casa.",
+      "salida": "acepta",
+      "motivo": null,
+      "arbol": "(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms (adj_ms negro))) (sv_s (v_s duerme) (sp (p en) (sn (sn_fs (det_fs la) (n_fs casa) (mod_fs ))))))",
+      "n_arboles": 1,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.046,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    },
+    {
+      "id": 44,
+      "oracion": "El perro duerme la carne.",
+      "salida": "rechaza",
+      "motivo": "estructura",
+      "arbol": null,
+      "n_arboles": 0,
+      "palabras_desconocidas": [],
+      "tiempo_ms": 0.021,
+      "error": null,
+      "timestamp": "2026-11-15T19:41:31"
+    }
+  ]
+}
