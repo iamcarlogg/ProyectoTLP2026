@@ -6,6 +6,8 @@ Este documento reúne los acuerdos vigentes del equipo. Cuando se toma una decis
 
 | Fecha | Decisión |
 | --- | --- |
+| 2026-11-15 | Fase 2: la segunda herramienta de NLP es NLTK (etiquetador entrenado con `cess_esp`; misma regla de concordancia que spaCy). El LLM se usa por API, no por el chat |
+| 2026-11-15 | Alcance de la Fase 2 ajustado por el docente ([alcance_fase2.md](alcance_fase2.md)): solo informe con evidencia, 40+ oraciones, 4 enfoques, entrega jueves 19 nov a las 17:30; sin presentación oral. Reemplaza la fecha del 18 de noviembre |
 | 2026-11-05 | P3: spaCy usa el modelo `es_core_news_md`; las oraciones se pasan tal como están escritas |
 | 2026-11-05 | P3: spaCy «rechaza» una oración si sus rasgos muestran un error de concordancia (`errores_concordancia()` en `tabla_nlp.py`) |
 | 2026-11-05 | Fechas extendidas: Fase 1 el 7 de noviembre y Fase 2 el 18 de noviembre |
@@ -29,10 +31,10 @@ Sin estos acuerdos, el trabajo de cada rol no encaja con el de los demás.
 | Formato de árbol común | Notación de corchetes de `nltk.Tree` para el parser, NLP y LLM. Sin esto, las métricas no son comparables. | Todos |
 | Interfaz `parsear(oracion)` | Devuelve el árbol o `None`. | P1 → P3 y P4 |
 | Formato del set de prueba | CSV con columnas `id, oracion, nivel, esperado, arbol_esperado` (`esperado` = acepta o rechaza). | P2 → P3 y P4 |
-| Oraciones a tiempo | Fase 1 antes del 22 oct (cumplido); set de la Fase 2 antes del 7 nov. | P2 → todos |
+| Oraciones a tiempo | Fase 1 antes del 22 oct (cumplido); corpus de la Fase 2 (40+) el 16 nov. | P2 → todos |
 | Informe por secciones | Cada integrante redacta la suya; P4 integra y unifica. | Todos → P4 |
 | Revisión cruzada de código | P1 con P2, P3 con P4. | Todos |
-| Asistencia | Al menos 3 de los 4 integrantes en cada presentación. | Todos |
+| Asistencia | Fase 1: al menos 3 de 4 en la presentación. Fase 2: al menos uno el 19 nov en clase, capaz de explicar logs, tablas y respuestas del LLM. | Todos |
 
 ## Notación de las gramáticas
 
@@ -114,5 +116,7 @@ Fase 2:
 
 - [ ] Decidir cómo se maneja la concordancia: duplicar no terminales (CFG pura, como en la Fase 1) o rasgos chequeados al construir el nodo (ya no es CFG pura; se aclara en el informe).
 - [ ] Decidir si `parsear()` devuelve el primer árbol o todos (devolver todos permite medir cuántas oraciones son ambiguas).
-- [ ] Decidir el criterio de acierto para el LLM y para HuggingFace. Para spaCy, la Fase 1 usó una regla de concordancia; revisar si alcanza para la Fase 2.
+- [x] Elegir la segunda herramienta de NLP: **NLTK**.
+- [ ] Modelo de LLM: lo elige P4, que hace el experimento (cualquier proveedor, siempre por API). Debe anotar en la metodología el ID exacto del modelo y sus parámetros.
+- [ ] Decidir el criterio de acierto para el LLM y para NLTK. Para spaCy, la Fase 1 usó una regla de concordancia; revisar si alcanza para la Fase 2.
 - [ ] Decidir cómo importa la Fase 2 el motor de `fase1/` (copiarlo o añadir `fase1/` al `sys.path`).

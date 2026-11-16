@@ -9,9 +9,9 @@ Proyecto de Teoría de Lenguajes de Programación (TLP02-2026): *experimentando 
 | Fase | Qué se hace | Peso | Entrega | Presentación |
 | --- | --- | ---: | --- | --- |
 | **1 — Encontrar el límite** | Parser de un subconjunto de C (mini-C) que funciona perfecto; luego intentar extender la CFG al español y documentar dónde y por qué falla; demo con spaCy/NLTK. | 40 % | **sábado 7 nov 2026** (fecha extendida) | por confirmar |
-| **2 — Medir la diferencia** | CFG de un español controlado, set de 60+ oraciones etiquetadas, comparación con spaCy y HuggingFace (métricas), y experimento con un LLM (zero-shot y few-shot). | 60 % | **18 nov 2026** (fecha extendida) | por confirmar |
+| **2 — Medir la diferencia** | Benchmark: el mismo corpus de 40+ oraciones etiquetadas pasa por 4 enfoques (parser propio, spaCy, NLTK o HuggingFace, LLM zero-shot y few-shot) y se comparan con métricas. Se evalúa **solo con un informe escrito** (8–10 páginas) y anexos de evidencia. Detalle: [docs/alcance_fase2.md](docs/alcance_fase2.md). | 60 % | **jueves 19 nov 2026, 17:30** (correo institucional: enlace al repositorio + PDF) | **no hay**; el 19 en clase el docente puede preguntar a cualquier equipo (debe ir al menos un integrante) |
 
-Cada fase se evalúa así: correctitud técnica 35 %, profundidad del análisis 30 %, rigor experimental 20 %, presentación y demo 15 %. **Todos deben poder explicar cualquier línea de código.**
+La Fase 1 se evaluó así: correctitud técnica 35 %, profundidad del análisis 30 %, rigor experimental 20 %, presentación y demo 15 %. La Fase 2 no tiene presentación: se evalúa por el informe y su evidencia. **Todos deben poder explicar cualquier línea de código.**
 
 ## Roles
 
@@ -19,10 +19,10 @@ Cada persona mantiene el mismo eje en las dos fases. Completen la columna *Integ
 
 | Rol | Integrante | Fase 1 | Fase 2 |
 | --- | --- | --- | --- |
-| **P1 — Parsers** | | Lexer y parser de mini-C, árbol, errores, motor genérico | Parser del español, visualización de árboles, función `parsear()` |
-| **P2 — Gramáticas** | | Extensión de la CFG al español y análisis formal de las fallas | CFG formal del español, vocabulario y set de 60+ oraciones |
-| **P3 — NLP** | | Demo con spaCy/NLTK sobre las oraciones de P2 | spaCy + HuggingFace, `comparar.py`, métricas, tablas y gráficas |
-| **P4 — Teoría, LLM e integración** | | Marco teórico, tests del parser formal, README, informe | Experimento con el LLM (logs) e informe final |
+| **P1 — Parsers** | | Lexer y parser de mini-C, árbol, errores, motor genérico | Correr el parser propio sobre el corpus y guardar su log |
+| **P2 — Gramáticas** | | Extensión de la CFG al español y análisis formal de las fallas | CFG del español, reglas en texto para el prompt y corpus de 40+ oraciones etiquetadas |
+| **P3 — NLP** | | Demo con spaCy/NLTK sobre las oraciones de P2 | spaCy + NLTK o HuggingFace (logs), script de evaluación, tablas y gráfica |
+| **P4 — Teoría, LLM e integración** | | Marco teórico, tests del parser formal, README, informe | LLM zero-shot y few-shot (prompts, respuestas y timestamps) e informe final en PDF |
 
 ## Estado (5 de noviembre de 2026)
 
@@ -42,17 +42,16 @@ Cada persona mantiene el mismo eje en las dos fases. Completen la columna *Integ
 
 ### Fase 2 (aún no empieza en el repositorio)
 
-Fechas del reparto original; hay que ajustarlas a la nueva entrega del 18 de noviembre.
+Alcance ajustado por el docente el 15 de noviembre: ver [docs/alcance_fase2.md](docs/alcance_fase2.md). Fechas propuestas para llegar al jueves 19 a las 17:30:
 
-| Archivo esperado | Rol | Fecha límite |
+| Archivo esperado | Rol | Fecha propuesta |
 | --- | --- | --- |
-| `gramatica_es.txt` y reglas en formato legible para el prompt | P2 | 5 nov |
-| `set_prueba.csv` (columnas `id, oracion, nivel, esperado, arbol_esperado`) | P2 | 7 nov |
-| Función `parsear(oracion)` documentada | P1 | 9 nov |
-| `llm_experimento.py`, prompts y logs | P4 | 11 nov |
-| `comparar.py` | P3 | 12 nov |
-| `visualizar.py` e imágenes PNG de árboles | P1 | 13 nov |
-| Métricas en CSV y gráficas en PNG | P3 | 14 nov |
+| `fase2/corpus.csv` (columnas `id, oracion, nivel, esperado, arbol_esperado`) y reglas de la gramática en texto para el prompt | P2 | 16 nov |
+| `fase2/logs/parser.*` — salida bruta del parser propio sobre el corpus | P1 | 17 nov |
+| `fase2/logs/spacy.*` y `fase2/logs/nltk.*` o `huggingface.*` | P3 | 17 nov |
+| `fase2/logs/llm_zero_shot.*` y `llm_few_shot.*` — prompt, respuesta completa y timestamp de cada llamada | P4 | 17 nov |
+| `fase2/evaluar.py` — lee los logs y produce las tablas y la gráfica | P3 | 18 nov |
+| Informe en PDF (8–10 páginas + anexos) y README de reproducción | P4 (cada rol su sección) | 19 nov, antes de las 17:30 |
 
 Sugerencia: crear la carpeta `fase2/` con la misma lógica que `fase1/` (código suelto en la carpeta y documentación en `fase2/documentacion/`).
 
