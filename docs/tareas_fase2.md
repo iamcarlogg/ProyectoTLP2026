@@ -16,8 +16,8 @@ Todo va en `fase2/`, con los logs en `fase2/logs/`. Las fechas son propuestas y 
 
 - [x] **15 nov** — `fase2/correr_parser.py` listo y probado con un corpus provisional (las 44 oraciones de la Fase 1): log en `fase2/logs/parser.json`.
 - [ ] **16–17 nov** — Cuando lleguen la gramática y el corpus de P2: volver a correr `python fase2/correr_parser.py` (si la gramática queda en `fase2/gramatica_es.py`, se usa sola).
-- [ ] **18 nov** — Entregar a P4: resumen del parser y la CFG (máximo 1 página, sin repetir la Fase 1) y el análisis de los errores del parser (qué rechaza y por qué).
-- [ ] Sección de metodología del parser: cómo se corre y la versión de Python y NLTK.
+- [x] **15 nov** — Borrador de la sección del informe en `fase2/documentacion/01_parser_propio.md`: resumen del parser y la CFG (sección 1), metodología (sección 3) y estructura del análisis de errores (sección 5).
+- [ ] **18 nov** — Completar ese documento con los números de la corrida final (valores ⟨…⟩ y análisis de errores) y entregarlo a P4.
 
 ## P2 — Federico · Gramática y corpus
 
@@ -27,6 +27,7 @@ Todo va en `fase2/`, con los logs en `fase2/logs/`. Las fechas son propuestas y 
   - Nivel 3 (complejas): concordancia a distancia, subordinadas anidadas, ambigüedad estructural.
   - Incluir **bastantes** oraciones que deban rechazarse (el borrador tiene solo 7 de 44: un fallo mueve la tasa un 14 %).
   - En el nivel 3, usar **palabras que estén en el vocabulario** de la gramática: si falta una palabra, el parser rechaza por `vocabulario` y no se prueba el límite de la CFG. Con el borrador, los 10 falsos negativos son todos por vocabulario y ninguno por estructura.
+  - **Sin duplicados:** el borrador repite «El perro come la carne en la casa.» (ids 20 y 39); una oración repetida cuenta doble en las métricas.
   - Hay un borrador en `fase2/corpus.csv` (44 oraciones de la Fase 1, niveles provisionales) para partir de él.
   - Se pueden reutilizar las 20 de `fase1/pruebas_base.py` y las 24 de `fase1/pruebas_fallas.py`.
 - [ ] **16 nov** — Reglas de producción en texto legible (`fase2/gramatica_es.txt`) para pegarlas en el prompt del LLM; pasárselas a P4.
