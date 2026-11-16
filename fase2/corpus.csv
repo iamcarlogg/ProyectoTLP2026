@@ -1,45 +1,61 @@
 id,oracion,nivel,esperado,arbol_esperado
-1,El perro duerme.,1,acepta,
-2,Los perros duermen.,1,acepta,
-3,Las gatas duermen.,1,acepta,
-4,El perro negro duerme.,2,acepta,
-5,La gata negra duerme.,2,acepta,
-6,Los perros negros duermen.,2,acepta,
-7,Las gatas negras duermen.,2,acepta,
-8,El perro come la carne.,2,acepta,
-9,La gata come lentamente.,2,acepta,
-10,El perro duerme en la casa.,2,acepta,
-11,Los perros negros comen rápidamente en el jardín.,2,acepta,
-12,El perro que come duerme.,2,acepta,
-13,La gata que duerme come la carne.,2,acepta,
-14,Los perros que comen duermen en la casa.,2,acepta,
-15,El perro que la gata persigue duerme.,2,acepta,
-16,La perro come.,1,rechaza,
-17,El perro negra duerme.,2,rechaza,
-18,El perro duermen.,1,rechaza,
-19,El perro que come la carne duermen.,2,rechaza,
-20,El perro come la carne en la casa.,2,acepta,
-21,El perro que la gata persigue duerme.,3,acepta,
-22,Los perros negros comen rápidamente en el jardín.,3,acepta,
-23,El perro duerme con la gata.,3,acepta,
-24,El perro persigue a la gata.,3,acepta,
-25,El perro no duerme.,3,acepta,
-26,El perro duerme porque la gata come.,3,acepta,
-27,El perro come y la gata duerme.,3,acepta,
-28,El perro negro y grande duerme.,3,acepta,
-29,El perro muy negro duerme.,3,acepta,
-30,El perro negro pequeño duerme.,3,acepta,
-31,El perro negro que come duerme.,3,acepta,
-32,El perro que duerme en la casa come la carne.,3,acepta,
-33,La gata que el perro persigue duerme.,3,acepta,
-34,El perro que las gatas persiguen duerme.,3,acepta,
-35,El perro que la gata persiguen duerme.,3,rechaza,
-36,Los perros que comen duerme.,3,rechaza,
-37,El perro duerme en el jardín.,3,acepta,
-38,La carne negra duerme.,3,acepta,
-39,El perro come la carne en la casa.,3,acepta,
-40,¿El perro duerme?,3,acepta,
-41,El perro y la gata duermen.,3,acepta,
-42,La gata duerme lentamente.,3,acepta,
-43,El perro negro duerme en la casa.,3,acepta,
-44,El perro duerme la carne.,3,rechaza,
+1,El perro duerme.,1,acepta,(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms )) (sv_s (v_s duerme)))
+2,La gata duerme.,1,acepta,(oracion (sn_fs (det_fs la) (n_fs gata) (mod_fs )) (sv_s (v_s duerme)))
+3,Los perros duermen.,1,acepta,(oracion (sn_mp (det_mp los) (n_mp perros) (mod_mp )) (sv_p (v_p duermen)))
+4,Las gatas duermen.,1,acepta,(oracion (sn_fp (det_fp las) (n_fp gatas) (mod_fp )) (sv_p (v_p duermen)))
+5,El perro come.,1,acepta,(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms )) (sv_s (v_s come)))
+6,La gata come.,1,acepta,(oracion (sn_fs (det_fs la) (n_fs gata) (mod_fs )) (sv_s (v_s come)))
+7,Los perros comen.,1,acepta,(oracion (sn_mp (det_mp los) (n_mp perros) (mod_mp )) (sv_p (v_p comen)))
+8,Las gatas comen.,1,acepta,(oracion (sn_fp (det_fp las) (n_fp gatas) (mod_fp )) (sv_p (v_p comen)))
+9,El perro durmió.,1,acepta,(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms )) (sv_s_pret (v_s_pret durmió)))
+10,La gata comió.,1,acepta,(oracion (sn_fs (det_fs la) (n_fs gata) (mod_fs )) (sv_s_pret (v_s_pret comió)))
+11,Los perros durmieron.,1,acepta,(oracion (sn_mp (det_mp los) (n_mp perros) (mod_mp )) (sv_p_pret (v_p_pret durmieron)))
+12,Las gatas comieron.,1,acepta,(oracion (sn_fp (det_fp las) (n_fp gatas) (mod_fp )) (sv_p_pret (v_p_pret comieron)))
+13,Yo duermo.,1,acepta,(oracion (pron_1s yo) (sv_1s_pres (v_1s_pres duermo)))
+14,Nosotros comemos.,1,acepta,(oracion (pron_1p nosotros) (sv_1p_pres (v_1p_pres comemos)))
+15,La perro duerme.,1,rechaza,
+16,El gata duerme.,1,rechaza,
+17,Los perro duermen.,1,rechaza,
+18,Las gata duermen.,1,rechaza,
+19,El perro duermen.,1,rechaza,
+20,Las gatas duerme.,1,rechaza,
+21,El perro negro duerme.,2,acepta,(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms (adj_ms negro))) (sv_s (v_s duerme)))
+22,La gata negra come.,2,acepta,(oracion (sn_fs (det_fs la) (n_fs gata) (mod_fs (adj_fs negra))) (sv_s (v_s come)))
+23,Los perros negros comen.,2,acepta,(oracion (sn_mp (det_mp los) (n_mp perros) (mod_mp (adj_mp negros))) (sv_p (v_p comen)))
+24,Las gatas negras duermen.,2,acepta,(oracion (sn_fp (det_fp las) (n_fp gatas) (mod_fp (adj_fp negras))) (sv_p (v_p duermen)))
+25,El perro duerme lentamente.,2,acepta,(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms )) (sv_s (v_s duerme) (adv lentamente)))
+26,Las gatas comen rápidamente.,2,acepta,(oracion (sn_fp (det_fp las) (n_fp gatas) (mod_fp )) (sv_p (v_p comen) (adv rápidamente)))
+27,El perro come la carne.,2,acepta,(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms )) (sv_s (vt_s come) (sn (sn_fs (det_fs la) (n_fs carne) (mod_fs )))))
+28,La gata comió la carne.,2,acepta,(oracion (sn_fs (det_fs la) (n_fs gata) (mod_fs )) (sv_s_pret (vt_s_pret comió) (sn (sn_fs (det_fs la) (n_fs carne) (mod_fs )))))
+29,El perro duerme en la casa.,2,acepta,(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms )) (sv_s (v_s duerme) (sp (p en) (sn (sn_fs (det_fs la) (n_fs casa) (mod_fs ))))))
+30,Los perros duermen en el jardín.,2,acepta,(oracion (sn_mp (det_mp los) (n_mp perros) (mod_mp )) (sv_p (v_p duermen) (sp (p en) (sn (sn_ms (det_ms el) (n_ms jardín) (mod_ms ))))))
+31,La gata negra durmió lentamente.,2,acepta,(oracion (sn_fs (det_fs la) (n_fs gata) (mod_fs (adj_fs negra))) (sv_s_pret (v_s_pret durmió) (adv lentamente)))
+32,Las gatas negras comieron la carne.,2,acepta,(oracion (sn_fp (det_fp las) (n_fp gatas) (mod_fp (adj_fp negras))) (sv_p_pret (vt_p_pret comieron) (sn (sn_fs (det_fs la) (n_fs carne) (mod_fs )))))
+33,Yo como la carne.,2,acepta,(oracion (pron_1s yo) (sv_1s_pres (vt_1s_pres como) (sn (sn_fs (det_fs la) (n_fs carne) (mod_fs )))))
+34,Nosotras comimos la carne.,2,acepta,(oracion (pron_1p nosotras) (sv_1p_pret (vt_1p_pret comimos) (sn (sn_fs (det_fs la) (n_fs carne) (mod_fs )))))
+35,El perro negra duerme.,2,rechaza,
+36,La gata negro come.,2,rechaza,
+37,Los perros negro duermen.,2,rechaza,
+38,Las gatas negros comen.,2,rechaza,
+39,La gata negros durmió.,2,rechaza,
+40,Los perros negras comieron.,2,rechaza,
+41,El perro que come duerme.,3,acepta,(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms (rel_suj_s que (sv_s (v_s come))))) (sv_s (v_s duerme)))
+42,La gata que duerme come la carne.,3,acepta,(oracion (sn_fs (det_fs la) (n_fs gata) (mod_fs (rel_suj_s que (sv_s (v_s duerme))))) (sv_s (vt_s come) (sn (sn_fs (det_fs la) (n_fs carne) (mod_fs )))))
+43,Los perros que comen duermen en la casa.,3,acepta,(oracion (sn_mp (det_mp los) (n_mp perros) (mod_mp (rel_suj_p que (sv_p (v_p comen))))) (sv_p (v_p duermen) (sp (p en) (sn (sn_fs (det_fs la) (n_fs casa) (mod_fs ))))))
+44,El perro que la gata persigue duerme.,3,acepta,(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms (rel_obj que (sn_fs (det_fs la) (n_fs gata) (mod_fs )) (vt_s persigue)))) (sv_s (v_s duerme)))
+45,La gata que el perro persiguió durmió.,3,acepta,(oracion (sn_fs (det_fs la) (n_fs gata) (mod_fs (rel_obj_pret que (sn_ms (det_ms el) (n_ms perro) (mod_ms )) (vt_s_pret persiguió)))) (sv_s_pret (v_s_pret durmió)))
+46,Los perros negros que comieron durmieron.,3,acepta,(oracion (sn_mp (det_mp los) (n_mp perros) (mod_mp (adj_mp negros) (rel_suj_p_pret que (sv_p_pret (v_p_pret comieron))))) (sv_p_pret (v_p_pret durmieron)))
+47,El perro come la carne en la casa.,3,acepta,(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms )) (sv_s (vt_s come) (sn (sn_fs (det_fs la) (n_fs carne) (mod_fs (sp (p en) (sn (sn_fs (det_fs la) (n_fs casa) (mod_fs )))))))))
+48,El perro que la gata que duerme persigue duerme.,3,acepta,(oracion (sn_ms (det_ms el) (n_ms perro) (mod_ms (rel_obj que (sn_fs (det_fs la) (n_fs gata) (mod_fs (rel_suj_s que (sv_s (v_s duerme))))) (vt_s persigue)))) (sv_s (v_s duerme)))
+49,El perro y la gata duermen.,3,acepta,(oracion (sn_coord (sn_ms (det_ms el) (n_ms perro)) y (sn_fs (det_fs la) (n_fs gata))) (sv_p (v_p duermen)))
+50,El perro come la carne y duerme.,3,acepta,(oracion (sn_ms (det_ms el) (n_ms perro)) (sv_coord (sv_s (vt_s come) (sn (sn_fs (det_fs la) (n_fs carne)))) y (sv_s (v_s duerme))))
+51,El perro duerme y la gata come.,3,acepta,(oracion_coord (oracion (sn_ms (det_ms el) (n_ms perro)) (sv_s (v_s duerme))) y (oracion (sn_fs (det_fs la) (n_fs gata)) (sv_s (v_s come))))
+52,El perro no come la carne.,3,acepta,(oracion (sn_ms (det_ms el) (n_ms perro)) (sv_s (negacion no) (vt_s come) (sn (sn_fs (det_fs la) (n_fs carne)))))
+53,El perro que la gata persiguen duerme.,3,rechaza,
+54,Los perros que comen duerme.,3,rechaza,
+55,La gata que el perro persiguieron durmió.,3,rechaza,
+56,El perro negro que comen duerme.,3,rechaza,
+57,El perro que la gata persigue duermen.,3,rechaza,
+58,Las gatas que comen durmió.,3,rechaza,
+59,El perro que la gata persigue negra duerme.,3,rechaza,
+60,El perro come la carne duermen.,3,rechaza,
