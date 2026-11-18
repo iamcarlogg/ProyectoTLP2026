@@ -1,0 +1,2734 @@
+{
+  "metadatos": {
+    "enfoque": "spacy",
+    "fecha": "2026-11-17T21:17:50",
+    "python": "3.12.10",
+    "spacy": "3.8.18",
+    "modelo": "es_core_news_md",
+    "version_modelo": "3.8.0",
+    "criterio_rechazo": "error de concordancia de género o número en los rasgos de spaCy (fase1/tabla_nlp.py: errores_concordancia)",
+    "corpus": "fase2\\corpus.csv",
+    "oraciones": 60
+  },
+  "resultados": [
+    {
+      "id": 1,
+      "oracion": "El perro duerme.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "El",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "nsubj",
+          "cabeza": "duerme"
+        },
+        {
+          "texto": "duerme",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "ROOT",
+          "cabeza": "duerme"
+        }
+      ],
+      "raiz": "duerme",
+      "raiz_pos": "PROPN",
+      "tiempo_ms": 170.196,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 2,
+      "oracion": "La gata duerme.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "La",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "gata",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "nsubj",
+          "cabeza": "duerme"
+        },
+        {
+          "texto": "duerme",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "duerme"
+        }
+      ],
+      "raiz": "duerme",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.961,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 3,
+      "oracion": "Los perros duermen.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "Los",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Plur|PronType=Art",
+          "dep": "det",
+          "cabeza": "perros"
+        },
+        {
+          "texto": "perros",
+          "pos": "NOUN",
+          "morph": "Gender=Masc|Number=Plur",
+          "dep": "nsubj",
+          "cabeza": "duermen"
+        },
+        {
+          "texto": "duermen",
+          "pos": "VERB",
+          "morph": "Mood=Sub|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "duermen"
+        }
+      ],
+      "raiz": "duermen",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 4.399,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 4,
+      "oracion": "Las gatas duermen.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "Las",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Plur|PronType=Art",
+          "dep": "det",
+          "cabeza": "gatas"
+        },
+        {
+          "texto": "gatas",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Plur",
+          "dep": "nsubj",
+          "cabeza": "duermen"
+        },
+        {
+          "texto": "duermen",
+          "pos": "VERB",
+          "morph": "Mood=Sub|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "duermen"
+        }
+      ],
+      "raiz": "duermen",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.154,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 5,
+      "oracion": "El perro come.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "El",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "nsubj",
+          "cabeza": "come"
+        },
+        {
+          "texto": "come",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "ROOT",
+          "cabeza": "come"
+        }
+      ],
+      "raiz": "come",
+      "raiz_pos": "PROPN",
+      "tiempo_ms": 2.927,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 6,
+      "oracion": "La gata come.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "La",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "gata",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "nsubj",
+          "cabeza": "come"
+        },
+        {
+          "texto": "come",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "ROOT",
+          "cabeza": "come"
+        }
+      ],
+      "raiz": "come",
+      "raiz_pos": "PROPN",
+      "tiempo_ms": 2.837,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 7,
+      "oracion": "Los perros comen.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "Los",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Plur|PronType=Art",
+          "dep": "det",
+          "cabeza": "perros"
+        },
+        {
+          "texto": "perros",
+          "pos": "NOUN",
+          "morph": "Gender=Masc|Number=Plur",
+          "dep": "nsubj",
+          "cabeza": "comen"
+        },
+        {
+          "texto": "comen",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "comen"
+        }
+      ],
+      "raiz": "comen",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.164,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 8,
+      "oracion": "Las gatas comen.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "Las",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Plur|PronType=Art",
+          "dep": "det",
+          "cabeza": "gatas"
+        },
+        {
+          "texto": "gatas",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Plur",
+          "dep": "nsubj",
+          "cabeza": "comen"
+        },
+        {
+          "texto": "comen",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "comen"
+        }
+      ],
+      "raiz": "comen",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.032,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 9,
+      "oracion": "El perro durmió.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "El",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "nsubj",
+          "cabeza": "durmió"
+        },
+        {
+          "texto": "durmió",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "durmió"
+        }
+      ],
+      "raiz": "durmió",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.824,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 10,
+      "oracion": "La gata comió.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "La",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "gata",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "nsubj",
+          "cabeza": "comió"
+        },
+        {
+          "texto": "comió",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "comió"
+        }
+      ],
+      "raiz": "comió",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.017,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 11,
+      "oracion": "Los perros durmieron.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "Los",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Plur|PronType=Art",
+          "dep": "det",
+          "cabeza": "perros"
+        },
+        {
+          "texto": "perros",
+          "pos": "NOUN",
+          "morph": "Gender=Masc|Number=Plur",
+          "dep": "nsubj",
+          "cabeza": "durmieron"
+        },
+        {
+          "texto": "durmieron",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "durmieron"
+        }
+      ],
+      "raiz": "durmieron",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.47,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 12,
+      "oracion": "Las gatas comieron.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "Las",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Plur|PronType=Art",
+          "dep": "det",
+          "cabeza": "gatas"
+        },
+        {
+          "texto": "gatas",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Plur",
+          "dep": "nsubj",
+          "cabeza": "comieron"
+        },
+        {
+          "texto": "comieron",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "comieron"
+        }
+      ],
+      "raiz": "comieron",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.024,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 13,
+      "oracion": "Yo duermo.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "Yo",
+          "pos": "PRON",
+          "morph": "Case=Nom|Number=Sing|Person=1|PronType=Prs",
+          "dep": "nsubj",
+          "cabeza": "duermo"
+        },
+        {
+          "texto": "duermo",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "ROOT",
+          "cabeza": "duermo"
+        }
+      ],
+      "raiz": "duermo",
+      "raiz_pos": "PROPN",
+      "tiempo_ms": 3.094,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 14,
+      "oracion": "Nosotros comemos.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "Nosotros",
+          "pos": "PRON",
+          "morph": "Case=Acc,Nom|Gender=Masc|Number=Plur|Person=1|PronType=Prs",
+          "dep": "nsubj",
+          "cabeza": "comemos"
+        },
+        {
+          "texto": "comemos",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Plur|Person=1|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "comemos"
+        }
+      ],
+      "raiz": "comemos",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.126,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 15,
+      "oracion": "La perro duerme.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "La",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "nsubj",
+          "cabeza": "duerme"
+        },
+        {
+          "texto": "duerme",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "ROOT",
+          "cabeza": "duerme"
+        }
+      ],
+      "raiz": "duerme",
+      "raiz_pos": "PROPN",
+      "tiempo_ms": 2.993,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 16,
+      "oracion": "El gata duerme.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "Gender: gata=Fem / El=Masc"
+      ],
+      "palabras": [
+        {
+          "texto": "El",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "gata",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "nsubj",
+          "cabeza": "duerme"
+        },
+        {
+          "texto": "duerme",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "duerme"
+        }
+      ],
+      "raiz": "duerme",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 2.936,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 17,
+      "oracion": "Los perro duermen.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "Los",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Plur|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "nsubj",
+          "cabeza": "duermen"
+        },
+        {
+          "texto": "duermen",
+          "pos": "VERB",
+          "morph": "Mood=Sub|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "duermen"
+        }
+      ],
+      "raiz": "duermen",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 2.76,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 18,
+      "oracion": "Las gata duermen.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "Number: gata=Sing / Las=Plur",
+        "sujeto-verbo: gata=Sing / duermen=Plur"
+      ],
+      "palabras": [
+        {
+          "texto": "Las",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Plur|PronType=Art",
+          "dep": "det",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "gata",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "nsubj",
+          "cabeza": "duermen"
+        },
+        {
+          "texto": "duermen",
+          "pos": "VERB",
+          "morph": "Mood=Sub|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "duermen"
+        }
+      ],
+      "raiz": "duermen",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.087,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 19,
+      "oracion": "El perro duermen.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "sujeto-verbo: perro=Sing / duermen=Plur"
+      ],
+      "palabras": [
+        {
+          "texto": "El",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "nsubj",
+          "cabeza": "duermen"
+        },
+        {
+          "texto": "duermen",
+          "pos": "VERB",
+          "morph": "Mood=Sub|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "duermen"
+        }
+      ],
+      "raiz": "duermen",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 2.91,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 20,
+      "oracion": "Las gatas duerme.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "sujeto-verbo: gatas=Plur / duerme=Sing"
+      ],
+      "palabras": [
+        {
+          "texto": "Las",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Plur|PronType=Art",
+          "dep": "det",
+          "cabeza": "gatas"
+        },
+        {
+          "texto": "gatas",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Plur",
+          "dep": "nsubj",
+          "cabeza": "duerme"
+        },
+        {
+          "texto": "duerme",
+          "pos": "VERB",
+          "morph": "Case=Acc|Number=Sing|Person=1|PrepCase=Npr|PronType=Prs|Reflex=Yes|VerbForm=Inf",
+          "dep": "ROOT",
+          "cabeza": "duerme"
+        }
+      ],
+      "raiz": "duerme",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.069,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 21,
+      "oracion": "El perro negro duerme.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "El",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "nsubj",
+          "cabeza": "duerme"
+        },
+        {
+          "texto": "negro",
+          "pos": "ADJ",
+          "morph": "Gender=Masc|Number=Sing",
+          "dep": "amod",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "duerme",
+          "pos": "VERB",
+          "morph": "Mood=Sub|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "duerme"
+        }
+      ],
+      "raiz": "duerme",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.692,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 22,
+      "oracion": "La gata negra come.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "La",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "gata",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "nsubj",
+          "cabeza": "come"
+        },
+        {
+          "texto": "negra",
+          "pos": "ADJ",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "amod",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "come",
+          "pos": "VERB",
+          "morph": "Mood=Sub|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "come"
+        }
+      ],
+      "raiz": "come",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.456,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 23,
+      "oracion": "Los perros negros comen.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "Los",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Plur|PronType=Art",
+          "dep": "det",
+          "cabeza": "perros"
+        },
+        {
+          "texto": "perros",
+          "pos": "NOUN",
+          "morph": "Gender=Masc|Number=Plur",
+          "dep": "nsubj",
+          "cabeza": "comen"
+        },
+        {
+          "texto": "negros",
+          "pos": "ADJ",
+          "morph": "Gender=Masc|Number=Plur",
+          "dep": "amod",
+          "cabeza": "perros"
+        },
+        {
+          "texto": "comen",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "comen"
+        }
+      ],
+      "raiz": "comen",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 4.011,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 24,
+      "oracion": "Las gatas negras duermen.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "Las",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Plur|PronType=Art",
+          "dep": "det",
+          "cabeza": "gatas"
+        },
+        {
+          "texto": "gatas",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Plur",
+          "dep": "nsubj",
+          "cabeza": "duermen"
+        },
+        {
+          "texto": "negras",
+          "pos": "ADJ",
+          "morph": "Gender=Fem|Number=Plur",
+          "dep": "amod",
+          "cabeza": "gatas"
+        },
+        {
+          "texto": "duermen",
+          "pos": "VERB",
+          "morph": "Mood=Sub|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "duermen"
+        }
+      ],
+      "raiz": "duermen",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.306,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 25,
+      "oracion": "El perro duerme lentamente.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "El",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "nsubj",
+          "cabeza": "duerme"
+        },
+        {
+          "texto": "duerme",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "duerme"
+        },
+        {
+          "texto": "lentamente",
+          "pos": "ADV",
+          "morph": "",
+          "dep": "advmod",
+          "cabeza": "duerme"
+        }
+      ],
+      "raiz": "duerme",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.122,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 26,
+      "oracion": "Las gatas comen rápidamente.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "Las",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Plur|PronType=Art",
+          "dep": "det",
+          "cabeza": "gatas"
+        },
+        {
+          "texto": "gatas",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Plur",
+          "dep": "nsubj",
+          "cabeza": "comen"
+        },
+        {
+          "texto": "comen",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "comen"
+        },
+        {
+          "texto": "rápidamente",
+          "pos": "ADV",
+          "morph": "",
+          "dep": "advmod",
+          "cabeza": "comen"
+        }
+      ],
+      "raiz": "comen",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 2.997,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 27,
+      "oracion": "El perro come la carne.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "El",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "nsubj",
+          "cabeza": "come"
+        },
+        {
+          "texto": "come",
+          "pos": "VERB",
+          "morph": "Mood=Imp|Number=Sing|Person=3|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "come"
+        },
+        {
+          "texto": "la",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "carne"
+        },
+        {
+          "texto": "carne",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "obj",
+          "cabeza": "come"
+        }
+      ],
+      "raiz": "come",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.924,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 28,
+      "oracion": "La gata comió la carne.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "La",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "gata",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "nsubj",
+          "cabeza": "comió"
+        },
+        {
+          "texto": "comió",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "comió"
+        },
+        {
+          "texto": "la",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "carne"
+        },
+        {
+          "texto": "carne",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "obj",
+          "cabeza": "comió"
+        }
+      ],
+      "raiz": "comió",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 4.161,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 29,
+      "oracion": "El perro duerme en la casa.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "El",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "nsubj",
+          "cabeza": "duerme"
+        },
+        {
+          "texto": "duerme",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "duerme"
+        },
+        {
+          "texto": "en",
+          "pos": "ADP",
+          "morph": "",
+          "dep": "case",
+          "cabeza": "casa"
+        },
+        {
+          "texto": "la",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "casa"
+        },
+        {
+          "texto": "casa",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "obl",
+          "cabeza": "duerme"
+        }
+      ],
+      "raiz": "duerme",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 4.478,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 30,
+      "oracion": "Los perros duermen en el jardín.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "Los",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Plur|PronType=Art",
+          "dep": "det",
+          "cabeza": "perros"
+        },
+        {
+          "texto": "perros",
+          "pos": "NOUN",
+          "morph": "Gender=Masc|Number=Plur",
+          "dep": "nsubj",
+          "cabeza": "duermen"
+        },
+        {
+          "texto": "duermen",
+          "pos": "VERB",
+          "morph": "Mood=Sub|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "duermen"
+        },
+        {
+          "texto": "en",
+          "pos": "ADP",
+          "morph": "",
+          "dep": "case",
+          "cabeza": "jardín"
+        },
+        {
+          "texto": "el",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "jardín"
+        },
+        {
+          "texto": "jardín",
+          "pos": "NOUN",
+          "morph": "Gender=Masc|Number=Sing",
+          "dep": "obl",
+          "cabeza": "duermen"
+        }
+      ],
+      "raiz": "duermen",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 4.265,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 31,
+      "oracion": "La gata negra durmió lentamente.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "La",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "gata",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "nsubj",
+          "cabeza": "durmió"
+        },
+        {
+          "texto": "negra",
+          "pos": "ADJ",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "amod",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "durmió",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "durmió"
+        },
+        {
+          "texto": "lentamente",
+          "pos": "ADV",
+          "morph": "",
+          "dep": "advmod",
+          "cabeza": "durmió"
+        }
+      ],
+      "raiz": "durmió",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.95,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 32,
+      "oracion": "Las gatas negras comieron la carne.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "Las",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Plur|PronType=Art",
+          "dep": "det",
+          "cabeza": "gatas"
+        },
+        {
+          "texto": "gatas",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Plur",
+          "dep": "nsubj",
+          "cabeza": "comieron"
+        },
+        {
+          "texto": "negras",
+          "pos": "ADJ",
+          "morph": "Gender=Fem|Number=Plur",
+          "dep": "amod",
+          "cabeza": "gatas"
+        },
+        {
+          "texto": "comieron",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "comieron"
+        },
+        {
+          "texto": "la",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "carne"
+        },
+        {
+          "texto": "carne",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "obj",
+          "cabeza": "comieron"
+        }
+      ],
+      "raiz": "comieron",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 4.093,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 33,
+      "oracion": "Yo como la carne.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "Yo",
+          "pos": "PRON",
+          "morph": "Case=Nom|Number=Sing|Person=1|PronType=Prs",
+          "dep": "ROOT",
+          "cabeza": "Yo"
+        },
+        {
+          "texto": "como",
+          "pos": "SCONJ",
+          "morph": "",
+          "dep": "mark",
+          "cabeza": "carne"
+        },
+        {
+          "texto": "la",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "carne"
+        },
+        {
+          "texto": "carne",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "nmod",
+          "cabeza": "Yo"
+        }
+      ],
+      "raiz": "Yo",
+      "raiz_pos": "PRON",
+      "tiempo_ms": 3.872,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 34,
+      "oracion": "Nosotras comimos la carne.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "Nosotras",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "nsubj",
+          "cabeza": "comimos"
+        },
+        {
+          "texto": "comimos",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Plur|Person=1|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "comimos"
+        },
+        {
+          "texto": "la",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "carne"
+        },
+        {
+          "texto": "carne",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "obj",
+          "cabeza": "comimos"
+        }
+      ],
+      "raiz": "comimos",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 4.035,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 35,
+      "oracion": "El perro negra duerme.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "Gender: El=Masc / negra=Fem"
+      ],
+      "palabras": [
+        {
+          "texto": "El",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "nsubj",
+          "cabeza": "duerme"
+        },
+        {
+          "texto": "negra",
+          "pos": "ADJ",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "amod",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "duerme",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "duerme"
+        }
+      ],
+      "raiz": "duerme",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 4.014,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 36,
+      "oracion": "La gata negro come.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "Gender: gata=Fem / La=Fem / negro=Masc"
+      ],
+      "palabras": [
+        {
+          "texto": "La",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "gata",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "nsubj",
+          "cabeza": "come"
+        },
+        {
+          "texto": "negro",
+          "pos": "ADJ",
+          "morph": "Gender=Masc|Number=Sing",
+          "dep": "amod",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "come",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "ROOT",
+          "cabeza": "come"
+        }
+      ],
+      "raiz": "come",
+      "raiz_pos": "PROPN",
+      "tiempo_ms": 3.864,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 37,
+      "oracion": "Los perros negro duermen.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "Number: perros=Plur / Los=Plur / negro=Sing"
+      ],
+      "palabras": [
+        {
+          "texto": "Los",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Plur|PronType=Art",
+          "dep": "det",
+          "cabeza": "perros"
+        },
+        {
+          "texto": "perros",
+          "pos": "NOUN",
+          "morph": "Gender=Masc|Number=Plur",
+          "dep": "nsubj",
+          "cabeza": "duermen"
+        },
+        {
+          "texto": "negro",
+          "pos": "ADJ",
+          "morph": "Gender=Masc|Number=Sing",
+          "dep": "amod",
+          "cabeza": "perros"
+        },
+        {
+          "texto": "duermen",
+          "pos": "VERB",
+          "morph": "Mood=Sub|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "duermen"
+        }
+      ],
+      "raiz": "duermen",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.793,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 38,
+      "oracion": "Las gatas negros comen.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "Gender: gatas=Fem / Las=Fem / negros=Masc"
+      ],
+      "palabras": [
+        {
+          "texto": "Las",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Plur|PronType=Art",
+          "dep": "det",
+          "cabeza": "gatas"
+        },
+        {
+          "texto": "gatas",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Plur",
+          "dep": "nsubj",
+          "cabeza": "comen"
+        },
+        {
+          "texto": "negros",
+          "pos": "ADJ",
+          "morph": "Gender=Masc|Number=Plur",
+          "dep": "amod",
+          "cabeza": "gatas"
+        },
+        {
+          "texto": "comen",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "comen"
+        }
+      ],
+      "raiz": "comen",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 4.315,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 39,
+      "oracion": "La gata negros durmió.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "Gender: gata=Fem / La=Fem / negros=Masc",
+        "Number: gata=Sing / La=Sing / negros=Plur"
+      ],
+      "palabras": [
+        {
+          "texto": "La",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "gata",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "nsubj",
+          "cabeza": "durmió"
+        },
+        {
+          "texto": "negros",
+          "pos": "ADJ",
+          "morph": "Gender=Masc|Number=Plur",
+          "dep": "amod",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "durmió",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "durmió"
+        }
+      ],
+      "raiz": "durmió",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.426,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 40,
+      "oracion": "Los perros negras comieron.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "Gender: perros=Masc / Los=Masc / negras=Fem"
+      ],
+      "palabras": [
+        {
+          "texto": "Los",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Plur|PronType=Art",
+          "dep": "det",
+          "cabeza": "perros"
+        },
+        {
+          "texto": "perros",
+          "pos": "NOUN",
+          "morph": "Gender=Masc|Number=Plur",
+          "dep": "nsubj",
+          "cabeza": "comieron"
+        },
+        {
+          "texto": "negras",
+          "pos": "ADJ",
+          "morph": "Gender=Fem|Number=Plur",
+          "dep": "amod",
+          "cabeza": "perros"
+        },
+        {
+          "texto": "comieron",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "comieron"
+        }
+      ],
+      "raiz": "comieron",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.098,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 41,
+      "oracion": "El perro que come duerme.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "El",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "NOUN",
+          "morph": "Gender=Masc|Number=Sing",
+          "dep": "ROOT",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "que",
+          "pos": "PRON",
+          "morph": "PronType=Int,Rel",
+          "dep": "nsubj",
+          "cabeza": "come"
+        },
+        {
+          "texto": "come",
+          "pos": "VERB",
+          "morph": "Mood=Sub|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "acl",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "duerme",
+          "pos": "ADJ",
+          "morph": "Number=Sing",
+          "dep": "obj",
+          "cabeza": "come"
+        }
+      ],
+      "raiz": "perro",
+      "raiz_pos": "NOUN",
+      "tiempo_ms": 3.148,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 42,
+      "oracion": "La gata que duerme come la carne.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "La",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "gata",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "ROOT",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "que",
+          "pos": "PRON",
+          "morph": "PronType=Int,Rel",
+          "dep": "nsubj",
+          "cabeza": "duerme"
+        },
+        {
+          "texto": "duerme",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "acl",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "come",
+          "pos": "VERB",
+          "morph": "Case=Dat|Number=Sing|Person=2|PrepCase=Npr|PronType=Prs|Reflex=Yes|VerbForm=Inf",
+          "dep": "xcomp",
+          "cabeza": "duerme"
+        },
+        {
+          "texto": "la",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "carne"
+        },
+        {
+          "texto": "carne",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "obj",
+          "cabeza": "come"
+        }
+      ],
+      "raiz": "gata",
+      "raiz_pos": "NOUN",
+      "tiempo_ms": 3.35,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 43,
+      "oracion": "Los perros que comen duermen en la casa.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "Los",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Plur|PronType=Art",
+          "dep": "det",
+          "cabeza": "perros"
+        },
+        {
+          "texto": "perros",
+          "pos": "NOUN",
+          "morph": "Gender=Masc|Number=Plur",
+          "dep": "ROOT",
+          "cabeza": "perros"
+        },
+        {
+          "texto": "que",
+          "pos": "PRON",
+          "morph": "PronType=Int,Rel",
+          "dep": "nsubj",
+          "cabeza": "comen"
+        },
+        {
+          "texto": "comen",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "acl",
+          "cabeza": "perros"
+        },
+        {
+          "texto": "duermen",
+          "pos": "VERB",
+          "morph": "Mood=Sub|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "xcomp",
+          "cabeza": "comen"
+        },
+        {
+          "texto": "en",
+          "pos": "ADP",
+          "morph": "",
+          "dep": "case",
+          "cabeza": "casa"
+        },
+        {
+          "texto": "la",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "casa"
+        },
+        {
+          "texto": "casa",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "obl",
+          "cabeza": "duermen"
+        }
+      ],
+      "raiz": "perros",
+      "raiz_pos": "NOUN",
+      "tiempo_ms": 4.294,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 44,
+      "oracion": "El perro que la gata persigue duerme.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "El",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "NOUN",
+          "morph": "Gender=Masc|Number=Sing",
+          "dep": "ROOT",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "que",
+          "pos": "PRON",
+          "morph": "PronType=Int,Rel",
+          "dep": "obj",
+          "cabeza": "persigue"
+        },
+        {
+          "texto": "la",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "gata",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "nsubj",
+          "cabeza": "persigue"
+        },
+        {
+          "texto": "persigue",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "acl",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "duerme",
+          "pos": "VERB",
+          "morph": "Case=Acc|Number=Sing|Person=1|PrepCase=Npr|PronType=Prs|VerbForm=Inf",
+          "dep": "xcomp",
+          "cabeza": "persigue"
+        }
+      ],
+      "raiz": "perro",
+      "raiz_pos": "NOUN",
+      "tiempo_ms": 3.942,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 45,
+      "oracion": "La gata que el perro persiguió durmió.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "La",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "gata",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "nsubj",
+          "cabeza": "durmió"
+        },
+        {
+          "texto": "que",
+          "pos": "PRON",
+          "morph": "PronType=Int,Rel",
+          "dep": "obj",
+          "cabeza": "persiguió"
+        },
+        {
+          "texto": "el",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "NOUN",
+          "morph": "Gender=Masc|Number=Sing",
+          "dep": "nsubj",
+          "cabeza": "persiguió"
+        },
+        {
+          "texto": "persiguió",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin",
+          "dep": "acl",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "durmió",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "durmió"
+        }
+      ],
+      "raiz": "durmió",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.696,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 46,
+      "oracion": "Los perros negros que comieron durmieron.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "Los",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Plur|PronType=Art",
+          "dep": "det",
+          "cabeza": "perros"
+        },
+        {
+          "texto": "perros",
+          "pos": "NOUN",
+          "morph": "Gender=Masc|Number=Plur",
+          "dep": "nsubj",
+          "cabeza": "durmieron"
+        },
+        {
+          "texto": "negros",
+          "pos": "ADJ",
+          "morph": "Gender=Masc|Number=Plur",
+          "dep": "amod",
+          "cabeza": "perros"
+        },
+        {
+          "texto": "que",
+          "pos": "PRON",
+          "morph": "PronType=Int,Rel",
+          "dep": "nsubj",
+          "cabeza": "comieron"
+        },
+        {
+          "texto": "comieron",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin",
+          "dep": "acl",
+          "cabeza": "perros"
+        },
+        {
+          "texto": "durmieron",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "durmieron"
+        }
+      ],
+      "raiz": "durmieron",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.211,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 47,
+      "oracion": "El perro come la carne en la casa.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "El",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "nsubj",
+          "cabeza": "come"
+        },
+        {
+          "texto": "come",
+          "pos": "VERB",
+          "morph": "Mood=Imp|Number=Sing|Person=3|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "come"
+        },
+        {
+          "texto": "la",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "carne"
+        },
+        {
+          "texto": "carne",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "obj",
+          "cabeza": "come"
+        },
+        {
+          "texto": "en",
+          "pos": "ADP",
+          "morph": "",
+          "dep": "case",
+          "cabeza": "casa"
+        },
+        {
+          "texto": "la",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "casa"
+        },
+        {
+          "texto": "casa",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "obl",
+          "cabeza": "come"
+        }
+      ],
+      "raiz": "come",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 4.598,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 48,
+      "oracion": "El perro que la gata que duerme persigue duerme.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "El",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "NOUN",
+          "morph": "Gender=Masc|Number=Sing",
+          "dep": "nsubj",
+          "cabeza": "duerme"
+        },
+        {
+          "texto": "que",
+          "pos": "PRON",
+          "morph": "PronType=Int,Rel",
+          "dep": "obj",
+          "cabeza": "persigue"
+        },
+        {
+          "texto": "la",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "gata",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "nsubj",
+          "cabeza": "persigue"
+        },
+        {
+          "texto": "que",
+          "pos": "PRON",
+          "morph": "PronType=Int,Rel",
+          "dep": "nsubj",
+          "cabeza": "duerme"
+        },
+        {
+          "texto": "duerme",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "acl",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "persigue",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "acl",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "duerme",
+          "pos": "VERB",
+          "morph": "VerbForm=Inf",
+          "dep": "ROOT",
+          "cabeza": "duerme"
+        }
+      ],
+      "raiz": "duerme",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 4.29,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 49,
+      "oracion": "El perro y la gata duermen.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "sujeto-verbo: perro=Sing / duermen=Plur"
+      ],
+      "palabras": [
+        {
+          "texto": "El",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "nsubj",
+          "cabeza": "duermen"
+        },
+        {
+          "texto": "y",
+          "pos": "CCONJ",
+          "morph": "",
+          "dep": "cc",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "la",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "gata",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "conj",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "duermen",
+          "pos": "VERB",
+          "morph": "Mood=Sub|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "duermen"
+        }
+      ],
+      "raiz": "duermen",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.728,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 50,
+      "oracion": "El perro come la carne y duerme.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "El",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "nsubj",
+          "cabeza": "come"
+        },
+        {
+          "texto": "come",
+          "pos": "VERB",
+          "morph": "Mood=Imp|Number=Sing|Person=3|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "come"
+        },
+        {
+          "texto": "la",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "carne"
+        },
+        {
+          "texto": "carne",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "obj",
+          "cabeza": "come"
+        },
+        {
+          "texto": "y",
+          "pos": "CCONJ",
+          "morph": "",
+          "dep": "cc",
+          "cabeza": "duerme"
+        },
+        {
+          "texto": "duerme",
+          "pos": "VERB",
+          "morph": "Case=Acc|Number=Sing|Person=1|PrepCase=Npr|PronType=Prs|Reflex=Yes|VerbForm=Inf",
+          "dep": "conj",
+          "cabeza": "come"
+        }
+      ],
+      "raiz": "come",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.865,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 51,
+      "oracion": "El perro duerme y la gata come.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "El",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "nsubj",
+          "cabeza": "duerme"
+        },
+        {
+          "texto": "duerme",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "ROOT",
+          "cabeza": "duerme"
+        },
+        {
+          "texto": "y",
+          "pos": "CCONJ",
+          "morph": "",
+          "dep": "cc",
+          "cabeza": "come"
+        },
+        {
+          "texto": "la",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "gata",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "nsubj",
+          "cabeza": "come"
+        },
+        {
+          "texto": "come",
+          "pos": "VERB",
+          "morph": "Mood=Sub|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "conj",
+          "cabeza": "duerme"
+        }
+      ],
+      "raiz": "duerme",
+      "raiz_pos": "PROPN",
+      "tiempo_ms": 4.821,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 52,
+      "oracion": "El perro no come la carne.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "El",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "nsubj",
+          "cabeza": "come"
+        },
+        {
+          "texto": "no",
+          "pos": "ADV",
+          "morph": "Polarity=Neg",
+          "dep": "advmod",
+          "cabeza": "come"
+        },
+        {
+          "texto": "come",
+          "pos": "VERB",
+          "morph": "Mood=Sub|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "come"
+        },
+        {
+          "texto": "la",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "carne"
+        },
+        {
+          "texto": "carne",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "obj",
+          "cabeza": "come"
+        }
+      ],
+      "raiz": "come",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 5.248,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 53,
+      "oracion": "El perro que la gata persiguen duerme.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "sujeto-verbo: gata=Sing / persiguen=Plur"
+      ],
+      "palabras": [
+        {
+          "texto": "El",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "NOUN",
+          "morph": "Gender=Masc|Number=Sing",
+          "dep": "ROOT",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "que",
+          "pos": "PRON",
+          "morph": "PronType=Int,Rel",
+          "dep": "obj",
+          "cabeza": "persiguen"
+        },
+        {
+          "texto": "la",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "gata",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "nsubj",
+          "cabeza": "persiguen"
+        },
+        {
+          "texto": "persiguen",
+          "pos": "VERB",
+          "morph": "Mood=Sub|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "acl",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "duerme",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "xcomp",
+          "cabeza": "persiguen"
+        }
+      ],
+      "raiz": "perro",
+      "raiz_pos": "NOUN",
+      "tiempo_ms": 5.352,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 54,
+      "oracion": "Los perros que comen duerme.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "sujeto-verbo: perros=Plur / duerme=Sing"
+      ],
+      "palabras": [
+        {
+          "texto": "Los",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Plur|PronType=Art",
+          "dep": "det",
+          "cabeza": "perros"
+        },
+        {
+          "texto": "perros",
+          "pos": "NOUN",
+          "morph": "Gender=Masc|Number=Plur",
+          "dep": "nsubj",
+          "cabeza": "duerme"
+        },
+        {
+          "texto": "que",
+          "pos": "PRON",
+          "morph": "PronType=Int,Rel",
+          "dep": "nsubj",
+          "cabeza": "comen"
+        },
+        {
+          "texto": "comen",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "acl",
+          "cabeza": "perros"
+        },
+        {
+          "texto": "duerme",
+          "pos": "VERB",
+          "morph": "Case=Acc|Number=Sing|Person=1|PrepCase=Npr|PronType=Prs|Reflex=Yes|VerbForm=Inf",
+          "dep": "ROOT",
+          "cabeza": "duerme"
+        }
+      ],
+      "raiz": "duerme",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 4.317,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 55,
+      "oracion": "La gata que el perro persiguieron durmió.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "sujeto-verbo: perro=Sing / persiguieron=Plur"
+      ],
+      "palabras": [
+        {
+          "texto": "La",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "gata",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "nsubj",
+          "cabeza": "durmió"
+        },
+        {
+          "texto": "que",
+          "pos": "PRON",
+          "morph": "PronType=Int,Rel",
+          "dep": "obj",
+          "cabeza": "persiguieron"
+        },
+        {
+          "texto": "el",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "nsubj",
+          "cabeza": "persiguieron"
+        },
+        {
+          "texto": "persiguieron",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin",
+          "dep": "acl",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "durmió",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "durmió"
+        }
+      ],
+      "raiz": "durmió",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 4.549,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 56,
+      "oracion": "El perro negro que comen duerme.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "El",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "NOUN",
+          "morph": "Gender=Masc|Number=Sing",
+          "dep": "ROOT",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "negro",
+          "pos": "ADJ",
+          "morph": "Gender=Masc|Number=Sing",
+          "dep": "amod",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "que",
+          "pos": "PRON",
+          "morph": "PronType=Int,Rel",
+          "dep": "nsubj",
+          "cabeza": "comen"
+        },
+        {
+          "texto": "comen",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "acl",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "duerme",
+          "pos": "VERB",
+          "morph": "Case=Acc|Number=Sing|Person=1|PrepCase=Npr|PronType=Prs|Reflex=Yes|VerbForm=Inf",
+          "dep": "xcomp",
+          "cabeza": "comen"
+        }
+      ],
+      "raiz": "perro",
+      "raiz_pos": "NOUN",
+      "tiempo_ms": 4.145,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 57,
+      "oracion": "El perro que la gata persigue duermen.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "El",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "NOUN",
+          "morph": "Gender=Masc|Number=Sing",
+          "dep": "ROOT",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "que",
+          "pos": "PRON",
+          "morph": "PronType=Int,Rel",
+          "dep": "obj",
+          "cabeza": "persigue"
+        },
+        {
+          "texto": "la",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "gata",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "nsubj",
+          "cabeza": "persigue"
+        },
+        {
+          "texto": "persigue",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "acl",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "duermen",
+          "pos": "VERB",
+          "morph": "Case=Acc|Gender=Masc|Number=Sing|Person=3|PrepCase=Npr|PronType=Prs|VerbForm=Inf",
+          "dep": "xcomp",
+          "cabeza": "persigue"
+        }
+      ],
+      "raiz": "perro",
+      "raiz_pos": "NOUN",
+      "tiempo_ms": 4.392,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 58,
+      "oracion": "Las gatas que comen durmió.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "sujeto-verbo: gatas=Plur / durmió=Sing"
+      ],
+      "palabras": [
+        {
+          "texto": "Las",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Plur|PronType=Art",
+          "dep": "det",
+          "cabeza": "gatas"
+        },
+        {
+          "texto": "gatas",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Plur",
+          "dep": "nsubj",
+          "cabeza": "durmió"
+        },
+        {
+          "texto": "que",
+          "pos": "PRON",
+          "morph": "PronType=Int,Rel",
+          "dep": "obj",
+          "cabeza": "comen"
+        },
+        {
+          "texto": "comen",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "acl",
+          "cabeza": "gatas"
+        },
+        {
+          "texto": "durmió",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "durmió"
+        }
+      ],
+      "raiz": "durmió",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.813,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 59,
+      "oracion": "El perro que la gata persigue negra duerme.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "El",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "NOUN",
+          "morph": "Gender=Masc|Number=Sing",
+          "dep": "nsubj",
+          "cabeza": "duerme"
+        },
+        {
+          "texto": "que",
+          "pos": "PRON",
+          "morph": "PronType=Int,Rel",
+          "dep": "mark",
+          "cabeza": "persigue"
+        },
+        {
+          "texto": "la",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "gata"
+        },
+        {
+          "texto": "gata",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "nsubj",
+          "cabeza": "persigue"
+        },
+        {
+          "texto": "persigue",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "acl",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "negra",
+          "pos": "ADJ",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "obj",
+          "cabeza": "persigue"
+        },
+        {
+          "texto": "duerme",
+          "pos": "VERB",
+          "morph": "Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "duerme"
+        }
+      ],
+      "raiz": "duerme",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 4.203,
+      "timestamp": "2026-11-17T21:17:50"
+    },
+    {
+      "id": 60,
+      "oracion": "El perro come la carne duermen.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "El",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Masc|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "perro"
+        },
+        {
+          "texto": "perro",
+          "pos": "PROPN",
+          "morph": "",
+          "dep": "nsubj",
+          "cabeza": "come"
+        },
+        {
+          "texto": "come",
+          "pos": "VERB",
+          "morph": "Mood=Imp|Number=Sing|Person=3|VerbForm=Fin",
+          "dep": "ROOT",
+          "cabeza": "come"
+        },
+        {
+          "texto": "la",
+          "pos": "DET",
+          "morph": "Definite=Def|Gender=Fem|Number=Sing|PronType=Art",
+          "dep": "det",
+          "cabeza": "carne"
+        },
+        {
+          "texto": "carne",
+          "pos": "NOUN",
+          "morph": "Gender=Fem|Number=Sing",
+          "dep": "obj",
+          "cabeza": "come"
+        },
+        {
+          "texto": "duermen",
+          "pos": "VERB",
+          "morph": "Mood=Sub|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin",
+          "dep": "advcl",
+          "cabeza": "come"
+        }
+      ],
+      "raiz": "come",
+      "raiz_pos": "VERB",
+      "tiempo_ms": 3.781,
+      "timestamp": "2026-11-17T21:17:50"
+    }
+  ]
+}

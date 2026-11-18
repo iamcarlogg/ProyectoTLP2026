@@ -6,6 +6,9 @@ Este documento reúne los acuerdos vigentes del equipo. Cuando se toma una decis
 
 | Fecha | Decisión |
 | --- | --- |
+| 2026-11-17 | P3: errores de etiquetado = el enfoque acepta bien la oración pero alguna palabra tiene otra categoría que la de `arbol_esperado`; cada enfoque se traduce a categorías comunes (`evaluar.py`) |
+| 2026-11-17 | P3: NLTK usa un etiquetador entrenado con `cess_esp` (bigramas → unigramas → sufijos; 86,2 % en validación) y la regla de concordancia sobre palabras vecinas |
+| 2026-11-17 | `evaluar.py` cuenta `invalida` como error (FN si la oración es correcta, FP si es incorrecta) y se detiene si un log no corresponde al corpus actual |
 | 2026-11-15 | Formato común de los logs de la Fase 2: JSON con `metadatos` y `resultados`; obligatorios `id, oracion, salida, timestamp`; `salida` = acepta, rechaza o invalida (ver «Formato de los logs») |
 | 2026-11-15 | Log del parser: guarda el primer árbol (en una línea) y `n_arboles` (mide la ambigüedad), más `motivo` del rechazo (vocabulario, estructura o error) |
 | 2026-11-15 | La Fase 2 importa el motor desde `fase1/` (no se copia); `motor.normalizar()` es la única limpieza del texto |
@@ -60,13 +63,11 @@ Los cinco logs (parser, spaCy, NLTK, LLM zero-shot y LLM few-shot) van en `fase2
 - **Campos propios de cada enfoque:** se agregan sin romper a los demás. El parser usa `motivo` (`vocabulario`, `estructura`, `error` o `null`), `arbol` (primer árbol, en una línea), `n_arboles`, `palabras_desconocidas`, `tiempo_ms` y `error`. El LLM debería guardar `prompt` y `respuesta_completa`.
 - Se escribe con `ensure_ascii=False` para que las tildes y la ñ se lean.
 
-**Recomendación para los errores de etiquetado** (pendiente de acordar entre P2 y P3). Cada enfoque etiqueta con su propio sistema: el parser con nuestras categorías (`sn`, `det`…), spaCy con Universal Dependencies (`DET`, `NOUN`) y NLTK con EAGLES (`da0ms0`). Por eso no se pueden comparar árboles completos entre los cuatro. Propuesta:
+**Errores de etiquetado (decidido el 17 nov, P3).** Cada enfoque etiqueta con su propio sistema: el parser con nuestras categorías (`det_ms`, `vt_s`…), spaCy con Universal Dependencies (`DET`, `NOUN`) y NLTK con EAGLES (`da0ms0`). Por eso se comparan **categorías por palabra**, no árboles completos:
 
-1. En el corpus, para las oraciones aceptadas, P2 anota la **categoría esperada de cada palabra** en nuestra notación (`det n v`…), además de `arbol_esperado`.
-2. Cada enfoque traduce sus etiquetas a esas categorías con una tabla corta (`DET`/`da…` → `det`, `NOUN`/`nc…` → `n`, `VERB`/`v…` → `v`, `ADJ`/`aq…` → `adj`, `ADP`/`sp…` → `p`).
-3. **Error de etiquetado** = la salida (acepta o rechaza) es correcta pero alguna palabra quedó con una categoría distinta de la esperada. Para el parser y el LLM también cuenta si el árbol difiere de `arbol_esperado`.
-
-Así los cuatro enfoques se miden con la misma vara y la tabla de traducción queda documentada en la metodología.
+1. Las categorías esperadas se sacan del `arbol_esperado` del corpus: `(det_ms el)` → *el* es `det`. P2 no tiene que anotar nada más.
+2. `evaluar.py` traduce las etiquetas de cada enfoque a categorías comunes (`det`, `n`, `n_propio`, `pron`, `v`, `adj`, `adv`, `p`, `conj`, `que`). La tabla está en [03_nlp_y_evaluacion.md](../fase2/documentacion/03_nlp_y_evaluacion.md#errores-de-etiquetado).
+3. **Error de etiquetado** = el enfoque aceptó bien la oración (VP), pero alguna palabra quedó con una categoría distinta de la esperada. Para el parser y el LLM se cuenta aparte si el árbol completo difiere de `arbol_esperado`.
 
 ## Notación de las gramáticas
 
@@ -147,10 +148,11 @@ Fase 1:
 
 Fase 2:
 
-- [ ] Decidir cómo se maneja la concordancia: duplicar no terminales (CFG pura, como en la Fase 1) o rasgos chequeados al construir el nodo (ya no es CFG pura; se aclara en el informe).
+- [x] Concordancia: se siguen duplicando no terminales (`sn_ms`, `sv_s`…), así que la gramática sigue siendo una CFG pura.
 - [x] Primer árbol o todos: el log guarda el primer árbol y el número de árboles (`n_arboles`).
 - [x] Elegir la segunda herramienta de NLP: **NLTK**.
 - [ ] Modelo de LLM: lo elige P4, que hace el experimento (cualquier proveedor, siempre por API). Debe anotar en la metodología el ID exacto del modelo y sus parámetros.
-- [ ] Decidir el criterio de acierto para el LLM y para NLTK. Para spaCy, la Fase 1 usó una regla de concordancia; revisar si alcanza para la Fase 2.
+- [x] Criterio de acierto de spaCy y NLTK: regla de concordancia (spaCy, la de `tabla_nlp.py`; NLTK, la misma sobre palabras vecinas).
+- [ ] Criterio de acierto del LLM: lo que responda (acepta o rechaza) en el formato pedido; si no respeta el formato, `invalida` (P4).
 - [x] La Fase 2 importa el motor añadiendo `fase1/` al `sys.path`.
-- [ ] Errores de etiquetado: acordar cómo se miden (ver la recomendación en «Formato de los logs»).
+- [x] Errores de etiquetado: categorías por palabra sacadas de `arbol_esperado` (ver «Formato de los logs»).

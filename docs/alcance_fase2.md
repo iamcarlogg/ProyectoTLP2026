@@ -61,8 +61,8 @@ Presentación: tablas comparativas con las cuatro columnas y **al menos una grá
 
 Sirve para demostrar que el experimento se corrió de verdad y no se armó a posteriori.
 
-- [ ] Corpus completo en `.csv` o `.txt`, con la etiqueta esperada por oración.
-- [ ] Logs brutos de cada uno de los cuatro enfoques sobre el corpus completo (`.txt`, `.json` o `.csv`; nada de capturas).
+- [x] Corpus completo en `.csv` o `.txt`, con la etiqueta esperada por oración. → `fase2/corpus.csv`
+- [ ] Logs brutos de cada uno de los cuatro enfoques sobre el corpus completo (`.txt`, `.json` o `.csv`; nada de capturas). → `fase2/logs/`: parser, spaCy y NLTK listos; falta el LLM
 - [ ] Prompts exactos del LLM (zero-shot y few-shot) y las respuestas completas; **cada llamada con su timestamp**.
-- [ ] Script de evaluación en Python que lee los logs y calcula las métricas; reproducible: mismas entradas → mismas tablas del informe.
-- [ ] Repositorio Git (o zip) con código, corpus, logs y un README que explique paso a paso cómo reproducir los experimentos.
+- [x] Script de evaluación en Python que lee los logs y calcula las métricas; reproducible: mismas entradas → mismas tablas del informe. → `fase2/evaluar.py`
+- [ ] Repositorio Git (o zip) con código, corpus, logs y un README que explique paso a paso cómo reproducir los experimentos. → README en `fase2/README.md`; falta completar el paso del LLM

@@ -1,0 +1,10 @@
+enfoque,nivel,oraciones,aciertos,FP,FN
+parser,1,20,20,0,0
+parser,2,20,20,0,0
+parser,3,20,16,0,4
+spacy,1,20,18,2,0
+spacy,2,20,20,0,0
+spacy,3,20,15,4,1
+nltk,1,20,20,0,0
+nltk,2,20,20,0,0
+nltk,3,20,18,2,0

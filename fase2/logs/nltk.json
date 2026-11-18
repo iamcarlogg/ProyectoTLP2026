@@ -1,0 +1,2065 @@
+{
+  "metadatos": {
+    "enfoque": "nltk",
+    "fecha": "2026-11-17T21:19:13",
+    "python": "3.12.10",
+    "nltk": "3.10.3",
+    "corpus_entrenamiento": "cess_esp",
+    "oraciones_entrenamiento": 6030,
+    "palabras_entrenamiento": 188802,
+    "etiquetador": "BigramTagger → UnigramTagger → RegexpTagger (sufijos)",
+    "exactitud_validacion": 0.862,
+    "validacion": "entrenado con el 90 % inicial de cess_esp, probado con el 10 % final",
+    "segundos_entrenamiento": 4.1,
+    "minusculas": true,
+    "criterio_rechazo": "error de concordancia de género o número entre palabras vecinas (grupo nominal, relativas y sujeto principal con el primer verbo fuera de ellas)",
+    "corpus": "fase2/corpus.csv",
+    "oraciones": 60
+  },
+  "resultados": [
+    {
+      "id": 1,
+      "oracion": "El perro duerme.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "duerme",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.241,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 2,
+      "oracion": "La gata duerme.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "gata",
+          "etiqueta": "ncfs000",
+          "conocida": false
+        },
+        {
+          "texto": "duerme",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.062,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 3,
+      "oracion": "Los perros duermen.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "los",
+          "etiqueta": "da0mp0",
+          "conocida": true
+        },
+        {
+          "texto": "perros",
+          "etiqueta": "ncmp000",
+          "conocida": true
+        },
+        {
+          "texto": "duermen",
+          "etiqueta": "vmip3p0",
+          "conocida": false
+        }
+      ],
+      "tiempo_ms": 0.065,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 4,
+      "oracion": "Las gatas duermen.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "las",
+          "etiqueta": "da0fp0",
+          "conocida": true
+        },
+        {
+          "texto": "gatas",
+          "etiqueta": "ncfp000",
+          "conocida": false
+        },
+        {
+          "texto": "duermen",
+          "etiqueta": "vmip3p0",
+          "conocida": false
+        }
+      ],
+      "tiempo_ms": 0.059,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 5,
+      "oracion": "El perro come.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "come",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.05,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 6,
+      "oracion": "La gata come.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "gata",
+          "etiqueta": "ncfs000",
+          "conocida": false
+        },
+        {
+          "texto": "come",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.048,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 7,
+      "oracion": "Los perros comen.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "los",
+          "etiqueta": "da0mp0",
+          "conocida": true
+        },
+        {
+          "texto": "perros",
+          "etiqueta": "ncmp000",
+          "conocida": true
+        },
+        {
+          "texto": "comen",
+          "etiqueta": "vmip3p0",
+          "conocida": false
+        }
+      ],
+      "tiempo_ms": 0.063,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 8,
+      "oracion": "Las gatas comen.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "las",
+          "etiqueta": "da0fp0",
+          "conocida": true
+        },
+        {
+          "texto": "gatas",
+          "etiqueta": "ncfp000",
+          "conocida": false
+        },
+        {
+          "texto": "comen",
+          "etiqueta": "vmip3p0",
+          "conocida": false
+        }
+      ],
+      "tiempo_ms": 0.057,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 9,
+      "oracion": "El perro durmió.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "durmió",
+          "etiqueta": "vmis3s0",
+          "conocida": false
+        }
+      ],
+      "tiempo_ms": 0.059,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 10,
+      "oracion": "La gata comió.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "gata",
+          "etiqueta": "ncfs000",
+          "conocida": false
+        },
+        {
+          "texto": "comió",
+          "etiqueta": "vmis3s0",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.054,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 11,
+      "oracion": "Los perros durmieron.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "los",
+          "etiqueta": "da0mp0",
+          "conocida": true
+        },
+        {
+          "texto": "perros",
+          "etiqueta": "ncmp000",
+          "conocida": true
+        },
+        {
+          "texto": "durmieron",
+          "etiqueta": "vmis3p0",
+          "conocida": false
+        }
+      ],
+      "tiempo_ms": 0.051,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 12,
+      "oracion": "Las gatas comieron.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "las",
+          "etiqueta": "da0fp0",
+          "conocida": true
+        },
+        {
+          "texto": "gatas",
+          "etiqueta": "ncfp000",
+          "conocida": false
+        },
+        {
+          "texto": "comieron",
+          "etiqueta": "vmis3p0",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.049,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 13,
+      "oracion": "Yo duermo.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "yo",
+          "etiqueta": "pp1csn00",
+          "conocida": true
+        },
+        {
+          "texto": "duermo",
+          "etiqueta": "ncms000",
+          "conocida": false
+        }
+      ],
+      "tiempo_ms": 0.045,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 14,
+      "oracion": "Nosotros comemos.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "nosotros",
+          "etiqueta": "pp1mp000",
+          "conocida": true
+        },
+        {
+          "texto": "comemos",
+          "etiqueta": "vmip1p0",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.036,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 15,
+      "oracion": "La perro duerme.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "Gender: la=f / perro=m"
+      ],
+      "palabras": [
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "duerme",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.085,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 16,
+      "oracion": "El gata duerme.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "Gender: el=m / gata=f"
+      ],
+      "palabras": [
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "gata",
+          "etiqueta": "ncfs000",
+          "conocida": false
+        },
+        {
+          "texto": "duerme",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.053,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 17,
+      "oracion": "Los perro duermen.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "Number: los=p / perro=s",
+        "sujeto-verbo: perro=s / duermen=p"
+      ],
+      "palabras": [
+        {
+          "texto": "los",
+          "etiqueta": "da0mp0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "duermen",
+          "etiqueta": "vmip3p0",
+          "conocida": false
+        }
+      ],
+      "tiempo_ms": 0.066,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 18,
+      "oracion": "Las gata duermen.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "Number: las=p / gata=s",
+        "sujeto-verbo: gata=s / duermen=p"
+      ],
+      "palabras": [
+        {
+          "texto": "las",
+          "etiqueta": "da0fp0",
+          "conocida": true
+        },
+        {
+          "texto": "gata",
+          "etiqueta": "ncfs000",
+          "conocida": false
+        },
+        {
+          "texto": "duermen",
+          "etiqueta": "vmip3p0",
+          "conocida": false
+        }
+      ],
+      "tiempo_ms": 0.064,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 19,
+      "oracion": "El perro duermen.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "sujeto-verbo: perro=s / duermen=p"
+      ],
+      "palabras": [
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "duermen",
+          "etiqueta": "vmip3p0",
+          "conocida": false
+        }
+      ],
+      "tiempo_ms": 0.063,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 20,
+      "oracion": "Las gatas duerme.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "sujeto-verbo: gatas=p / duerme=s"
+      ],
+      "palabras": [
+        {
+          "texto": "las",
+          "etiqueta": "da0fp0",
+          "conocida": true
+        },
+        {
+          "texto": "gatas",
+          "etiqueta": "ncfp000",
+          "conocida": false
+        },
+        {
+          "texto": "duerme",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.049,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 21,
+      "oracion": "El perro negro duerme.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "negro",
+          "etiqueta": "aq0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "duerme",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.056,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 22,
+      "oracion": "La gata negra come.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "gata",
+          "etiqueta": "ncfs000",
+          "conocida": false
+        },
+        {
+          "texto": "negra",
+          "etiqueta": "aq0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "come",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.055,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 23,
+      "oracion": "Los perros negros comen.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "los",
+          "etiqueta": "da0mp0",
+          "conocida": true
+        },
+        {
+          "texto": "perros",
+          "etiqueta": "ncmp000",
+          "conocida": true
+        },
+        {
+          "texto": "negros",
+          "etiqueta": "aq0mp0",
+          "conocida": true
+        },
+        {
+          "texto": "comen",
+          "etiqueta": "vmip3p0",
+          "conocida": false
+        }
+      ],
+      "tiempo_ms": 0.064,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 24,
+      "oracion": "Las gatas negras duermen.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "las",
+          "etiqueta": "da0fp0",
+          "conocida": true
+        },
+        {
+          "texto": "gatas",
+          "etiqueta": "ncfp000",
+          "conocida": false
+        },
+        {
+          "texto": "negras",
+          "etiqueta": "aq0fp0",
+          "conocida": true
+        },
+        {
+          "texto": "duermen",
+          "etiqueta": "vmip3p0",
+          "conocida": false
+        }
+      ],
+      "tiempo_ms": 0.061,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 25,
+      "oracion": "El perro duerme lentamente.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "duerme",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        },
+        {
+          "texto": "lentamente",
+          "etiqueta": "rg",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.055,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 26,
+      "oracion": "Las gatas comen rápidamente.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "las",
+          "etiqueta": "da0fp0",
+          "conocida": true
+        },
+        {
+          "texto": "gatas",
+          "etiqueta": "ncfp000",
+          "conocida": false
+        },
+        {
+          "texto": "comen",
+          "etiqueta": "vmip3p0",
+          "conocida": false
+        },
+        {
+          "texto": "rápidamente",
+          "etiqueta": "rg",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.061,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 27,
+      "oracion": "El perro come la carne.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "come",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        },
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "carne",
+          "etiqueta": "ncfs000",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.062,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 28,
+      "oracion": "La gata comió la carne.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "gata",
+          "etiqueta": "ncfs000",
+          "conocida": false
+        },
+        {
+          "texto": "comió",
+          "etiqueta": "vmis3s0",
+          "conocida": true
+        },
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "carne",
+          "etiqueta": "ncfs000",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.067,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 29,
+      "oracion": "El perro duerme en la casa.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "duerme",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        },
+        {
+          "texto": "en",
+          "etiqueta": "sps00",
+          "conocida": true
+        },
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "casa",
+          "etiqueta": "ncfs000",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.117,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 30,
+      "oracion": "Los perros duermen en el jardín.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "los",
+          "etiqueta": "da0mp0",
+          "conocida": true
+        },
+        {
+          "texto": "perros",
+          "etiqueta": "ncmp000",
+          "conocida": true
+        },
+        {
+          "texto": "duermen",
+          "etiqueta": "vmip3p0",
+          "conocida": false
+        },
+        {
+          "texto": "en",
+          "etiqueta": "sps00",
+          "conocida": true
+        },
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "jardín",
+          "etiqueta": "ncms000",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.099,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 31,
+      "oracion": "La gata negra durmió lentamente.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "gata",
+          "etiqueta": "ncfs000",
+          "conocida": false
+        },
+        {
+          "texto": "negra",
+          "etiqueta": "aq0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "durmió",
+          "etiqueta": "vmis3s0",
+          "conocida": false
+        },
+        {
+          "texto": "lentamente",
+          "etiqueta": "rg",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.067,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 32,
+      "oracion": "Las gatas negras comieron la carne.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "las",
+          "etiqueta": "da0fp0",
+          "conocida": true
+        },
+        {
+          "texto": "gatas",
+          "etiqueta": "ncfp000",
+          "conocida": false
+        },
+        {
+          "texto": "negras",
+          "etiqueta": "aq0fp0",
+          "conocida": true
+        },
+        {
+          "texto": "comieron",
+          "etiqueta": "vmis3p0",
+          "conocida": true
+        },
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "carne",
+          "etiqueta": "ncfs000",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.068,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 33,
+      "oracion": "Yo como la carne.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "yo",
+          "etiqueta": "pp1csn00",
+          "conocida": true
+        },
+        {
+          "texto": "como",
+          "etiqueta": "cs",
+          "conocida": true
+        },
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "carne",
+          "etiqueta": "ncfs000",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.032,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 34,
+      "oracion": "Nosotras comimos la carne.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "nosotras",
+          "etiqueta": "ncfp000",
+          "conocida": false
+        },
+        {
+          "texto": "comimos",
+          "etiqueta": "vmis1p0",
+          "conocida": true
+        },
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "carne",
+          "etiqueta": "ncfs000",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.054,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 35,
+      "oracion": "El perro negra duerme.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "Gender: el=m / perro=m / negra=f"
+      ],
+      "palabras": [
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "negra",
+          "etiqueta": "aq0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "duerme",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.095,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 36,
+      "oracion": "La gata negro come.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "Gender: la=f / gata=f / negro=m"
+      ],
+      "palabras": [
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "gata",
+          "etiqueta": "ncfs000",
+          "conocida": false
+        },
+        {
+          "texto": "negro",
+          "etiqueta": "aq0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "come",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.056,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 37,
+      "oracion": "Los perros negro duermen.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "Number: los=p / perros=p / negro=s"
+      ],
+      "palabras": [
+        {
+          "texto": "los",
+          "etiqueta": "da0mp0",
+          "conocida": true
+        },
+        {
+          "texto": "perros",
+          "etiqueta": "ncmp000",
+          "conocida": true
+        },
+        {
+          "texto": "negro",
+          "etiqueta": "aq0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "duermen",
+          "etiqueta": "vmip3p0",
+          "conocida": false
+        }
+      ],
+      "tiempo_ms": 0.067,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 38,
+      "oracion": "Las gatas negros comen.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "Gender: las=f / gatas=f / negros=m"
+      ],
+      "palabras": [
+        {
+          "texto": "las",
+          "etiqueta": "da0fp0",
+          "conocida": true
+        },
+        {
+          "texto": "gatas",
+          "etiqueta": "ncfp000",
+          "conocida": false
+        },
+        {
+          "texto": "negros",
+          "etiqueta": "aq0mp0",
+          "conocida": true
+        },
+        {
+          "texto": "comen",
+          "etiqueta": "vmip3p0",
+          "conocida": false
+        }
+      ],
+      "tiempo_ms": 0.064,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 39,
+      "oracion": "La gata negros durmió.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "Gender: la=f / gata=f / negros=m",
+        "Number: la=s / gata=s / negros=p"
+      ],
+      "palabras": [
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "gata",
+          "etiqueta": "ncfs000",
+          "conocida": false
+        },
+        {
+          "texto": "negros",
+          "etiqueta": "aq0mp0",
+          "conocida": true
+        },
+        {
+          "texto": "durmió",
+          "etiqueta": "vmis3s0",
+          "conocida": false
+        }
+      ],
+      "tiempo_ms": 0.065,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 40,
+      "oracion": "Los perros negras comieron.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "Gender: los=m / perros=m / negras=f"
+      ],
+      "palabras": [
+        {
+          "texto": "los",
+          "etiqueta": "da0mp0",
+          "conocida": true
+        },
+        {
+          "texto": "perros",
+          "etiqueta": "ncmp000",
+          "conocida": true
+        },
+        {
+          "texto": "negras",
+          "etiqueta": "aq0fp0",
+          "conocida": true
+        },
+        {
+          "texto": "comieron",
+          "etiqueta": "vmis3p0",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.058,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 41,
+      "oracion": "El perro que come duerme.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "que",
+          "etiqueta": "pr0cn000",
+          "conocida": true
+        },
+        {
+          "texto": "come",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        },
+        {
+          "texto": "duerme",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.069,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 42,
+      "oracion": "La gata que duerme come la carne.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "gata",
+          "etiqueta": "ncfs000",
+          "conocida": false
+        },
+        {
+          "texto": "que",
+          "etiqueta": "pr0cn000",
+          "conocida": true
+        },
+        {
+          "texto": "duerme",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        },
+        {
+          "texto": "come",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        },
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "carne",
+          "etiqueta": "ncfs000",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.108,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 43,
+      "oracion": "Los perros que comen duermen en la casa.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "los",
+          "etiqueta": "da0mp0",
+          "conocida": true
+        },
+        {
+          "texto": "perros",
+          "etiqueta": "ncmp000",
+          "conocida": true
+        },
+        {
+          "texto": "que",
+          "etiqueta": "pr0cn000",
+          "conocida": true
+        },
+        {
+          "texto": "comen",
+          "etiqueta": "vmip3p0",
+          "conocida": false
+        },
+        {
+          "texto": "duermen",
+          "etiqueta": "vmip3p0",
+          "conocida": false
+        },
+        {
+          "texto": "en",
+          "etiqueta": "sps00",
+          "conocida": true
+        },
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "casa",
+          "etiqueta": "ncfs000",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.118,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 44,
+      "oracion": "El perro que la gata persigue duerme.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "que",
+          "etiqueta": "pr0cn000",
+          "conocida": true
+        },
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "gata",
+          "etiqueta": "ncfs000",
+          "conocida": false
+        },
+        {
+          "texto": "persigue",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        },
+        {
+          "texto": "duerme",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.095,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 45,
+      "oracion": "La gata que el perro persiguió durmió.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "gata",
+          "etiqueta": "ncfs000",
+          "conocida": false
+        },
+        {
+          "texto": "que",
+          "etiqueta": "pr0cn000",
+          "conocida": true
+        },
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "persiguió",
+          "etiqueta": "vmis3s0",
+          "conocida": false
+        },
+        {
+          "texto": "durmió",
+          "etiqueta": "vmis3s0",
+          "conocida": false
+        }
+      ],
+      "tiempo_ms": 0.112,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 46,
+      "oracion": "Los perros negros que comieron durmieron.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "los",
+          "etiqueta": "da0mp0",
+          "conocida": true
+        },
+        {
+          "texto": "perros",
+          "etiqueta": "ncmp000",
+          "conocida": true
+        },
+        {
+          "texto": "negros",
+          "etiqueta": "aq0mp0",
+          "conocida": true
+        },
+        {
+          "texto": "que",
+          "etiqueta": "pr0cn000",
+          "conocida": true
+        },
+        {
+          "texto": "comieron",
+          "etiqueta": "vmis3p0",
+          "conocida": true
+        },
+        {
+          "texto": "durmieron",
+          "etiqueta": "vmis3p0",
+          "conocida": false
+        }
+      ],
+      "tiempo_ms": 0.075,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 47,
+      "oracion": "El perro come la carne en la casa.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "come",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        },
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "carne",
+          "etiqueta": "ncfs000",
+          "conocida": true
+        },
+        {
+          "texto": "en",
+          "etiqueta": "sps00",
+          "conocida": true
+        },
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "casa",
+          "etiqueta": "ncfs000",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.093,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 48,
+      "oracion": "El perro que la gata que duerme persigue duerme.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "que",
+          "etiqueta": "pr0cn000",
+          "conocida": true
+        },
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "gata",
+          "etiqueta": "ncfs000",
+          "conocida": false
+        },
+        {
+          "texto": "que",
+          "etiqueta": "pr0cn000",
+          "conocida": true
+        },
+        {
+          "texto": "duerme",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        },
+        {
+          "texto": "persigue",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        },
+        {
+          "texto": "duerme",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.103,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 49,
+      "oracion": "El perro y la gata duermen.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "y",
+          "etiqueta": "cc",
+          "conocida": true
+        },
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "gata",
+          "etiqueta": "ncfs000",
+          "conocida": false
+        },
+        {
+          "texto": "duermen",
+          "etiqueta": "vmip3p0",
+          "conocida": false
+        }
+      ],
+      "tiempo_ms": 0.098,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 50,
+      "oracion": "El perro come la carne y duerme.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "come",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        },
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "carne",
+          "etiqueta": "ncfs000",
+          "conocida": true
+        },
+        {
+          "texto": "y",
+          "etiqueta": "cc",
+          "conocida": true
+        },
+        {
+          "texto": "duerme",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.068,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 51,
+      "oracion": "El perro duerme y la gata come.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "duerme",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        },
+        {
+          "texto": "y",
+          "etiqueta": "cc",
+          "conocida": true
+        },
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "gata",
+          "etiqueta": "ncfs000",
+          "conocida": false
+        },
+        {
+          "texto": "come",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.115,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 52,
+      "oracion": "El perro no come la carne.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "no",
+          "etiqueta": "rn",
+          "conocida": true
+        },
+        {
+          "texto": "come",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        },
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "carne",
+          "etiqueta": "ncfs000",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.067,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 53,
+      "oracion": "El perro que la gata persiguen duerme.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "relativa: gata=s / persiguen=p"
+      ],
+      "palabras": [
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "que",
+          "etiqueta": "pr0cn000",
+          "conocida": true
+        },
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "gata",
+          "etiqueta": "ncfs000",
+          "conocida": false
+        },
+        {
+          "texto": "persiguen",
+          "etiqueta": "vmip3p0",
+          "conocida": false
+        },
+        {
+          "texto": "duerme",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.109,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 54,
+      "oracion": "Los perros que comen duerme.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "sujeto-verbo: perros=p / duerme=s"
+      ],
+      "palabras": [
+        {
+          "texto": "los",
+          "etiqueta": "da0mp0",
+          "conocida": true
+        },
+        {
+          "texto": "perros",
+          "etiqueta": "ncmp000",
+          "conocida": true
+        },
+        {
+          "texto": "que",
+          "etiqueta": "pr0cn000",
+          "conocida": true
+        },
+        {
+          "texto": "comen",
+          "etiqueta": "vmip3p0",
+          "conocida": false
+        },
+        {
+          "texto": "duerme",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.072,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 55,
+      "oracion": "La gata que el perro persiguieron durmió.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "relativa: perro=s / persiguieron=p"
+      ],
+      "palabras": [
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "gata",
+          "etiqueta": "ncfs000",
+          "conocida": false
+        },
+        {
+          "texto": "que",
+          "etiqueta": "pr0cn000",
+          "conocida": true
+        },
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "persiguieron",
+          "etiqueta": "vmis3p0",
+          "conocida": false
+        },
+        {
+          "texto": "durmió",
+          "etiqueta": "vmis3s0",
+          "conocida": false
+        }
+      ],
+      "tiempo_ms": 0.11,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 56,
+      "oracion": "El perro negro que comen duerme.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "relativa: negro=s / comen=p"
+      ],
+      "palabras": [
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "negro",
+          "etiqueta": "aq0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "que",
+          "etiqueta": "pr0cn000",
+          "conocida": true
+        },
+        {
+          "texto": "comen",
+          "etiqueta": "vmip3p0",
+          "conocida": false
+        },
+        {
+          "texto": "duerme",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.088,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 57,
+      "oracion": "El perro que la gata persigue duermen.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "sujeto-verbo: perro=s / duermen=p"
+      ],
+      "palabras": [
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "que",
+          "etiqueta": "pr0cn000",
+          "conocida": true
+        },
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "gata",
+          "etiqueta": "ncfs000",
+          "conocida": false
+        },
+        {
+          "texto": "persigue",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        },
+        {
+          "texto": "duermen",
+          "etiqueta": "vmip3p0",
+          "conocida": false
+        }
+      ],
+      "tiempo_ms": 0.107,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 58,
+      "oracion": "Las gatas que comen durmió.",
+      "salida": "rechaza",
+      "errores_concordancia": [
+        "sujeto-verbo: gatas=p / durmió=s"
+      ],
+      "palabras": [
+        {
+          "texto": "las",
+          "etiqueta": "da0fp0",
+          "conocida": true
+        },
+        {
+          "texto": "gatas",
+          "etiqueta": "ncfp000",
+          "conocida": false
+        },
+        {
+          "texto": "que",
+          "etiqueta": "pr0cn000",
+          "conocida": true
+        },
+        {
+          "texto": "comen",
+          "etiqueta": "vmip3p0",
+          "conocida": false
+        },
+        {
+          "texto": "durmió",
+          "etiqueta": "vmis3s0",
+          "conocida": false
+        }
+      ],
+      "tiempo_ms": 0.078,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 59,
+      "oracion": "El perro que la gata persigue negra duerme.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "que",
+          "etiqueta": "pr0cn000",
+          "conocida": true
+        },
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "gata",
+          "etiqueta": "ncfs000",
+          "conocida": false
+        },
+        {
+          "texto": "persigue",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        },
+        {
+          "texto": "negra",
+          "etiqueta": "aq0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "duerme",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        }
+      ],
+      "tiempo_ms": 0.065,
+      "timestamp": "2026-11-17T21:19:13"
+    },
+    {
+      "id": 60,
+      "oracion": "El perro come la carne duermen.",
+      "salida": "acepta",
+      "errores_concordancia": [],
+      "palabras": [
+        {
+          "texto": "el",
+          "etiqueta": "da0ms0",
+          "conocida": true
+        },
+        {
+          "texto": "perro",
+          "etiqueta": "ncms000",
+          "conocida": true
+        },
+        {
+          "texto": "come",
+          "etiqueta": "vmip3s0",
+          "conocida": true
+        },
+        {
+          "texto": "la",
+          "etiqueta": "da0fs0",
+          "conocida": true
+        },
+        {
+          "texto": "carne",
+          "etiqueta": "ncfs000",
+          "conocida": true
+        },
+        {
+          "texto": "duermen",
+          "etiqueta": "vmip3p0",
+          "conocida": false
+        }
+      ],
+      "tiempo_ms": 0.051,
+      "timestamp": "2026-11-17T21:19:13"
+    }
+  ]
+}
