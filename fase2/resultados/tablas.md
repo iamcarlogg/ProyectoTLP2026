@@ -31,4 +31,15 @@ Corpus: 60 oraciones (40 correctas, 20 incorrectas). Generado por `python fase2/
 | 2 (20 oraciones) | 20/20 | 20/20 | 20/20 |
 | 3 (20 oraciones) | 16/20 | 15/20 | 18/20 |
 
+## Fidelidad a la gramática
+
+Mide si el enfoque acepta exactamente las oraciones que genera la CFG (36 de 60) y rechaza las demás, sin importar si son correctas en español. Es la medida de la pregunta 2: un LLM que sigue las reglas dadas tiene 100 %. El parser es la referencia (100 % por construcción); spaCy y NLTK no reciben la gramática, así que en ellos solo es informativa.
+
+| Medida | Parser (CFG) | spaCy | NLTK |
+|---|---|---|---|
+| Fidelidad a la gramática | 100.0 % | 85.0 % | 90.0 % |
+| Correctas en español fuera de la gramática aceptadas (de 4) | 0/4 | 3/4 | 4/4 |
+
+Oraciones correctas en español que la gramática no genera: 49 «El perro y la gata duermen.», 50 «El perro come la carne y duerme.», 51 «El perro duerme y la gata come.», 52 «El perro no come la carne.». Si un enfoque las acepta, usó su conocimiento del español en vez de las reglas.
+
 **Pendientes (sin log todavía):** LLM zero-shot, LLM few-shot

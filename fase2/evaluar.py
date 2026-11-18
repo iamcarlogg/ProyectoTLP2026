@@ -18,6 +18,12 @@ Salidas en fase2/resultados/:
     metricas.png            gráfica de precisión, cobertura y rechazo correcto
     aciertos_por_nivel.png  gráfica de exactitud por nivel
 
+Además de las métricas contra el español (columna esperado), mide la FIDELIDAD A LA
+GRAMÁTICA: si cada enfoque acepta exactamente las oraciones que la CFG genera. Es la
+medida de la pregunta 2 del informe (¿el LLM respeta las reglas o se desvía hacia su
+conocimiento general del español?). Para saber qué oraciones genera la CFG, este script
+las analiza con el motor de la Fase 1 y la gramática de fase2/gramatica_es.py.
+
 Reproducible: no hay azar. Con los mismos archivos de entrada salen las mismas cifras.
 Ejecutar desde la raíz: python fase2/evaluar.py
 """
@@ -32,6 +38,12 @@ import matplotlib.pyplot as plt          # noqa: E402
 from nltk import Tree                    # noqa: E402
 
 AQUI = Path(__file__).parent
+# Igual que correr_parser.py: el motor está en fase1/ y la gramática en fase2/
+# (fase2/ va primero en sys.path, así que gana fase2/gramatica_es.py).
+sys.path.append(str(AQUI.parent / "fase1"))
+from motor import todos_los_arboles                 # noqa: E402
+from gramatica_es import GRAMATICA, INICIAL         # noqa: E402
+
 CORPUS = AQUI / "corpus.csv"
 LOGS = AQUI / "logs"
 SALIDA = AQUI / "resultados"
@@ -138,6 +150,14 @@ def leer_corpus():
         fila["nivel"] = int(fila["nivel"])
         cats = categorias_de_arbol(fila["arbol_esperado"]) if fila["arbol_esperado"] else None
         fila["categorias"] = cats
+
+        # Qué dice la gramática de esta oración: todos sus árboles (puede haber varios si es
+        # ambigua, como la 47) y si la oración pertenece al lenguaje que genera la CFG.
+        arboles = {normalizar_arbol(str(a)) for a in todos_los_arboles(fila["oracion"], GRAMATICA, INICIAL)}
+        fila["en_gramatica"] = bool(arboles)
+        # Árboles que cuentan como correctos: el esperado y cualquier otro que la gramática asigne.
+        fila["arboles_validos"] = arboles | ({normalizar_arbol(fila["arbol_esperado"])}
+                                             if fila["arbol_esperado"] else set())
     return filas
 
 
@@ -187,12 +207,23 @@ def evaluar(clave, resultados, corpus):
     filas_detalle = {}
     conteo = {"VP": 0, "FN": 0, "FP": 0, "VN": 0}
     invalidas = etiquetado = arbol_distinto = medibles_arbol = 0
+    fieles = fuera_aceptadas = 0
 
     for fila in corpus:
         r = resultados[fila["id"]]
         tipo = clasificar(fila["esperado"], r["salida"])
         conteo[tipo] += 1
         invalidas += r["salida"] == "invalida"
+
+        # Fidelidad a la gramática: acepta exactamente lo que la CFG genera y rechaza lo demás.
+        # Una respuesta 'invalida' no es ni aceptar ni rechazar: cuenta como no fiel.
+        fiel = (r["salida"] == "acepta" and fila["en_gramatica"]) or \
+               (r["salida"] == "rechaza" and not fila["en_gramatica"])
+        fieles += fiel
+        # Las oraciones clave de la pregunta 2: correctas en español pero fuera de la gramática.
+        # Aceptarlas = usar el conocimiento general del español en vez de las reglas dadas.
+        if fila["esperado"] == "acepta" and not fila["en_gramatica"]:
+            fuera_aceptadas += r["salida"] == "acepta"
 
         # Error de etiquetado: solo en las aceptadas correctamente (VP) con categorías esperadas.
         error_etq = None
@@ -202,12 +233,15 @@ def evaluar(clave, resultados, corpus):
                 esperadas = [c for _, c in fila["categorias"]]
                 error_etq = [c for _, c in obtenidas] != esperadas
                 etiquetado += error_etq
-            # Parser y LLM entregan árbol: además se compara la estructura completa
+            # Parser y LLM entregan árbol: además se compara la estructura completa.
+            # Cuenta como correcto cualquier árbol que la gramática asigne: en una oración
+            # ambigua (la 47 tiene 2), dar la otra lectura válida no es un error.
             if clave in ("parser", "llm_zero_shot", "llm_few_shot") and r.get("arbol"):
                 medibles_arbol += 1
-                arbol_distinto += normalizar_arbol(r["arbol"]) != normalizar_arbol(fila["arbol_esperado"])
+                arbol_distinto += normalizar_arbol(r["arbol"]) not in fila["arboles_validos"]
 
-        filas_detalle[fila["id"]] = {"salida": r["salida"], "tipo": tipo, "error_etiquetado": error_etq}
+        filas_detalle[fila["id"]] = {"salida": r["salida"], "tipo": tipo, "error_etiquetado": error_etq,
+                                     "fiel": fiel}
 
     vp, fn, fp, vn = conteo["VP"], conteo["FN"], conteo["FP"], conteo["VN"]
     n = vp + fn + fp + vn
@@ -219,6 +253,8 @@ def evaluar(clave, resultados, corpus):
         "rechazo_correcto": dividir(vn, vn + fp),
         "errores_etiquetado": etiquetado,
         "arbol_distinto": arbol_distinto if medibles_arbol else None,
+        "fidelidad_cfg": dividir(fieles, n),
+        "fuera_cfg_aceptadas": fuera_aceptadas,
     }
     return metricas, filas_detalle
 
@@ -330,7 +366,8 @@ def main():
 
     # --- metricas.csv ---
     campos = ["VP", "FN", "FP", "VN", "invalidas", "exactitud", "precision", "cobertura",
-              "rechazo_correcto", "errores_etiquetado", "arbol_distinto"]
+              "rechazo_correcto", "errores_etiquetado", "arbol_distinto",
+              "fidelidad_cfg", "fuera_cfg_aceptadas"]
     escribir_csv(SALIDA / "metricas.csv", ["enfoque"] + campos,
                  [[c] + [round(m[k], 4) if isinstance(m[k], float) else m[k] for k in campos]
                   for c, _, m, _, _ in evaluados])
@@ -341,15 +378,16 @@ def main():
                   for c, _, _, _, niv in evaluados for nivel, d in niv.items()])
 
     # --- detalle.csv: una fila por oración ---
-    encabezado = ["id", "nivel", "oracion", "esperado"]
+    encabezado = ["id", "nivel", "oracion", "esperado", "en_gramatica"]
     for c, _, _, _, _ in evaluados:
-        encabezado += [f"{c}_salida", f"{c}_tipo", f"{c}_error_etiquetado"]
+        encabezado += [f"{c}_salida", f"{c}_tipo", f"{c}_error_etiquetado", f"{c}_fiel_cfg"]
     filas = []
     for f in corpus:
-        fila = [f["id"], f["nivel"], f["oracion"], f["esperado"]]
+        fila = [f["id"], f["nivel"], f["oracion"], f["esperado"], "si" if f["en_gramatica"] else "no"]
         for _, _, _, det, _ in evaluados:
             d = det[f["id"]]
-            fila += [d["salida"], d["tipo"], "" if d["error_etiquetado"] is None else int(d["error_etiquetado"])]
+            fila += [d["salida"], d["tipo"], "" if d["error_etiquetado"] is None else int(d["error_etiquetado"]),
+                     int(d["fiel"])]
         filas.append(fila)
     escribir_csv(SALIDA / "detalle.csv", encabezado, filas)
 
@@ -378,10 +416,26 @@ def main():
         [f"{niv[nivel]['aciertos']}/{niv[nivel]['n']}" for _, _, _, _, niv in evaluados]
         for nivel in (1, 2, 3)
     ])
+    fuera = [f for f in corpus if f["esperado"] == "acepta" and not f["en_gramatica"]]
+    en_cfg = sum(f["en_gramatica"] for f in corpus)
+    t4 = tabla_md(["Medida"] + nombres, [
+        ["Fidelidad a la gramática"] + [pct(m["fidelidad_cfg"]) for _, _, m, _, _ in evaluados],
+        [f"Correctas en español fuera de la gramática aceptadas (de {len(fuera)})"] +
+        [f"{m['fuera_cfg_aceptadas']}/{len(fuera)}" for _, _, m, _, _ in evaluados],
+    ])
+    lista_fuera = ", ".join(f"{f['id']} «{f['oracion']}»" for f in fuera)
     texto = (f"# Resultados de la evaluación\n\nCorpus: {total} oraciones ({correctas} correctas, "
              f"{total - correctas} incorrectas). Generado por `python fase2/evaluar.py`.\n\n"
              f"## Métricas\n\n{t1}\n\n## Clasificación de errores\n\n{t2}\n\n"
-             f"## Aciertos por nivel\n\n{t3}\n")
+             f"## Aciertos por nivel\n\n{t3}\n\n"
+             f"## Fidelidad a la gramática\n\n"
+             f"Mide si el enfoque acepta exactamente las oraciones que genera la CFG ({en_cfg} de {total}) "
+             f"y rechaza las demás, sin importar si son correctas en español. Es la medida de la "
+             f"pregunta 2: un LLM que sigue las reglas dadas tiene 100 %. El parser es la referencia "
+             f"(100 % por construcción); spaCy y NLTK no reciben la gramática, así que en ellos "
+             f"solo es informativa.\n\n{t4}\n\n"
+             f"Oraciones correctas en español que la gramática no genera: {lista_fuera}. "
+             f"Si un enfoque las acepta, usó su conocimiento del español en vez de las reglas.\n")
     if pendientes:
         texto += "\n**Pendientes (sin log todavía):** " + ", ".join(n for _, n, _ in pendientes) + "\n"
     (SALIDA / "tablas.md").write_text(texto, encoding="utf-8")
