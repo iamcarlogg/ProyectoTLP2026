@@ -1,4 +1,4 @@
-# 1. Parser propio y CFG del español controlado — P1 (Carlo)
+# 1. Parser propio y CFG del español controlado — P1
 
 Material para la **sección 1 del informe** («Resumen del parser propio y de la CFG», máximo 1 página, sin repetir la Fase 1) y para la parte del parser en la **metodología** y el **análisis de errores**.
 
