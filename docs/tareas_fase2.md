@@ -7,7 +7,7 @@ Todo va en `fase2/`, con los logs en `fase2/logs/`. Las fechas son propuestas y 
 ## Acuerdos que hay que cerrar ya (16 nov)
 
 - [x] Segunda herramienta de NLP: **NLTK** (decidido el 15 nov).
-- [ ] Modelo de LLM: **lo elige P4** (proveedor y modelo libres, siempre por API). Debe anotar el ID exacto del modelo y los parámetros usados para la metodología.
+- [x] Modelo de LLM (P4, 18 nov): Google, `gemini-3.1-flash-lite`, temperatura solicitada 0, razonamiento MINIMAL, API `v1beta`, `maxOutputTokens=2048`. Conexión verificada y corrida completa: 120 respuestas.
 - [x] Formato común de los logs: JSON con `metadatos` y `resultados`; obligatorios `id, oracion, salida, timestamp` (detalle en [decisiones.md](decisiones.md#formato-de-los-logs-fase-2); ejemplo real en `fase2/logs/parser.json`).
 - [x] Errores de etiquetado: categorías esperadas sacadas de `arbol_esperado` y una tabla de traducción por enfoque (P3, 17 nov; ver [03_nlp_y_evaluacion.md](../fase2/documentacion/03_nlp_y_evaluacion.md#errores-de-etiquetado)).
 - [x] Criterio de acierto de spaCy y NLTK: regla de concordancia (spaCy, la de `tabla_nlp.py`; NLTK, la misma sobre palabras vecinas).
@@ -45,13 +45,13 @@ Todo va en `fase2/`, con los logs en `fase2/logs/`. Las fechas son propuestas y 
 
 ## P4 — Allan · LLM e informe
 
-- [ ] **16 nov** — Escribir los dos prompts con las reglas de P2: **zero-shot** (solo reglas) y **few-shot** (reglas + 3–5 ejemplos resueltos), con salida en formato fijo (acepta/rechaza + árbol en corchetes).
-- [ ] **17 nov** — `fase2/llm_experimento.py` (**por API, no por el chat**): corre todo el corpus con ambos prompts y guarda en `fase2/logs/llm_zero_shot.*` y `llm_few_shot.*`, por cada llamada, **el prompt exacto, la respuesta completa y el timestamp**.
-- [ ] **18 nov** — Análisis del LLM: ¿respeta las reglas o se desvía hacia su conocimiento general? (la clave son las oraciones correctas en español que la gramática no acepta), y ¿few-shot mejora frente a zero-shot?
-- [ ] **19 nov, mañana** — Integrar el informe de 8–10 páginas y exportarlo a PDF:
+- [x] **18 nov** — Dos prompts nuevos con las reglas completas de P2: zero-shot y few-shot con cinco ejemplos externos al corpus; salida JSON fija con veredicto y árbol. Ver `fase2/prompts/` y `fase2/preparar_prompts.py`.
+- [x] **18 nov** — `fase2/llm_experimento.py` (**por API, no por el chat**): corre todo el corpus con ambos prompts y guarda en `fase2/logs/llm_zero_shot.*` y `llm_few_shot.*`, por cada llamada, **el prompt exacto, la respuesta completa y el timestamp**.
+- [x] **18 nov** — Análisis del LLM: ¿respeta las reglas o se desvía hacia su conocimiento general? (la clave son las oraciones correctas en español que la gramática no acepta), y ¿few-shot mejora frente a zero-shot? → `fase2/documentacion/04_llm.md`; exactitud 90,0 % / 91,7 %, fidelidad CFG 90,0 % / 98,3 %.
+- [x] **18 nov** — Informe integrado en `output/pdf/informe_fase2.pdf`: 10 páginas principales más 9 de anexos; código y evidencia en `output/pdf/entrega_fase2.zip`:
   1. Parser y CFG (P1) · 2. Corpus (P2) · 3. Metodología (todos) · 4. Resultados (P3) · 5. Análisis de errores (todos; énfasis en el LLM) · 6. Conclusiones con datos.
   - Anexos: corpus, logs de los cuatro enfoques, prompts y respuestas con timestamp, `evaluar.py`.
-- [ ] **19 nov** — README de `fase2/` con los pasos para reproducir todo desde cero.
+- [x] **18 nov** — README de `fase2/` actualizado: variable `GEMINI_API_KEY`, ejecución y reproducción desde los cinco logs, sin volver a consultar la API.
 
 ## Todos
 

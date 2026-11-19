@@ -1,0 +1,108 @@
+{
+  "fecha": "2026-11-18T15:46:15.759+00:00",
+  "verificaciones": "60 IDs únicos por variante; textos y prompts exactos; huellas de fuentes; modelo; timestamps; interpretación; respuesta bruta; ausencia de clave.",
+  "variantes": {
+    "zero-shot": {
+      "registros": 60,
+      "sha256_log": "a3fd407e813a813d31ab2676a27622035599884486a9cdc146cc06276a3d5ea1",
+      "salidas": {
+        "acepta": 36,
+        "invalida": 3,
+        "rechaza": 21
+      },
+      "modelos_devueltos": [
+        "gemini-3.1-flash-lite"
+      ],
+      "intentos": 73,
+      "errores_api": {
+        "HTTP_503:UNAVAILABLE": 12,
+        "HTTP_429:RESOURCE_EXHAUSTED": 1
+      },
+      "tokens_entrada": 163459,
+      "tokens_salida_visible": 3297,
+      "tokens_pensamiento": 0,
+      "costo_equivalente_tarifa_pagada_usd": 0.04581025,
+      "aceptaciones_con_arbol_valido_cfg": 10,
+      "aceptaciones_con_arbol_invalido_cfg": [
+        2,
+        6,
+        8,
+        10,
+        12,
+        14,
+        22,
+        25,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        50,
+        52,
+        56
+      ],
+      "invalidas": [
+        4,
+        11,
+        26
+      ],
+      "fecha_inicio": "2026-11-18T14:58:23.812+00:00",
+      "fecha_fin": "2026-11-18T15:16:29.493+00:00"
+    },
+    "few-shot": {
+      "registros": 60,
+      "sha256_log": "a0a928d0d7ce34b4a4bdbf44a15929dc3e1134fba080f6e50697d747a6c2e625",
+      "salidas": {
+        "acepta": 37,
+        "rechaza": 23
+      },
+      "modelos_devueltos": [
+        "gemini-3.1-flash-lite"
+      ],
+      "intentos": 90,
+      "errores_api": {
+        "HTTP_503:UNAVAILABLE": 30
+      },
+      "tokens_entrada": 188539,
+      "tokens_salida_visible": 3084,
+      "tokens_pensamiento": 0,
+      "costo_equivalente_tarifa_pagada_usd": 0.05176075,
+      "aceptaciones_con_arbol_valido_cfg": 30,
+      "aceptaciones_con_arbol_invalido_cfg": [
+        29,
+        32,
+        34,
+        42,
+        43,
+        47,
+        56
+      ],
+      "invalidas": [],
+      "fecha_inicio": "2026-11-18T15:16:34.544+00:00",
+      "fecha_fin": "2026-11-18T15:45:40.371+00:00"
+    }
+  },
+  "nota_costo": "Equivalente estándar por tokens reportados; no confirma cargos ni créditos, sin impuestos o descuentos.",
+  "reproducibilidad": {
+    "verificado": true,
+    "metodo": "Dos ejecuciones de evaluar.py con los mismos cinco logs; seis archivos idénticos byte a byte.",
+    "sha256_resultados": {
+      "aciertos_por_nivel.png": "9deb0b049cf372da477e5444f4e1e02752e57c6f6af42cab2ab57532545c28a9",
+      "detalle.csv": "eb1bb7bbce9e9d02f648bd40e5e5b4445b3308a82cfae376bfe9ba604853b262",
+      "metricas.csv": "b7781f0d3a90b920bea020967c085ee9b520db0d8b0dd876ff3d6ceb7ebb5b1f",
+      "metricas.png": "7c4ba97d03443d0cc4acb2c134d159dc1825b40286b342ff00d0e830841977ee",
+      "metricas_por_nivel.csv": "dc937afd9461361f16a2502be982a719c7783559939bf087385bc0ab90dd4f46",
+      "tablas.md": "4711370d69283553dc781e5348247f4c81d7bf0aca74e67cc851d8b7baa68ac6"
+    }
+  }
+}

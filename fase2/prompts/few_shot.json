@@ -1,0 +1,31 @@
+[
+  {
+    "oracion": "Los perros durmieron lentamente.",
+    "respuesta": {
+      "salida": "acepta",
+      "arbol": "(oracion (sn_mp (det_mp los) (n_mp perros) (mod_mp)) (sv_p_pret (v_p_pret durmieron) (adv lentamente)))"
+    }
+  },
+  {
+    "oracion": "Yo perseguí la gata negra.",
+    "respuesta": {
+      "salida": "acepta",
+      "arbol": "(oracion (pron_1s yo) (sv_1s_pret (vt_1s_pret perseguí) (sn (sn_fs (det_fs la) (n_fs gata) (mod_fs (adj_fs negra))))))"
+    }
+  },
+  {
+    "oracion": "La gata que los perros persiguen come.",
+    "respuesta": {
+      "salida": "acepta",
+      "arbol": "(oracion (sn_fs (det_fs la) (n_fs gata) (mod_fs (rel_obj que (sn_mp (det_mp los) (n_mp perros) (mod_mp)) (vt_p persiguen)))) (sv_s (v_s come)))"
+    }
+  },
+  {
+    "oracion": "Las gatas negra durmieron.",
+    "respuesta": {"salida": "rechaza", "arbol": null}
+  },
+  {
+    "oracion": "Las gatas no comen la carne.",
+    "respuesta": {"salida": "rechaza", "arbol": null}
+  }
+]

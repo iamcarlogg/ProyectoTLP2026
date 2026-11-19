@@ -1,0 +1,64 @@
+{
+  "fecha": "2026-11-18T14:50:52.776+00:00",
+  "modelo": "gemini-3.1-flash-lite",
+  "api_version": "v1beta",
+  "fuente_precios": "https://ai.google.dev/gemini-api/docs/pricing#gemini-3.1-flash-lite",
+  "usd_millon_entrada": 0.25,
+  "usd_millon_salida": 1.5,
+  "nota": "Costo de tarifa de pago. Puede ser cero con cuota gratuita disponible; no comprueba facturación ni créditos.",
+  "metodo": "Muestra de 4 prompts: no es conteo exacto de las 120 entradas.",
+  "mediciones": [
+    {
+      "variante": "zero-shot",
+      "id": 1,
+      "caracteres": 6754,
+      "input_tokens_estimados": 2722
+    },
+    {
+      "variante": "zero-shot",
+      "id": 48,
+      "caracteres": 6786,
+      "input_tokens_estimados": 2731
+    },
+    {
+      "variante": "few-shot",
+      "id": 1,
+      "caracteres": 7783,
+      "input_tokens_estimados": 3140
+    },
+    {
+      "variante": "few-shot",
+      "id": 48,
+      "caracteres": 7815,
+      "input_tokens_estimados": 3149
+    }
+  ],
+  "entrada_tokens_estimada": 352260.0,
+  "costo_entrada_estimado_usd": 0.088065,
+  "tope_salida_tokens": 245760,
+  "tope_costo_solo_salida_usd": 0.36864,
+  "prueba_generacion": {
+    "id": 1,
+    "variante": "zero-shot",
+    "modelo_devuelto": "gemini-3.1-flash-lite",
+    "timestamp": "2026-11-18T14:58:23.812+00:00",
+    "salida": "acepta",
+    "arbol_valido_cfg": true,
+    "stop_reason": "STOP",
+    "uso_tokens": {
+      "promptTokenCount": 2722,
+      "candidatesTokenCount": 55,
+      "totalTokenCount": 2777,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 2722
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "costo_equivalente_tarifa_pagada_usd": 0.000763,
+    "log": "fase2/logs/llm_zero_shot.json",
+    "nota": "Una sola generación. No verifica saldo ni cuota restante y no demuestra un cargo efectivo."
+  }
+}

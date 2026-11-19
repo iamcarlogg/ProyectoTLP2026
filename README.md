@@ -24,7 +24,7 @@ Cada persona mantiene el mismo eje en las dos fases. Completen la columna *Integ
 | **P3 — NLP** | | Demo con spaCy/NLTK sobre las oraciones de P2 | spaCy + NLTK o HuggingFace (logs), script de evaluación, tablas y gráfica |
 | **P4 — Teoría, LLM e integración** | | Marco teórico, tests del parser formal, README, informe | LLM zero-shot y few-shot (prompts, respuestas y timestamps) e informe final en PDF |
 
-## Estado (5 de noviembre de 2026)
+## Estado (18 de noviembre de 2026)
 
 ### Fase 1
 
@@ -40,20 +40,37 @@ Cada persona mantiene el mismo eje en las dos fases. Completen la columna *Integ
 | Demo con spaCy: análisis, tabla y página interactiva | P3 | ✅ Listo | `fase1/demo_nlp.py`, `tabla_nlp.py`, `visualizar_nlp.py`, [documento](fase1/documentacion/06_demo_nlp.md) |
 | Marco teórico e informe (7 páginas con portada) | P4 | ✅ Listo | `informe/` |
 
-### Fase 2 (aún no empieza en el repositorio)
+### Fase 2
 
-Alcance ajustado por el docente el 15 de noviembre: ver [docs/alcance_fase2.md](docs/alcance_fase2.md). Decisiones tomadas y qué debe rehacer cada integrante: [fase2/decisiones_tomadas.md](fase2/decisiones_tomadas.md). Fechas propuestas para llegar al jueves 19 a las 17:30:
+Alcance vigente: [docs/alcance_fase2.md](docs/alcance_fase2.md). Pasos completos de
+reproducción: [fase2/README.md](fase2/README.md). Para recalcular las cifras desde
+los cinco logs guardados, sin volver a consultar ninguna API:
 
-| Archivo esperado | Rol | Fecha propuesta |
+```powershell
+python fase2/evaluar.py
+```
+
+| Pieza | Rol | Estado |
 | --- | --- | --- |
-| `fase2/corpus.csv` (hay un borrador con las 44 oraciones de la Fase 1; columnas `id, oracion, nivel, esperado, arbol_esperado`) y reglas de la gramática en texto para el prompt | P2 | 16 nov |
-| `fase2/logs/parser.json` — salida bruta del parser propio (`python fase2/correr_parser.py`) | P1 | ✅ script listo; se vuelve a correr con el corpus final |
-| `fase2/logs/spacy.*` y `fase2/logs/nltk.*` o `huggingface.*` | P3 | 17 nov |
-| `fase2/logs/llm_zero_shot.*` y `llm_few_shot.*` — prompt, respuesta completa y timestamp de cada llamada | P4 | 17 nov |
-| `fase2/evaluar.py` — lee los logs y produce las tablas y la gráfica | P3 | 18 nov |
-| Informe en PDF (8–10 páginas + anexos) y README de reproducción | P4 (cada rol su sección) | 19 nov, antes de las 17:30 |
+| Corpus de 60 oraciones y CFG (207 producciones) | P2 | ✅ Listo |
+| Log del parser con corpus final | P1 | ✅ Listo |
+| Logs de spaCy y NLTK | P3 | ✅ Listos |
+| Experimento Gemini `gemini-3.1-flash-lite` | P4 | ✅ 60 zero-shot + 60 few-shot |
+| Evaluación, tablas y dos gráficas | P3/P4 | ✅ Actualizadas con los cinco logs; reproducción verificada |
+| Documentación del LLM | P4 | ✅ [04_llm.md](fase2/documentacion/04_llm.md) |
+| Informe PDF y paquete de entrega | P4 | ✅ [PDF](output/pdf/informe_fase2.pdf): 10 páginas principales + 9 de anexos; [ZIP](output/pdf/entrega_fase2.zip) con evidencia y código |
 
-Sugerencia: crear la carpeta `fase2/` con la misma lógica que `fase1/` (código suelto en la carpeta y documentación en `fase2/documentacion/`).
+Few-shot frente a zero-shot: exactitud española 91,7 % frente a 90,0 %;
+fidelidad del veredicto a la CFG 98,3 % frente a 90,0 %. Las cifras oficiales y
+las demás métricas están en [tablas.md](fase2/resultados/tablas.md).
+La clave `GEMINI_API_KEY` vive en el entorno o `.env` local, ignorado por Git;
+no hace falta para evaluar los logs existentes.
+
+El PDF incorpora los archivos completos como adjuntos; el ZIP ofrece la misma evidencia
+y el proyecto reproducible sin `.env` ni `.venv`. Fuente editable del informe:
+`informe/informe_fase2.md`; generador `informe/generar_fase2.py` (dependencias
+de autoría en `informe/requirements-informe.txt`). La entrega completa de P4 está
+incluida en esta revisión. Queda enviar el correo institucional antes del 19 nov a las 17:30.
 
 ## Mapa del repositorio
 

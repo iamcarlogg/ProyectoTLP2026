@@ -8,3 +8,9 @@ spacy,3,20,15,4,1
 nltk,1,20,20,0,0
 nltk,2,20,20,0,0
 nltk,3,20,18,2,0
+llm_zero_shot,1,20,18,0,2
+llm_zero_shot,2,20,19,0,1
+llm_zero_shot,3,20,17,1,2
+llm_few_shot,1,20,20,0,0
+llm_few_shot,2,20,20,0,0
+llm_few_shot,3,20,15,1,4

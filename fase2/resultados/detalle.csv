@@ -1,61 +1,61 @@
-id,nivel,oracion,esperado,en_gramatica,parser_salida,parser_tipo,parser_error_etiquetado,parser_fiel_cfg,spacy_salida,spacy_tipo,spacy_error_etiquetado,spacy_fiel_cfg,nltk_salida,nltk_tipo,nltk_error_etiquetado,nltk_fiel_cfg
-1,1,El perro duerme.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,0,1
-2,1,La gata duerme.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
-3,1,Los perros duermen.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
-4,1,Las gatas duermen.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
-5,1,El perro come.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,0,1
-6,1,La gata come.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,0,1
-7,1,Los perros comen.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
-8,1,Las gatas comen.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
-9,1,El perro durmió.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,0,1
-10,1,La gata comió.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
-11,1,Los perros durmieron.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
-12,1,Las gatas comieron.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
-13,1,Yo duermo.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,1,1
-14,1,Nosotros comemos.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
-15,1,La perro duerme.,rechaza,no,rechaza,VN,,1,acepta,FP,,0,rechaza,VN,,1
-16,1,El gata duerme.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
-17,1,Los perro duermen.,rechaza,no,rechaza,VN,,1,acepta,FP,,0,rechaza,VN,,1
-18,1,Las gata duermen.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
-19,1,El perro duermen.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
-20,1,Las gatas duerme.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
-21,2,El perro negro duerme.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,0,1
-22,2,La gata negra come.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
-23,2,Los perros negros comen.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
-24,2,Las gatas negras duermen.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
-25,2,El perro duerme lentamente.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,0,1
-26,2,Las gatas comen rápidamente.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
-27,2,El perro come la carne.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,0,1
-28,2,La gata comió la carne.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
-29,2,El perro duerme en la casa.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,0,1
-30,2,Los perros duermen en el jardín.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
-31,2,La gata negra durmió lentamente.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
-32,2,Las gatas negras comieron la carne.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
-33,2,Yo como la carne.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,1,1
-34,2,Nosotras comimos la carne.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,1,1
-35,2,El perro negra duerme.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
-36,2,La gata negro come.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
-37,2,Los perros negro duermen.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
-38,2,Las gatas negros comen.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
-39,2,La gata negros durmió.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
-40,2,Los perros negras comieron.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
-41,3,El perro que come duerme.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,0,1
-42,3,La gata que duerme come la carne.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
-43,3,Los perros que comen duermen en la casa.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
-44,3,El perro que la gata persigue duerme.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
-45,3,La gata que el perro persiguió durmió.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
-46,3,Los perros negros que comieron durmieron.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
-47,3,El perro come la carne en la casa.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,0,1
-48,3,El perro que la gata que duerme persigue duerme.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
-49,3,El perro y la gata duermen.,acepta,no,rechaza,FN,,1,rechaza,FN,,1,acepta,VP,0,0
-50,3,El perro come la carne y duerme.,acepta,no,rechaza,FN,,1,acepta,VP,1,0,acepta,VP,0,0
-51,3,El perro duerme y la gata come.,acepta,no,rechaza,FN,,1,acepta,VP,1,0,acepta,VP,0,0
-52,3,El perro no come la carne.,acepta,no,rechaza,FN,,1,acepta,VP,1,0,acepta,VP,0,0
-53,3,El perro que la gata persiguen duerme.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
-54,3,Los perros que comen duerme.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
-55,3,La gata que el perro persiguieron durmió.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
-56,3,El perro negro que comen duerme.,rechaza,no,rechaza,VN,,1,acepta,FP,,0,rechaza,VN,,1
-57,3,El perro que la gata persigue duermen.,rechaza,no,rechaza,VN,,1,acepta,FP,,0,rechaza,VN,,1
-58,3,Las gatas que comen durmió.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
-59,3,El perro que la gata persigue negra duerme.,rechaza,no,rechaza,VN,,1,acepta,FP,,0,acepta,FP,,0
-60,3,El perro come la carne duermen.,rechaza,no,rechaza,VN,,1,acepta,FP,,0,acepta,FP,,0
+id,nivel,oracion,esperado,en_gramatica,parser_salida,parser_tipo,parser_error_etiquetado,parser_fiel_cfg,spacy_salida,spacy_tipo,spacy_error_etiquetado,spacy_fiel_cfg,nltk_salida,nltk_tipo,nltk_error_etiquetado,nltk_fiel_cfg,llm_zero_shot_salida,llm_zero_shot_tipo,llm_zero_shot_error_etiquetado,llm_zero_shot_fiel_cfg,llm_few_shot_salida,llm_few_shot_tipo,llm_few_shot_error_etiquetado,llm_few_shot_fiel_cfg
+1,1,El perro duerme.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+2,1,La gata duerme.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+3,1,Los perros duermen.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+4,1,Las gatas duermen.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,invalida,FN,,0,acepta,VP,0,1
+5,1,El perro come.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+6,1,La gata come.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+7,1,Los perros comen.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+8,1,Las gatas comen.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+9,1,El perro durmió.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+10,1,La gata comió.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+11,1,Los perros durmieron.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,invalida,FN,,0,acepta,VP,0,1
+12,1,Las gatas comieron.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+13,1,Yo duermo.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,1,1,acepta,VP,0,1,acepta,VP,0,1
+14,1,Nosotros comemos.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+15,1,La perro duerme.,rechaza,no,rechaza,VN,,1,acepta,FP,,0,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
+16,1,El gata duerme.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
+17,1,Los perro duermen.,rechaza,no,rechaza,VN,,1,acepta,FP,,0,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
+18,1,Las gata duermen.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
+19,1,El perro duermen.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
+20,1,Las gatas duerme.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
+21,2,El perro negro duerme.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+22,2,La gata negra come.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+23,2,Los perros negros comen.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+24,2,Las gatas negras duermen.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+25,2,El perro duerme lentamente.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+26,2,Las gatas comen rápidamente.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,invalida,FN,,0,acepta,VP,0,1
+27,2,El perro come la carne.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+28,2,La gata comió la carne.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+29,2,El perro duerme en la casa.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,0,1
+30,2,Los perros duermen en el jardín.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,0,1
+31,2,La gata negra durmió lentamente.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+32,2,Las gatas negras comieron la carne.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+33,2,Yo como la carne.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,1,1,acepta,VP,0,1,acepta,VP,0,1
+34,2,Nosotras comimos la carne.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,1,1,acepta,VP,0,1,acepta,VP,0,1
+35,2,El perro negra duerme.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
+36,2,La gata negro come.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
+37,2,Los perros negro duermen.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
+38,2,Las gatas negros comen.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
+39,2,La gata negros durmió.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
+40,2,Los perros negras comieron.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
+41,3,El perro que come duerme.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+42,3,La gata que duerme come la carne.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,0,1
+43,3,Los perros que comen duermen en la casa.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+44,3,El perro que la gata persigue duerme.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+45,3,La gata que el perro persiguió durmió.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,0,1
+46,3,Los perros negros que comieron durmieron.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+47,3,El perro come la carne en la casa.,acepta,si,acepta,VP,0,1,acepta,VP,1,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+48,3,El perro que la gata que duerme persigue duerme.,acepta,si,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1,acepta,VP,0,1
+49,3,El perro y la gata duermen.,acepta,no,rechaza,FN,,1,rechaza,FN,,1,acepta,VP,0,0,rechaza,FN,,1,rechaza,FN,,1
+50,3,El perro come la carne y duerme.,acepta,no,rechaza,FN,,1,acepta,VP,1,0,acepta,VP,0,0,acepta,VP,1,0,rechaza,FN,,1
+51,3,El perro duerme y la gata come.,acepta,no,rechaza,FN,,1,acepta,VP,1,0,acepta,VP,0,0,rechaza,FN,,1,rechaza,FN,,1
+52,3,El perro no come la carne.,acepta,no,rechaza,FN,,1,acepta,VP,1,0,acepta,VP,0,0,acepta,VP,1,0,rechaza,FN,,1
+53,3,El perro que la gata persiguen duerme.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
+54,3,Los perros que comen duerme.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
+55,3,La gata que el perro persiguieron durmió.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
+56,3,El perro negro que comen duerme.,rechaza,no,rechaza,VN,,1,acepta,FP,,0,rechaza,VN,,1,acepta,FP,,0,acepta,FP,,0
+57,3,El perro que la gata persigue duermen.,rechaza,no,rechaza,VN,,1,acepta,FP,,0,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
+58,3,Las gatas que comen durmió.,rechaza,no,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1,rechaza,VN,,1
+59,3,El perro que la gata persigue negra duerme.,rechaza,no,rechaza,VN,,1,acepta,FP,,0,acepta,FP,,0,rechaza,VN,,1,rechaza,VN,,1
+60,3,El perro come la carne duermen.,rechaza,no,rechaza,VN,,1,acepta,FP,,0,acepta,FP,,0,rechaza,VN,,1,rechaza,VN,,1

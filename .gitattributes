@@ -1,0 +1,13 @@
+# Preserve the exact bytes recorded in the completed experiment's SHA-256 hashes.
+fase2/corpus.csv -text
+fase2/gramatica_es.txt -text
+fase2/gramatica_es.py -text
+fase2/prompts/base.txt -text
+fase2/prompts/few_shot.json -text
+fase2/preparar_prompts.py -text
+fase2/validar_respuesta_llm.py -text
+fase2/llm_experimento.py -text
+fase2/logs/llm_zero_shot.json -text
+fase2/logs/llm_few_shot.json -text
+fase2/resultados/* -text
+output/pdf/anexos/** -text

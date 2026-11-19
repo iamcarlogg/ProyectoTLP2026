@@ -151,8 +151,8 @@ Fase 2:
 - [x] Concordancia: se siguen duplicando no terminales (`sn_ms`, `sv_s`…), así que la gramática sigue siendo una CFG pura.
 - [x] Primer árbol o todos: el log guarda el primer árbol y el número de árboles (`n_arboles`).
 - [x] Elegir la segunda herramienta de NLP: **NLTK**.
-- [ ] Modelo de LLM: lo elige P4, que hace el experimento (cualquier proveedor, siempre por API). Debe anotar en la metodología el ID exacto del modelo y sus parámetros.
+- [x] Modelo de LLM (P4, 18 nov): `gemini-3.1-flash-lite` por API de Google; temperatura solicitada 0, razonamiento MINIMAL y máximo 2048 tokens de salida. Corrida completa y parámetros documentados en `fase2/documentacion/04_llm.md`.
 - [x] Criterio de acierto de spaCy y NLTK: regla de concordancia (spaCy, la de `tabla_nlp.py`; NLTK, la misma sobre palabras vecinas).
-- [ ] Criterio de acierto del LLM: lo que responda (acepta o rechaza) en el formato pedido; si no respeta el formato, `invalida` (P4).
+- [x] Criterio del LLM (P4): JSON con `salida` y `arbol`; formato ilegible o respuesta incompleta → `invalida`. Un veredicto equivocado o árbol con producciones incorrectas se conserva como error, sin corregir al modelo. Fidelidad del veredicto y validez del árbol se analizan por separado.
 - [x] La Fase 2 importa el motor añadiendo `fase1/` al `sys.path`.
 - [x] Errores de etiquetado: categorías por palabra sacadas de `arbol_esperado` (ver «Formato de los logs»).

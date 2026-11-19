@@ -1,6 +1,6 @@
 # Fase 2 — Decisiones tomadas y qué debe rehacer cada integrante
 
-Creado: 15 nov 2026 · @Carlo (P1) · Actualizado: 17 nov 2026 (P3: pendientes resueltos y avance de cada integrante)
+Creado: 15 nov 2026 · @Carlo (P1) · Actualizado: 18 nov 2026 (P4: LLM, evaluación e informe completos e incluidos en la revisión)
 
 Resumen para el equipo de lo que ya se decidió en la Fase 2 y de lo que cada uno debe hacer o rehacer para que su parte encaje. El detalle está en [docs/decisiones.md](../../docs/decisiones.md); el alcance del docente, en [docs/alcance_fase2.md](../../docs/alcance_fase2.md); las fechas, en [docs/tareas_fase2.md](../../docs/tareas_fase2.md).
 
@@ -45,7 +45,7 @@ Formato del log, con un ejemplo real del parser:
 
 - [x] **Errores de etiquetado** (P3, 17 nov): decisión 15. Detalle en [03_nlp_y_evaluacion.md](03_nlp_y_evaluacion.md#errores-de-etiquetado).
 - [x] **Criterio de acierto de NLTK** (P3, 17 nov): decisión 14.
-- [ ] **Criterio de acierto del LLM** (P4): lo que responda en el formato pedido; si no lo respeta, `invalida`.
+- [x] **Criterio de acierto del LLM** (P4, 18 nov): JSON con `salida` y `arbol`; formato ilegible o respuesta truncada → `invalida`. Un veredicto equivocado o una derivación que viola la CFG se conservan como errores del modelo, sin corregirlos. Exactitud frente al español, fidelidad del veredicto a la CFG y validez del árbol se analizan por separado. Ver `04_llm.md`.
 - [x] **Concordancia en la gramática nueva** (P2): decisión 13.
 
 ## Qué debe hacer o rehacer cada integrante
@@ -69,17 +69,26 @@ Formato del log, con un ejemplo real del parser:
 
 ### P4 — Allan · LLM e informe
 
-- [ ] **`fase2/llm_experimento.py` por API**, con la clave en una variable de entorno (nunca en el repositorio).
-- [ ] **Dos logs, `llm_zero_shot.json` y `llm_few_shot.json`, con el formato común.** En `metadatos`: proveedor, ID exacto del modelo y parámetros. En cada resultado, además de los obligatorios: `prompt` y `respuesta_completa`. Si la respuesta no se puede interpretar, `salida = "invalida"`.
-- [ ] **Una llamada por oración**, con el mismo prompt base, para que las respuestas no se influyan entre sí.
-- [x] **README de `fase2/`** con los pasos para reproducir todo: [fase2/README.md](../README.md). Falta agregar los detalles del LLM (variable de entorno de la clave).
-- [ ] **`04_llm.md`** en esta carpeta: prompts exactos, modelo, parámetros y análisis.
+- [x] **`fase2/llm_experimento.py` por API**, con la clave en una variable de entorno (nunca en el repositorio).
+- [x] **Dos logs, `llm_zero_shot.json` y `llm_few_shot.json`, con el formato común.** En `metadatos`: proveedor, ID exacto del modelo y parámetros. En cada resultado, además de los obligatorios: `prompt` y `respuesta_completa`. Si la respuesta no se puede interpretar, `salida = "invalida"`.
+- [x] **Una llamada por oración**, con el mismo prompt base, para que las respuestas no se influyan entre sí.
+- [x] **README de `fase2/`** con los pasos para reproducir todo: [fase2/README.md](../README.md). Detalles del LLM completos: `GEMINI_API_KEY` local, ambos logs de 60 y evaluación reproducida.
+- [x] **`04_llm.md`** en esta carpeta: prompts exactos, modelo, parámetros y análisis.
 
 ### P1 — Carlo · Parser propio
 
 - [x] `fase2/correr_parser.py` listo y probado con el borrador (log en `fase2/logs/parser.json`).
 - [x] Volver a correrlo cuando lleguen la gramática y el corpus finales (17 nov: 56/60).
 - [x] Sección del informe: resumen del parser y de la CFG (máximo 1 página) y análisis de sus errores → [01_parser_propio.md](01_parser_propio.md).
+
+## Cierre de P4 (18 nov)
+
+Gemini `gemini-3.1-flash-lite`: 60 respuestas por variante, con temperatura
+solicitada 0, razonamiento MINIMAL y 2048 tokens máximos de salida. Los errores
+HTTP quedaron en `intentos`, separados de las respuestas. Métricas y gráficas
+actualizadas con los cinco logs; seis archivos reproducidos byte a byte. El
+informe PDF final está listo en `output/pdf/informe_fase2.pdf`, con ZIP de entrega.
+La entrega de P4 queda incluida en esta revisión de Git; el correo institucional sigue pendiente.
 
 ## Orden para rehacer la corrida completa
 

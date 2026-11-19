@@ -1,0 +1,3 @@
+# Dependencias de autoría; no son necesarias para ejecutar evaluar.py.
+reportlab==4.4.9
+pypdf==6.21.4

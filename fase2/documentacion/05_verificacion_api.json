@@ -1,0 +1,33 @@
+{
+  "fecha": "2026-11-18T14:10:24.805+00:00",
+  "estado": "bloqueado_por_saldo_api",
+  "modelo": "claude-sonnet-4-6",
+  "api_version": "2023-06-01",
+  "endpoint_verificado": "https://api.anthropic.com/v1/messages/count_tokens",
+  "http_status": 400,
+  "tipo_error": "invalid_request_error",
+  "diagnostico": "Anthropic indica credit balance y billing. No se conservan credenciales ni mensajes libres de error.",
+  "respuestas_generadas": 0,
+  "conteo_tokens_completado": false,
+  "precios_usd_por_millon": {
+    "entrada": 3,
+    "salida": 15
+  },
+  "fuente_precios": "https://platform.claude.com/docs/en/models/overview",
+  "caracteres_prompts": {
+    "zero-shot": 405793,
+    "few-shot": 467533
+  },
+  "estimacion": {
+    "metodo": "Supuesto orientativo de 2 a 4 caracteres por token; no es conteo del tokenizador de Anthropic ni una cota garantizada.",
+    "entrada_tokens_min_est": 218331.5,
+    "entrada_tokens_max_est": 436663.0,
+    "costo_entrada_usd_min_est": 0.6549945,
+    "costo_entrada_usd_max_est": 1.309989,
+    "max_tokens_salida_por_llamada": 2048,
+    "max_salida_120_llamadas_usd": 3.6864,
+    "total_con_salida_al_maximo_usd_min_est": 4.3413945,
+    "total_con_salida_al_maximo_usd_max_est": 4.996389,
+    "exclusiones": "Sin impuestos ni reintentos; sin descuentos de cache o batch."
+  }
+}

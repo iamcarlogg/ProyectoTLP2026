@@ -1,0 +1,31 @@
+{
+  "archivos_zip": 81,
+  "paginas_pdf": 19,
+  "paginas_principales": 10,
+  "paginas_anexos": 9,
+  "adjuntos_pdf": 16,
+  "manifiesto_zip_verificado": true,
+  "adjuntos_identicos_al_zip": true,
+  "exclusiones_verificadas": [
+    ".env",
+    ".git",
+    ".venv"
+  ],
+  "instalacion_requirements_entorno_nuevo": true,
+  "evaluacion_copia_limpia": {
+    "aciertos_por_nivel.png": true,
+    "detalle.csv": true,
+    "metricas.csv": true,
+    "metricas.png": true,
+    "metricas_por_nivel.csv": true,
+    "tablas.md": true
+  },
+  "pruebas_llm": 16,
+  "pruebas_parser": 24,
+  "logs_originales_intactos": true,
+  "claves_ausentes_del_zip": true,
+  "sha256_pdf": "ded83c69b2856f8a5ff9dad3d951630aa0f27220d1c08e44d674d4a45988f092",
+  "sha256_zip": "2e776074cb1c56878322ccedbcfcee2d08627fd083138b098ec457119c9c7278",
+  "contenido_zip_identico_a_revision": true,
+  "huellas_fuentes_preservadas_en_git": true
+}
