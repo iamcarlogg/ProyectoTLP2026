@@ -77,45 +77,94 @@ y el proyecto reproducible sin `.env` ni `.venv`. Fuente editable del informe:
 ProyectoTLP2026/
 ├── README.md                 ← este archivo: visión general, roles, estado
 ├── requirements.txt          ← dependencias (nltk, pytest, spaCy y su modelo de español)
+├── .gitattributes            ← conserva los bytes exactos de logs y prompts (huellas SHA-256)
+│
+├── docs/                     ← lo que vale para todo el proyecto
+│   ├── decisiones.md         ← convenciones del equipo, válidas para las dos fases
+│   ├── alcance_fase2.md      ← alcance de la Fase 2 ajustado por el docente (manda sobre lo demás)
+│   └── tareas_fase2.md       ← reparto y estado de las tareas de la Fase 2
+│
 ├── informe/
-│   ├── informe_fase1.html    ← fuente del informe (editar aquí)
-│   ├── informe_fase1.pdf     ← informe entregable (7 páginas con portada)
+│   ├── informe_fase1.html    ← fuente del informe de la Fase 1 (editar aquí)
+│   ├── informe_fase1.pdf     ← informe entregable de la Fase 1 (7 páginas con portada)
 │   ├── generar_figuras.py    ← genera la Figura 1 del informe (correr antes de generar_pdf.py)
-│   ├── figuras/              ← figuras SVG del informe
+│   ├── figuras/              ← figuras SVG del informe de la Fase 1
 │   ├── generar_pdf.py        ← HTML → PDF (Fase 1)
-│   ├── informe_fase2.html    ← fuente del informe de la Fase 2 (editar aquí)
-│   └── generar_fase2.py      ← HTML → PDF de la Fase 2 con la evidencia adjunta y ZIP
-├── docs/
-│   └── decisiones.md         ← convenciones del equipo, válidas para las dos fases
-└── fase1/
-    ├── README.md             ← cómo ejecutar y usar el código de la Fase 1
+│   ├── informe_fase2.html    ← fuente del informe de la Fase 2 (mismo formato; editar aquí)
+│   ├── generar_fase2.py      ← HTML → PDF de la Fase 2 con la evidencia adjunta, y ZIP de entrega
+│   └── requirements-informe.txt ← dependencias solo para generar el PDF (Playwright, pypdf)
+│
+├── output/pdf/               ← entrega de la Fase 2 (la genera informe/generar_fase2.py)
+│   ├── informe_fase2.pdf     ← informe: 9 páginas con portada + 9 de anexos, evidencia adjunta
+│   ├── entrega_fase2.zip     ← proyecto completo y evidencia, sin .env ni .venv
+│   └── anexos/               ← manifiesto SHA-256 y prompts exactos del ID 1
+│
+├── fase1/
+│   ├── README.md             ← cómo ejecutar y usar el código de la Fase 1
+│   ├── decisiones_tomadas.md ← reglas y convenciones de P1
+│   │
+│   │   Parte A — Lenguaje formal (mini-C)
+│   ├── lexer.py              ← código → tokens
+│   ├── parser_formal.py      ← tokens → árbol (descendente recursivo)
+│   ├── test_parser_formal.py ← 24 pruebas con pytest
+│   ├── analisis_ll1.py       ← FIRST, FOLLOW y tabla LL(1): qué gramáticas son LL(1)
+│   │
+│   │   Parte B — Español
+│   ├── motor.py              ← parser genérico con backtracking (lo reutiliza la Fase 2)
+│   ├── gramatica_es.py       ← gramática del español (diccionario)
+│   ├── pruebas_base.py       ← las 20 oraciones acordadas
+│   ├── pruebas_fallas.py     ← 24 casos para la tabla de fallas
+│   ├── analisis_explosion.py ← cuenta cuánto crecen las reglas
+│   │
+│   │   Parte C — NLP · P3
+│   ├── demo_nlp.py           ← analiza las oraciones con spaCy
+│   ├── tabla_nlp.py          ← tabla lado a lado: CFG frente a spaCy (su regla la reutiliza la Fase 2)
+│   ├── visualizar_nlp.py     ← genera la página interactiva de la demo
+│   ├── plantilla_demo.html   ← diseño de esa página
+│   ├── salidas/              ← páginas generadas (se regeneran con un comando)
+│   │
+│   └── documentacion/        ← análisis para el informe, en orden de lectura
+│       ├── 01_parser_minic.md
+│       ├── 02_gramatica_espanol.md
+│       ├── 03_tabla_de_fallas.md
+│       ├── 04_explosion_de_reglas.md
+│       ├── 05_donde_si_falla_la_cfg.md
+│       ├── 06_demo_nlp.md
+│       └── reglas_gramatica_es.md ← producciones base de la gramática (P2)
+│
+└── fase2/
+    ├── README.md             ← reproducción paso a paso de la Fase 2
     │
-    │   Parte A — Lenguaje formal (mini-C)
-    ├── lexer.py              ← código → tokens
-    ├── parser_formal.py      ← tokens → árbol (descendente recursivo)
-    ├── test_parser_formal.py ← 24 pruebas con pytest
+    │   Gramática y corpus · P2
+    ├── gramatica_es.py       ← CFG de la Fase 2 (57 no terminales, 207 producciones)
+    ├── gramatica_es.txt      ← la misma CFG en texto, la que se pega en el prompt del LLM
+    ├── corpus.csv            ← 60 oraciones en 3 niveles, con salida y árbol esperados
     │
-    │   Parte B — Español
-    ├── motor.py              ← parser genérico con backtracking
-    ├── gramatica_es.py       ← gramática del español (diccionario)
-    ├── pruebas_base.py       ← las 20 oraciones acordadas
-    ├── pruebas_fallas.py     ← 24 casos para la tabla de fallas
-    ├── analisis_explosion.py ← cuenta cuánto crecen las reglas
+    │   Correr cada enfoque (cada uno escribe su log en logs/)
+    ├── correr_parser.py      ← P1: parser propio → logs/parser.json
+    ├── correr_spacy.py       ← P3: spaCy + regla → logs/spacy.json
+    ├── correr_nltk.py        ← P3: etiquetador NLTK + regla → logs/nltk.json
+    ├── llm_experimento.py    ← P4: Gemini zero-shot y few-shot → logs/llm_*.json
+    ├── preparar_prompts.py   ← P4: arma los prompts (sin clave ni red)
+    ├── validar_respuesta_llm.py ← P4: interpreta la respuesta sin corregirla
+    ├── continuar_corrida.py  ← P4: reanuda solo los intentos con error HTTP 503
+    ├── verificar_api.py      ← P4: cuenta tokens antes de gastar en la API
+    ├── test_llm.py           ← P4: pruebas del LLM sin red ni claves
+    ├── prompts/              ← base.txt y los ejemplos de few_shot.json
+    ├── logs/                 ← salida bruta de los cinco enfoques (evidencia)
     │
-    │   Parte C — NLP · P3
-    ├── demo_nlp.py           ← analiza las oraciones con spaCy
-    ├── tabla_nlp.py          ← tabla lado a lado: CFG frente a spaCy
-    ├── visualizar_nlp.py     ← genera la página interactiva de la demo
-    ├── plantilla_demo.html   ← diseño de esa página
-    ├── salidas/              ← páginas generadas (se regeneran con un comando)
+    │   Evaluación · P3
+    ├── evaluar.py            ← lee corpus y logs → métricas, tablas y gráficas
+    ├── resultados/           ← tablas.md, metricas.csv, detalle.csv, gráficas PNG
     │
-    └── documentacion/        ← análisis para el informe, en orden de lectura
-        ├── 01_parser_minic.md
-        ├── 02_gramatica_espanol.md
-        ├── 03_tabla_de_fallas.md
-        ├── 04_explosion_de_reglas.md
-        ├── 05_donde_si_falla_la_cfg.md
-        └── 06_demo_nlp.md
+    └── documentacion/        ← en orden de lectura
+        ├── 01_parser_propio.md
+        ├── 02_corpus.md
+        ├── 03_nlp_y_evaluacion.md
+        ├── 04_llm.md
+        ├── 05_verificacion_api.json, 06_verificacion_gemini.json
+        ├── 07_auditoria_corrida.json ← huellas SHA-256 de la corrida y de las tablas
+        └── decisiones_tomadas.md
 ```
 
 **Regla para ubicar archivos:** lo que pertenece a una fase va en su carpeta; lo que vale para todo el proyecto va en `docs/`.
@@ -146,9 +195,21 @@ python fase1/tabla_nlp.py                    # CFG 20/20 frente a spaCy 19/20 (-
 python fase1/visualizar_nlp.py               # página de la demo en fase1/salidas/
 ```
 
+## Ejecutar la Fase 2
+
+Para recalcular las tablas y gráficas del informe desde los logs guardados (no necesita clave de API):
+
+```bash
+python fase2/evaluar.py                      # → fase2/resultados/ (tablas.md, CSV y gráficas)
+```
+
+Para volver a correr cada enfoque y regenerar el PDF, ver [fase2/README.md](fase2/README.md).
+
 ## Qué leer y en qué orden
 
 1. Este README, para el panorama.
 2. [docs/decisiones.md](docs/decisiones.md), para las convenciones (notación, formato del árbol, reglas del motor).
 3. [fase1/README.md](fase1/README.md), para usar el código.
-4. `fase1/documentacion/01` a `06`, para el análisis que va al informe.
+4. `fase1/documentacion/01` a `06`, para el análisis que va al informe de la Fase 1.
+5. [docs/alcance_fase2.md](docs/alcance_fase2.md) y [fase2/README.md](fase2/README.md), para la Fase 2.
+6. `fase2/documentacion/01` a `04`, para el análisis que va al informe de la Fase 2.
