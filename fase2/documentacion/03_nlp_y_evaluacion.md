@@ -11,7 +11,7 @@ Este documento cubre la parte de P3 en la Fase 2. Es el material para las seccio
 ```bash
 python fase2/correr_spacy.py
 python fase2/correr_nltk.py      # la primera vez descarga cess_esp (unos 2 MB)
-python fase2/evaluar.py          # después de que estén los logs del parser y del LLM
+python fase2/evaluar.py          # lee los cinco logs guardados; no necesita la clave de API
 ```
 
 ## 1. Metodología: spaCy
@@ -98,43 +98,65 @@ Cada enfoque etiqueta con su propio sistema, así que todo se traduce a categor�
 - **Categorías esperadas:** salen del `arbol_esperado` que P2 escribió en el corpus. Por ejemplo, `(det_ms el)` significa que *el* es `det`.
 - **Error de etiquetado:** el enfoque **aceptó bien** la oración (VP), pero al menos una palabra quedó con una categoría distinta de la esperada.
 - `n_propio` es una categoría aparte a propósito: que spaCy tome «perro» por nombre propio es un error de etiquetado.
-- Para el parser y el LLM, que entregan árbol, también se cuenta si el árbol completo es distinto de `arbol_esperado`.
+- Para el parser y el LLM, que entregan árbol, también se cuenta si el árbol completo **no** es una derivación válida: se compara con `arbol_esperado` y con todos los árboles que la gramática asigna a la oración. Así, en la 47, que es ambigua, cualquiera de sus dos lecturas cuenta como correcta.
 
 ### Controles
 
 - **Corpus correcto:** si un log tiene otra cantidad de oraciones o un texto distinto del corpus, `evaluar.py` se detiene con un error. Así se evita mezclar corridas de corpus distintos.
 - **Logs pendientes:** un log que todavía no existe se marca como pendiente y no detiene la evaluación.
 - **Reproducibilidad:** no hay azar. Corriendo dos veces con las mismas entradas, los seis archivos de `resultados/` salen idénticos, byte a byte.
-- **`detalle.csv`:** tiene una fila por oración con la salida, el tipo (VP, FN, FP, VN) y el error de etiquetado de cada enfoque. Sirve para responder qué pasó en cualquier oración concreta.
+- **`detalle.csv`:** tiene una fila por oración con la salida, el tipo (VP, FN, FP, VN), el error de etiquetado y la fidelidad a la gramática de cada enfoque. Sirve para responder qué pasó en cualquier oración concreta.
 
-## 4. Resultados (parser, spaCy y NLTK)
+### Fidelidad a la gramática (agregada por P4)
 
-> Las columnas del LLM se agregan solas cuando P4 deje `logs/llm_zero_shot.json` y `logs/llm_few_shot.json` y se vuelva a correr `evaluar.py`. Las cifras finales están siempre en `resultados/tablas.md`.
+Las métricas anteriores miden contra el **español** (columna `esperado`). Para responder si el LLM sigue las reglas que se le dan, P4 agregó a `evaluar.py` una segunda medida:
+
+- **Fidelidad a la gramática** = porcentaje de oraciones en que el enfoque acepta exactamente lo que la CFG genera y rechaza lo demás. Para saber qué genera la CFG, `evaluar.py` analiza cada oración con el motor de la Fase 1 y `fase2/gramatica_es.py`: genera 36 de las 60.
+- **Correctas en español fuera de la gramática aceptadas:** de las 4 oraciones correctas que la CFG no genera (49–52), cuántas aceptó el enfoque. Si las acepta, usó su conocimiento del español en vez de las reglas.
+
+En spaCy y NLTK esta medida es solo informativa: no reciben la gramática, así que no se les pidió seguirla.
+
+## 4. Resultados finales (los cinco enfoques)
+
+Cifras de la corrida final del 18 nov, copiadas de `resultados/tablas.md`, que es la fuente de todas las cifras del informe. El LLM es Gemini 3.1 Flash-Lite (`gemini-3.1-flash-lite`, temperatura 0); su metodología y su análisis están en [04_llm.md](04_llm.md).
 
 Corpus: 60 oraciones (40 correctas y 20 incorrectas), 20 por nivel.
 
-| Métrica | Parser (CFG) | spaCy | NLTK |
-| --- | --- | --- | --- |
-| Exactitud | 93,3 % | 88,3 % | 96,7 % |
-| Precisión | 100,0 % | 86,7 % | 95,2 % |
-| Cobertura (recall) | 90,0 % | 97,5 % | 100,0 % |
-| Tasa de rechazo correcto | 100,0 % | 70,0 % | 90,0 % |
+| Métrica | Parser (CFG) | spaCy | NLTK | LLM zero-shot | LLM few-shot |
+| --- | --- | --- | --- | --- | --- |
+| Exactitud | 93,3 % | 88,3 % | 96,7 % | 90,0 % | 91,7 % |
+| Precisión | 100,0 % | 86,7 % | 95,2 % | 97,2 % | 97,3 % |
+| Cobertura (recall) | 90,0 % | 97,5 % | 100,0 % | 87,5 % | 90,0 % |
+| Tasa de rechazo correcto | 100,0 % | 70,0 % | 90,0 % | 95,0 % | 95,0 % |
 
-| Tipo | Parser (CFG) | spaCy | NLTK |
-| --- | --- | --- | --- |
-| Verdaderos positivos | 36 | 39 | 40 |
-| Verdaderos negativos | 20 | 14 | 18 |
-| Falsos positivos | 0 | 6 | 2 |
-| Falsos negativos | 4 | 1 | 0 |
-| Errores de etiquetado (de los VP) | 0 | 16 | 3 |
+| Tipo | Parser (CFG) | spaCy | NLTK | LLM zero-shot | LLM few-shot |
+| --- | --- | --- | --- | --- | --- |
+| Verdaderos positivos | 36 | 39 | 40 | 35 | 36 |
+| Verdaderos negativos | 20 | 14 | 18 | 19 | 19 |
+| Falsos positivos | 0 | 6 | 2 | 1 | 1 |
+| Falsos negativos | 4 | 1 | 0 | 5 | 4 |
+| Errores de etiquetado (de los VP) | 0 | 16 | 3 | 6 | 0 |
+| Árbol que no es derivación válida (de los VP) | 0 | n/a | n/a | 25 | 6 |
+| Respuestas inválidas | 0 | 0 | 0 | 3 | 0 |
 
-| Nivel | Parser (CFG) | spaCy | NLTK |
-| --- | --- | --- | --- |
-| 1 — simples | 20/20 | 18/20 | 20/20 |
-| 2 — intermedias | 20/20 | 20/20 | 20/20 |
-| 3 — complejas | 16/20 | 15/20 | 18/20 |
+| Nivel | Parser (CFG) | spaCy | NLTK | LLM zero-shot | LLM few-shot |
+| --- | --- | --- | --- | --- | --- |
+| 1 — simples | 20/20 | 18/20 | 20/20 | 18/20 | 20/20 |
+| 2 — intermedias | 20/20 | 20/20 | 20/20 | 19/20 | 20/20 |
+| 3 — complejas | 16/20 | 15/20 | 18/20 | 17/20 | 15/20 |
+
+| Medida | Parser (CFG) | spaCy | NLTK | LLM zero-shot | LLM few-shot |
+| --- | --- | --- | --- | --- | --- |
+| Fidelidad a la gramática | 100,0 % | 85,0 % | 90,0 % | 90,0 % | 98,3 % |
+| Correctas en español fuera de la gramática aceptadas (de 4) | 0/4 | 3/4 | 4/4 | 2/4 | 0/4 |
 
 Gráficas: `resultados/metricas.png` (precisión, cobertura y rechazo correcto por enfoque) y `resultados/aciertos_por_nivel.png`.
+
+**Lectura desde el lado de spaCy y NLTK:**
+
+- **NLTK más su regla tiene la mayor exactitud (58/60)**, pero acepta las 4 oraciones de 49–52 que la gramática no genera: su regla solo revisa concordancia, y esas oraciones concuerdan. Por eso su fidelidad a la gramática baja a 90 %. Es lo esperado: NLTK no conoce la gramática.
+- **spaCy tiene la cobertura más alta después de NLTK (39/40)**, pero el rechazo correcto más bajo (14/20) y el mayor número de errores de etiquetado (16).
+- **Frente al LLM:** las dos herramientas de NLP aceptan más oraciones correctas, y el LLM rechaza más incorrectas. Few-shot es el único enfoque, además del parser, que rechaza las 4 oraciones fuera de la gramática. El análisis del LLM está en [04_llm.md](04_llm.md).
 
 ## 5. Análisis de errores
 
@@ -177,6 +199,6 @@ Errores de etiquetado, todos en oraciones que acertó:
 
 - **La regla de NLTK es más elaborada que la de spaCy.** Conoce las relativas y la coordinación con «y», y se escribió conociendo el tipo de oraciones del corpus. La de spaCy viene de la Fase 1, antes de que existiera este corpus. El 96,7 % de NLTK mide **etiquetador + reglas escritas a mano**, no solo NLTK.
 - **Ni spaCy ni NLTK rechazan por sí mismos.** Sus tasas de rechazo correcto miden nuestra regla de concordancia aplicada a sus análisis, y por eso dependen de cómo se escribió esa regla.
-- **Los 20 errores del corpus son todos de concordancia.** Una regla de concordancia está bien adaptada a este corpus; con otro tipo de errores (orden de palabras, verbos que no llevan objeto) el resultado sería distinto.
+- **18 de los 20 errores del corpus son de concordancia.** Los otros dos no lo son: la 59 tiene un adjetivo fuera de lugar (*el perro que la gata persigue **negra** duerme*) y la 60 dos verbos sin enlace (*el perro come la carne **duermen***). Son justo las 2 oraciones incorrectas que fallan tanto spaCy como NLTK: una regla de concordancia está bien adaptada a la mayoría del corpus, pero no detecta errores de orden de palabras ni de estructura. Con más errores de ese tipo, sus tasas de rechazo correcto serían más bajas.
 - **Corpus pequeño:** 60 oraciones con un vocabulario reducido. Un solo error mueve la tasa de rechazo correcto un 5 % (1 de 20).
 - **`cess_esp` es prensa:** casi no tiene «gata», «duermen» ni la 1.ª persona, por eso hay 11 palabras desconocidas.
