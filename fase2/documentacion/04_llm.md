@@ -1,4 +1,4 @@
-# 4. LLM — P4 (Allan)
+# 4. LLM — P4
 
 ## Estado
 
