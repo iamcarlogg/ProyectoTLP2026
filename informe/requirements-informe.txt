@@ -1,3 +1,4 @@
-# Dependencias de autoría; no son necesarias para ejecutar evaluar.py.
-reportlab==4.4.9
+# Dependencias para generar el PDF del informe; no son necesarias para ejecutar evaluar.py.
+# Después de instalarlas: playwright install chromium
+playwright==1.63.0
 pypdf==6.21.4

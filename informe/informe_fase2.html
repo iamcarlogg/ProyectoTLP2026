@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Informe Fase 2 — TLP02-2026</title>
+<!--
+  Fuente del informe de la Fase 2 (mismo formato que informe_fase1.html).
+  Las marcas {{...}} las llena informe/generar_fase2.py con las tablas de
+  fase2/resultados/tablas.md, el corpus y los prompts exactos de los logs.
+  Generar el PDF y el ZIP: python informe/generar_fase2.py
+-->
+<style>
+  @page { size: Letter; margin: 2.2cm 2.2cm 2.2cm 2.2cm; }
+  @page portada { margin: 2.5cm; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Cambria", "Caladea", "Georgia", "Times New Roman", serif; font-size: 10.5pt; line-height: 1.38;
+         color: #111; margin: 0; }
+  h1, h2, h3, .portada, th, .tabla, figcaption, .nota { font-family: "Calibri", "Carlito", "Segoe UI", "Helvetica", sans-serif; }
+  h2 { font-size: 13pt; margin: 14pt 0 5pt; color: #000; border-bottom: 1px solid #bbb; padding-bottom: 2pt;
+       break-after: avoid; }
+  h3 { font-size: 11pt; margin: 9pt 0 3pt; color: #000; break-after: avoid; }
+  p { margin: 0 0 5pt; text-align: justify; hyphens: auto; }
+  ul, ol { margin: 0 0 5pt; padding-left: 17pt; }
+  li { margin-bottom: 2.5pt; text-align: justify; }
+  code, pre { font-family: "Consolas", "DejaVu Sans Mono", monospace; font-size: 8.6pt; }
+  code { background: #f1f3f8; padding: 0 2pt; border-radius: 2pt; }
+  pre { background: #f5f6fa; border: 1px solid #dde1ea; border-left: 3px solid #555; padding: 5pt 8pt;
+        margin: 4pt 0 7pt; line-height: 1.3; white-space: pre-wrap; break-inside: avoid; }
+  pre.largo { font-size: 7.4pt; break-inside: auto; }
+  table { border-collapse: collapse; width: 100%; margin: 4pt 0 3pt; font-size: 9pt; break-inside: avoid; }
+  th, td { border: 1px solid #c9cfe0; padding: 2.5pt 5pt; vertical-align: top; text-align: left; }
+  th { background: #e8ebf4; font-weight: 700; }
+  td.n, th.n { text-align: right; white-space: nowrap; }
+  table.corpus { font-size: 8.4pt; break-inside: auto; }
+  table.corpus td, table.corpus th { padding: 1.3pt 4pt; }
+  figcaption, .nota { font-size: 8.8pt; color: #444; margin: 0 0 8pt; }
+  figcaption b { color: #000; }
+  figure { margin: 0; break-inside: avoid; }
+  figure img { width: 100%; display: block; margin: 2pt auto 0; }
+  .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 10pt; }
+  .pregunta { border-left: 3px solid #555; padding: 3pt 0 3pt 9pt; margin: 0 0 7pt; break-inside: avoid; }
+  .pregunta p:first-child { font-family: "Calibri", "Carlito", sans-serif; font-weight: 700; margin-bottom: 2pt; }
+  .anexo { break-before: page; }
+
+  /* ---------- portada ---------- */
+  .portada { page: portada; height: 22.9cm; display: flex; flex-direction: column; text-align: center;
+             break-after: page; }
+  .portada .inst { font-size: 14pt; font-weight: 700; letter-spacing: .02em; }
+  .portada .fac { font-size: 12pt; margin-top: 4pt; }
+  .portada .asig { font-size: 12pt; margin-top: 18pt; }
+  .portada .linea { width: 60%; margin: 26pt auto; border-top: 2px solid #000; }
+  .portada .proy { font-size: 12pt; color: #000; font-weight: 700; letter-spacing: .08em; }
+  .portada h1 { font-size: 21pt; line-height: 1.2; margin: 10pt 0 6pt; color: #111; }
+  .portada .sub { font-size: 13pt; color: #333; }
+  .portada .fase { font-size: 12pt; margin-top: 14pt; }
+  .portada .equipo { margin: auto auto 0; width: 82%; font-size: 10.5pt; }
+  .portada .equipo th { text-align: center; }
+  .portada .datos { margin-top: 18pt; font-size: 11pt; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<!-- ============================ PORTADA ============================ -->
+<section class="portada">
+  <div class="inst">Universidad Centroamericana José Simeón Cañas</div>
+  <div class="fac">Facultad de Ingeniería y Arquitectura</div>
+  <div class="asig">Teoría de Lenguajes de Programación · TLP02-2026</div>
+  <div class="linea"></div>
+  <div class="proy">INFORME TÉCNICO · FASE 2</div>
+  <h1>Gramáticas formales y lenguaje natural:<br>experimentando los límites de la jerarquía de Chomsky</h1>
+  <div class="sub">Comparación experimental de una CFG, herramientas de NLP y un LLM</div>
+  <div class="fase">Grupo 8</div>
+
+  <table class="equipo">
+    <tr><th>Integrante</th><th>Carné</th></tr>
+    <tr><td>Carlo Enrique Guerra Vega</td><td>00052220</td></tr>
+    <tr><td>Federico Josué Calderón Durán</td><td>00215818</td></tr>
+    <tr><td>Kelvin Rodrigo Iraheta Morales</td><td>00083121</td></tr>
+    <tr><td>Allan Josué López Escalante</td><td>00049222</td></tr>
+  </table>
+  <div class="datos">
+    Docente: Jaime Roberto Clímaco Navarrete<br>
+    Antiguo Cuscatlán, La Libertad, 19 de noviembre de 2026
+  </div>
+</section>
+
+<!-- ============================ RESUMEN ============================ -->
+<h2>Resumen</h2>
+<p>La Fase 1 (Grupo 8, 2026) mostró que una CFG del español funciona mientras alguien escriba cada regla, y que spaCy cubre más oraciones a cambio de perder garantías. En esta fase se mide esa diferencia: el mismo corpus de 60 oraciones etiquetadas pasa por cuatro enfoques, que son un parser propio con una CFG del español, spaCy con reglas de concordancia, un etiquetador de NLTK con reglas y Gemini 3.1 Flash-Lite por API, este último en variantes zero-shot y few-shot. Se separan dos referencias: si la oración es correcta en español y si pertenece al lenguaje que genera la CFG. La gramática genera 36 de las 40 oraciones correctas; las otras cuatro (49–52) quedan fuera por construcciones que no tiene.</p>
+<p>Frente al español, la exactitud es 93.3 % para el parser, 88.3 % para spaCy, 96.7 % para NLTK, y 90.0 % y 91.7 % para el LLM en zero-shot y few-shot. El cambio más grande del LLM está en la fidelidad a la CFG: sube de 90.0 % a 98.3 % con ejemplos, rechaza las cuatro oraciones correctas que la gramática no genera y baja de 25 a 6 los árboles incorrectos. Aun así, acepta un error de concordancia y construye derivaciones inválidas. Las cifras se reproducen con <code>python fase2/evaluar.py</code> a partir de los cinco logs, sin volver a consultar la API.</p>
+
+<!-- ============================ 1. PARSER Y CFG ============================ -->
+<h2>1. Parser propio y CFG del español</h2>
+<p>El parser reutiliza el motor de la Fase 1 (<code>fase1/motor.py</code>): descenso recursivo con <em>backtracking</em> que devuelve todos los árboles que cubren la entrada completa. Ningún árbol significa rechazo; uno, aceptación; más de uno, ambigüedad. El motor recibe la gramática de <code>fase2/gramatica_es.py</code> sin copiarse ni añadir un corrector externo de concordancia.</p>
+<p>La CFG tiene 57 no terminales, 207 producciones y 47 palabras. La concordancia se codifica con categorías, igual que en la Fase 1: <code>sn_ms → det_ms n_ms mod_ms</code> solo admite determinante, sustantivo y modificadores masculinos singulares, y un sujeto singular solo se combina con un predicado singular. Cubre presente y pretérito, primera y tercera persona, adjetivos, adverbios, sintagmas preposicionales con «en» y «con», y relativas de sujeto y de objeto, también anidadas. La negación y la coordinación existen solo en formas fijas (<code>'no' v_s</code>, <code>v_s 'y' v_s</code>). Antes de analizar, el motor pasa el texto a minúsculas, quita puntos y comas y separa por espacios; todas las palabras del corpus están en el léxico, así que ningún rechazo se debe a vocabulario.</p>
+<p>La gramática acepta 36 oraciones y rechaza 24: las 20 incorrectas y las correctas 49–52, por producciones ausentes. La 47, «El perro come la carne en la casa.», tiene dos derivaciones, porque el sintagma preposicional puede modificar al objeto o al verbo. Frente a las 93 producciones de la gramática extendida de la Fase 1, las 207 actuales muestran el costo de cubrir más combinaciones de rasgos. Ese crecimiento no prueba que esas construcciones estén fuera del Tipo 2: agregar producciones las cubriría.</p>
+
+<!-- ============================ 2. CORPUS ============================ -->
+<h2>2. Corpus y criterios de selección</h2>
+<p>P2 escribió a mano 60 oraciones distintas, 40 correctas y 20 incorrectas, en <code>fase2/corpus.csv</code> con las columnas <code>id</code>, <code>oracion</code>, <code>nivel</code>, <code>esperado</code> y <code>arbol_esperado</code>. El <code>id</code> enlaza cada oración con todos los logs. La columna <code>esperado</code> indica si la oración es correcta en español, no lo que responde el parser.</p>
+<figure><table>
+  <tr><th>Nivel</th><th class="n">Correctas</th><th class="n">Incorrectas</th><th class="n">Total</th><th>Qué se prueba</th></tr>
+  <tr><td>1: simples</td><td class="n">14</td><td class="n">6</td><td class="n">20</td><td>Concordancia básica, pretérito y pronombres</td></tr>
+  <tr><td>2: intermedias</td><td class="n">14</td><td class="n">6</td><td class="n">20</td><td>Adjetivos, adverbios, objetos y sintagmas preposicionales</td></tr>
+  <tr><td>3: complejas</td><td class="n">12</td><td class="n">8</td><td class="n">20</td><td>Relativas, anidamiento, ambigüedad, concordancia a distancia y construcciones fuera de la CFG</td></tr>
+  <tr><td><b>Total</b></td><td class="n"><b>40</b></td><td class="n"><b>20</b></td><td class="n"><b>60</b></td><td>El mismo conjunto para los cinco logs</td></tr>
+</table>
+<figcaption><b>Tabla 1.</b> Composición del corpus por nivel. Los niveles se asignaron por fenómeno, no solo por longitud.</figcaption></figure>
+<p>Las oraciones simples comprueban aceptación y rechazo básicos; las intermedias combinan modificadores dentro de lo que la gramática intenta cubrir; las complejas prueban lo que probablemente la excede. Las incorrectas son sobre todo errores de concordancia nominal y verbal, incluida la distancia entre antecedente y verbo; la 59 y la 60 también involucran la posición del adjetivo y dos verbos sin enlace. El corpus usa 40 de las 47 palabras de la CFG y no tiene duplicados tras normalizar.</p>
+<p><strong>Dos referencias.</strong> Además de <code>esperado</code>, el evaluador calcula si cada oración pertenece al lenguaje de la CFG, con todas las derivaciones del motor. Las dos referencias solo difieren en 49–52: son correctas en español, pero la gramática no las genera. Rechazarlas cuenta como falso negativo frente al español y como acierto de fidelidad a la CFG. Esta distinción es la base para responder si el LLM respeta las reglas dadas.</p>
+
+<!-- ============================ 3. METODOLOGÍA ============================ -->
+<h2>3. Metodología</h2>
+<p>Cada enfoque se corrió una vez sobre el corpus completo y guardó un log JSON en <code>fase2/logs/</code> con metadatos (versiones, parámetros, fecha) y un resultado por <code>id</code>. El evaluador comprueba que cada log tenga los 60 <code>id</code> y la misma oración literal que el CSV antes de calcular nada.</p>
+<h3>3.1 Parser, spaCy y NLTK</h3>
+<p><strong>Parser</strong> (<code>correr_parser.py</code>, Python 3.12.10). Guarda veredicto, primer árbol, número de árboles, motivo del rechazo y tiempo.</p>
+<p><strong>spaCy</strong> 3.8.18 con el modelo <code>es_core_news_md</code> 3.8.0, entrenado con noticias en español (Honnibal et al., 2020; Explosion, s. f.). Recibe cada oración con su mayúscula y su punto originales. spaCy no rechaza oraciones, así que se reutiliza la regla de la Fase 1 (<code>fase1/tabla_nlp.py</code>): rechaza si sus propios rasgos muestran un desacuerdo de género o número entre determinante, sustantivo y adjetivo, o de número entre sujeto y verbo. Se evalúa el sistema «spaCy + regla», no un juicio de gramaticalidad propio de spaCy.</p>
+<p><strong>NLTK</strong> 3.10.3. No trae un modelo de español listo, así que se entrenó un etiquetador en cadena (BigramTagger → UnigramTagger → RegexpTagger por sufijos) con <code>cess_esp</code>: 6 030 oraciones y 188 802 palabras con etiquetas EAGLES (NLTK Project, s. f.). Entrenado con el 90 % inicial y probado con el 10 % final, etiqueta bien el 86.2 % de las palabras; para el experimento se entrenó con el 100 %. Ese 86.2 % no es la exactitud sobre nuestro corpus. Las etiquetas EAGLES traen género y número, y la regla de rechazo revisa grupos nominales vecinos, las relativas y el primer verbo principal; también trata un sujeto «X y Y» como plural. Por eso es más elaborada que la de spaCy.</p>
+<h3>3.2 LLM por API</h3>
+<p>Se llamó a la API de Google (<code>generateContent</code>) desde Python con <code>fase2/llm_experimento.py</code>, una solicitud independiente por oración, sin historial. El modelo pedido y devuelto en las 120 respuestas fue <code>gemini-3.1-flash-lite</code> (Google, 2026). La clave se leyó de la variable de entorno <code>GEMINI_API_KEY</code> y no aparece en prompts ni logs.</p>
+<figure><table>
+  <tr><th>Parámetro</th><th>Valor (idéntico en ambas variantes)</th></tr>
+  <tr><td>API y modelo</td><td><code>v1beta</code>; <code>gemini-3.1-flash-lite</code></td></tr>
+  <tr><td>Temperatura · máximo de salida · razonamiento</td><td>0 · <code>maxOutputTokens = 2048</code> · <code>thinkingLevel = MINIMAL</code></td></tr>
+  <tr><td>Llamadas</td><td>60 zero-shot y 60 few-shot, el 18 de noviembre de 2026; una oración por llamada</td></tr>
+  <tr><td>Formato pedido</td><td>JSON con <code>salida</code> («acepta» o «rechaza») y <code>arbol</code> en notación de paréntesis, <code>null</code> al rechazar</td></tr>
+</table>
+<figcaption><b>Tabla 2.</b> Configuración del experimento con el LLM.</figcaption></figure>
+<p><strong>Prompts.</strong> El zero-shot contiene las instrucciones, el texto completo de <code>fase2/gramatica_es.txt</code> y la oración. Pregunta si existe una derivación desde <code>oracion</code>, «aunque la oración sea correcta en español», no si la oración suena bien. El few-shot añade cinco ejemplos fijos: tres aceptaciones (pretérito con adverbio, primera persona con objeto, relativa de objeto) y dos rechazos (desacuerdo del adjetivo y negación con objeto). Ninguno está en el corpus, ni siquiera tras normalizar. No se envían el nivel, la etiqueta esperada ni resultados de otros enfoques. Los prompts exactos del ID 1 están en los Anexos C y D; los 120 están completos en los logs, cada uno con su timestamp de envío y de respuesta.</p>
+<p><strong>Interpretación de respuestas.</strong> Un JSON ilegible, un árbol que no se puede leer o una respuesta incompleta se guardan como <code>invalida</code>; no se repara ninguna respuesta. Hubo 163 intentos: 120 respuestas y 43 errores del servicio (42 HTTP 503 y un 429). Esos errores se reintentaron; ninguno se contó como rechazo y ninguna respuesta ya obtenida, inválida o no, se volvió a pedir. Temperatura 0 no garantiza respuestas idénticas en otra corrida.</p>
+<h3>3.3 Métricas</h3>
+<p>La clase positiva es «acepta». Frente a la etiqueta en español, un verdadero positivo (VP) es una correcta aceptada; un falso negativo (FN), una correcta rechazada; un falso positivo (FP), una incorrecta aceptada; y un verdadero negativo (VN), una incorrecta rechazada. Una respuesta <code>invalida</code> cuenta como error (FN o FP), así que las 60 oraciones quedan siempre en el denominador.</p>
+<figure><table>
+  <tr><th>Medida</th><th>Fórmula</th><th>Qué dice</th></tr>
+  <tr><td>Exactitud</td><td>(VP + VN) / 60</td><td>Decisiones correctas del total</td></tr>
+  <tr><td>Precisión</td><td>VP / (VP + FP)</td><td>De lo que aceptó, cuánto era correcto</td></tr>
+  <tr><td>Cobertura (recall)</td><td>VP / (VP + FN)</td><td>De las correctas, cuántas aceptó</td></tr>
+  <tr><td>Rechazo correcto</td><td>VN / (VN + FP)</td><td>De las incorrectas, cuántas rechazó</td></tr>
+  <tr><td>Fidelidad a la CFG</td><td>decisiones iguales a la pertenencia a la CFG / 60</td><td>Si acepta exactamente lo que la gramática genera</td></tr>
+</table>
+<figcaption><b>Tabla 3.</b> Métricas calculadas por <code>fase2/evaluar.py</code>.</figcaption></figure>
+<p>Un <strong>error de etiquetado</strong> es un VP en el que alguna palabra recibe una categoría distinta de la del árbol esperado, tras traducir cada sistema a un inventario común (determinante, nombre, verbo, adjetivo…). Cuenta oraciones, no palabras. Para el parser y el LLM, además, se compara el <strong>árbol completo</strong>: cuenta como correcto el árbol esperado o cualquier otro que la CFG asigne, así que en la 47 valen las dos lecturas. spaCy y NLTK no producen árboles de constituyentes, así que esa medida no se les aplica. La fidelidad de spaCy y NLTK es solo informativa: no recibieron la gramática.</p>
+
+<!-- ============================ 4. RESULTADOS ============================ -->
+<h2>4. Resultados</h2>
+<p>Todas las tablas de esta sección se copian de <code>fase2/resultados/tablas.md</code>, que genera el evaluador.</p>
+<figure>{{METRICAS}}
+<figcaption><b>Tabla 4.</b> Métricas frente a la etiqueta en español (60 oraciones).</figcaption></figure>
+<figure><img src="../fase2/resultados/metricas.png" alt="Gráfica de precisión, cobertura y rechazo correcto">
+<figcaption><b>Figura 1.</b> Precisión, cobertura y rechazo correcto por enfoque.</figcaption></figure>
+<p>NLTK con su regla obtiene la mayor exactitud (58/60). El parser clasifica 56/60 sin ningún falso positivo; sus cuatro fallos son las oraciones fuera de su cobertura. El LLM acierta 54/60 en zero-shot y 55/60 en few-shot. Los perfiles son distintos: el parser rechaza todas las incorrectas y cubre 36/40 correctas; spaCy cubre 39/40 pero acepta seis incorrectas; NLTK cubre las 40 y deja pasar dos; las dos variantes del LLM dejan pasar una.</p>
+<figure>{{ERRORES}}
+<figcaption><b>Tabla 5.</b> Clasificación de errores. Los errores de etiquetado y de árbol se cuentan entre los VP: son aciertos de clasificación con un análisis defectuoso, y no se suman a FP ni FN. n/a: no aplica a ese tipo de salida.</figcaption></figure>
+<figure>{{NIVELES}}
+<figcaption><b>Tabla 6.</b> Aciertos frente al español por nivel (la Figura 2 muestra los mismos datos en porcentaje).</figcaption></figure>
+<figure><img src="../fase2/resultados/aciertos_por_nivel.png" alt="Gráfica de exactitud por nivel">
+<figcaption><b>Figura 2.</b> Exactitud frente al español por nivel.</figcaption></figure>
+<p>Los niveles 1 y 2 casi no separan a los enfoques: todos aciertan al menos 18/20. Las diferencias aparecen en el nivel 3, donde están la concordancia a distancia y las construcciones fuera de la gramática. Que el few-shot baje en el nivel 3 de 17/20 a 15/20 no significa que obedezca peor: sus dos rechazos nuevos, la 50 y la 52, son justo los que pide la CFG (sección 5.2).</p>
+
+<!-- ============================ 5. ANÁLISIS DE ERRORES ============================ -->
+<h2>5. Análisis de errores</h2>
+<h3>5.1 Dónde falla cada herramienta</h3>
+<figure><table>
+  <tr><th>Enfoque</th><th>Falsos positivos (acepta una incorrecta)</th><th>Falsos negativos (rechaza una correcta)</th><th>VP con error de etiquetado</th></tr>
+  <tr><td>Parser (CFG)</td><td>ninguno</td><td>49, 50, 51, 52</td><td>ninguno</td></tr>
+  <tr><td>spaCy</td><td>15, 17, 56, 57, 59, 60</td><td>49</td><td>16 oraciones</td></tr>
+  <tr><td>NLTK</td><td>59, 60</td><td>ninguno</td><td>13, 33, 34</td></tr>
+  <tr><td>LLM zero-shot</td><td>56</td><td>4, 11, 26 (inválidas), 49, 51</td><td>29, 30, 42, 45, 50, 52</td></tr>
+  <tr><td>LLM few-shot</td><td>56</td><td>49, 50, 51, 52</td><td>ninguno</td></tr>
+</table>
+<figcaption><b>Tabla 7.</b> Oraciones mal clasificadas por enfoque, por <code>id</code> del corpus (fuente: <code>fase2/resultados/detalle.csv</code>). Las incorrectas que más enfoques dejan pasar (56, 59 y 60) son de nivel 3: concordancia a distancia.</figcaption></figure>
+<p><strong>Parser.</strong> Sus cuatro FN son las oraciones 49–52: «El perro y la gata duermen» (sujeto coordinado), «El perro come la carne y duerme» (coordinación con objeto), «El perro duerme y la gata come» (dos oraciones coordinadas) y «El perro no come la carne» (negación con objeto). Las cuatro fallas son de cobertura de esta gramática y se corregirían agregando producciones; sus 36 VP tienen el árbol correcto.</p>
+<p><strong>spaCy.</strong> En la 15 y la 17 («La perro duerme», «Los perro duermen») toma «perro» como nombre propio por la mayúscula inicial, así que no le asigna género y la regla no encuentra el desacuerdo, el mismo fallo observado en la Fase 1. En la 56, 57 y 59 relaciona mal palabras separadas por la relativa, y en la 60 no detecta dos verbos sin enlace. Su único FN, la 49, lo produce nuestra regla, que compara «perro» con «duermen» sin ver que el sujeto coordinado es plural. Además, 16 de sus 39 VP tienen alguna categoría distinta de la esperada.</p>
+<p><strong>NLTK.</strong> Deja pasar la 59 y la 60 porque su regla no relaciona el adjetivo alejado ni detecta el segundo verbo. Sus tres errores de etiquetado (13, 33 y 34) vienen de «duermo», «como» y «nosotras», palabras raras en <code>cess_esp</code> o que allí suelen tener otra categoría (como «como», que casi siempre es conjunción). Su ventaja sobre spaCy viene en parte de la regla, que conoce la coordinación y las relativas, y de un corpus con vocabulario reducido.</p>
+
+<h3>5.2 El LLM frente a las reglas formales</h3>
+<figure>{{FIDELIDAD}}
+<figcaption><b>Tabla 8.</b> Fidelidad del veredicto a la CFG. El parser es la referencia (100 % por construcción); spaCy y NLTK no recibieron las reglas, así que su valor es solo descriptivo.</figcaption></figure>
+<div class="dos">
+<div><figure><table>
+  <tr><th>ID</th><th>Correcta en español, fuera de la CFG</th><th>Zero</th><th>Few</th></tr>
+  <tr><td>49</td><td>El perro y la gata duermen.</td><td>rechaza</td><td>rechaza</td></tr>
+  <tr><td>50</td><td>El perro come la carne y duerme.</td><td><b>acepta</b></td><td>rechaza</td></tr>
+  <tr><td>51</td><td>El perro duerme y la gata come.</td><td>rechaza</td><td>rechaza</td></tr>
+  <tr><td>52</td><td>El perro no come la carne.</td><td><b>acepta</b></td><td>rechaza</td></tr>
+</table>
+<figcaption><b>Tabla 9.</b> Respuestas del LLM en las cuatro oraciones clave.</figcaption></figure></div>
+<div><p>El zero-shot acepta la 50 y la 52 aunque ninguna producción las genera: la gramática solo tiene <code>'no' v_s</code> y <code>v_s 'y' v_s</code>, sin objeto. Es evidencia observable de que se desvió de las reglas hacia el español general, aunque la salida no permite demostrar el mecanismo interno del modelo. El few-shot rechaza las cuatro.</p></div>
+</div>
+<p>La fidelidad sube de 54/60 a 59/60 por cinco cambios: la 50 y la 52, ahora rechazadas, y la 4, 11 y 26, que en zero-shot fueron respuestas inválidas (árboles con nodos sin etiqueta) y en few-shot son aceptaciones correctas. La exactitud frente al español solo gana un caso neto (tres recuperadas menos dos nuevos FN), por eso medir solo contra el español ocultaría la mayor parte de la mejora.</p>
+<p><strong>¿Influyó el quinto ejemplo?</strong> El último ejemplo del few-shot, «Las gatas no comen la carne» → rechaza, es la misma construcción que la 52, así que ese rechazo no se puede atribuir solo a las reglas. Aun excluyendo la 52, la fidelidad sube de 54/59 a 58/59. En particular, la 50 (coordinación con objeto) no se parece a ningún ejemplo y también pasó a rechazarse.</p>
+<h3>5.3 Una decisión correcta puede tener un árbol incorrecto</h3>
+<p>La fidelidad mide el veredicto, no la derivación. Al revisar con las producciones de la CFG todas las aceptaciones (no solo los VP), solo 10 de las 36 del zero-shot y 30 de las 37 del few-shot tienen un árbol válido. La Tabla 10 explica, con la respuesta guardada en el log, los casos en que el LLM se apartó de la gramática.</p>
+<figure><table>
+  <tr><th>ID</th><th>Variante</th><th>Qué respondió (extracto del log)</th><th>Por qué cuenta como error</th></tr>
+  <tr><td>4, 11, 26</td><td>zero-shot</td><td>«acepta» con <code>(mod_fp ())</code>; en la 26 además <code>(det_fp (las))</code></td><td>El veredicto era correcto, pero el árbol tiene nodos sin etiqueta y no se puede leer con las etiquetas de la CFG: se guardó como <code>invalida</code>, sin repararlo. En few-shot escribe <code>(mod_fp)</code> y las tres pasan a VP.</td></tr>
+  <tr><td>47</td><td>zero-shot</td><td><code>(sn (sn_fs … ) (sp (p en) …))</code></td><td>Usa <code>sn → sn_fs sp</code>, que no existe: en la CFG el SP va dentro de <code>mod_fs</code> o del predicado. Se penaliza la producción inventada, no la elección de una de las dos lecturas.</td></tr>
+  <tr><td>47</td><td>few-shot</td><td><code>(mod_fs (sp … (mod_fs (mod_ms))))</code></td><td>Elige la lectura válida «la carne en la casa», pero mete un <code>mod_ms</code> dentro de un <code>mod_fs</code>.</td></tr>
+  <tr><td>56</td><td>zero-shot</td><td><code>(rel_obj (que que) (sn_mp (det_mp los) (n_mp perros) …) (vt_p comen))</code></td><td>Inventa «los perros», que no están en la oración, para que «comen» tenga un sujeto plural. Acepta un error de concordancia.</td></tr>
+  <tr><td>56</td><td>few-shot</td><td><code>(rel_suj_s que (sv_s (v_s comen)))</code></td><td>Etiqueta «comen» como singular (<code>v_s</code>) aunque la gramática lo declara plural (<code>v_p</code>). Así «cuadra» la concordancia y acepta el error.</td></tr>
+</table>
+<figcaption><b>Tabla 10.</b> Casos del LLM que se apartan de la gramática, con su respuesta tal como está en <code>fase2/logs/</code>. Las demás aceptaciones con árbol inválido se listan en <code>07_auditoria_corrida.json</code>.</figcaption></figure>
+<p>La 56, «El perro negro que comen duerme.», es el único FP de las dos variantes y el caso más claro: en vez de rechazar, el modelo cambia la entrada o la categoría de una palabra hasta que la oración encaja. Este caso impide afirmar que el LLM sigue la gramática de forma perfecta.</p>
+
+<!-- ============================ 6. RESPUESTAS ============================ -->
+<h2>6. Conclusiones: respuesta a las tres preguntas</h2>
+<div class="pregunta">
+<p>Pregunta 1. ¿Qué tan lejos llega una CFG bien diseñada frente a las técnicas modernas?</p>
+<p>Llega lejos en garantías y corto en cobertura. Clasifica 56/60, rechaza las 20 incorrectas (ningún falso positivo, frente a 6 de spaCy, 2 de NLTK y 1 del LLM) y da un árbol correcto en sus 36 aceptaciones, algo que ningún otro enfoque logra. Pero solo acepta lo que alguien escribió: rechaza 4 oraciones correctas que spaCy, NLTK o el LLM aceptan, y para cubrir este corpus necesitó 207 producciones, frente a 93 en la Fase 1. El límite observado es de costo de especificación, no de poder expresivo: ninguna de sus fallas prueba que el español esté fuera del Tipo 2.</p>
+</div>
+<div class="pregunta">
+<p>Pregunta 2. ¿Un LLM respeta reglas formales cuando se le dan explícitamente?</p>
+<p>En gran parte, pero no por completo. Sin ejemplos, su veredicto coincide con la CFG en 54/60 oraciones: acepta 2 de las 4 correctas que la gramática no genera (50 y 52), lo que indica que se desvió hacia su conocimiento del español, y da 3 respuestas inválidas. Con ejemplos llega a 59/60, pero sigue aceptando un error de concordancia (56) y 7 de sus 37 árboles usan producciones que no existen. El LLM imita la gramática; no la aplica con garantías como el parser.</p>
+</div>
+<div class="pregunta">
+<p>Pregunta 3. ¿Mejora el LLM con ejemplos (few-shot) frente a solo las reglas (zero-shot)?</p>
+<p>Sí, y la mejora es mayor en estructura que en exactitud. La fidelidad a la CFG pasa de 90.0 % a 98.3 % (58/59 aun sin contar la 52, que se parece a un ejemplo), las respuestas inválidas de 3 a 0, los árboles incorrectos entre VP de 25 a 6 y los errores de etiquetado de 6 a 0. La exactitud frente al español solo sube de 90.0 % a 91.7 %. Es una sola corrida por variante, así que un caso neto de diferencia en exactitud no es significativo; la diferencia en árboles sí es amplia.</p>
+</div>
+<p>Ningún indicador aislado basta para elegir: la CFG sirve cuando se necesita rechazo estricto y una derivación verificable; NLTK y spaCy con reglas, cuando importa cubrir más oraciones; y el LLM queda en medio, con buena cobertura pero sin garantía de que su árbol respete la gramática.</p>
+
+<!-- ============================ 7. LIMITACIONES ============================ -->
+<h2>7. Limitaciones y reproducción</h2>
+<p>El corpus lo escribió el equipo con 47 palabras y no representa el español real; un tercio son incorrectas, así que cada error entre ellas mueve 5 puntos el rechazo correcto. Las reglas de spaCy y NLTK son nuestras y distintas entre sí, de modo que su comparación mide «herramienta + regla». Del LLM se probó un solo modelo, con una corrida por variante. No hay un conjunto externo de validación: las conclusiones describen este experimento, no una superioridad general.</p>
+<p>Para recalcular todas las tablas y gráficas desde los logs guardados, sin clave de API, desde la raíz del repositorio:</p>
+<pre>python -m venv .venv
+.venv\Scripts\activate          (Windows; en Linux o macOS: source .venv/bin/activate)
+pip install -r requirements.txt
+python fase2/evaluar.py</pre>
+<p>Dos ejecuciones locales dieron los seis archivos de <code>fase2/resultados/</code> idénticos byte a byte; sus huellas SHA-256 están en <code>fase2/documentacion/07_auditoria_corrida.json</code>. Los pasos para volver a correr cada enfoque están en <code>fase2/README.md</code>. Repositorio: <a href="https://github.com/iamcarlogg/ProyectoTLP2026">github.com/iamcarlogg/ProyectoTLP2026</a>.</p>
+
+<h2>Referencias</h2>
+<p class="nota" style="text-align:left">
+Explosion. (s. f.). <em>Spanish pipelines: es_core_news_md</em>. https://spacy.io/models/es#es_core_news_md<br>
+Google. (2026). <em>Gemini 3.1 Flash-Lite</em>. Gemini API documentation. https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite (consultado el 18 de noviembre de 2026).<br>
+Grupo 8, TLP02-2026. (2026). <em>Informe técnico Fase 1: Gramáticas formales y lenguaje natural</em>. Universidad Centroamericana José Simeón Cañas.<br>
+Honnibal, M., Montani, I., Van Landeghem, S. y Boyd, A. (2020). <em>spaCy: Industrial-strength Natural Language Processing in Python</em>. Zenodo.<br>
+NLTK Project. (s. f.). <em>nltk.tag.sequential: sequential backoff taggers</em>. https://www.nltk.org/api/nltk.tag.sequential.html
+</p>
+
+<!-- ============================ ANEXOS ============================ -->
+<section class="anexo">
+<h2>Anexo A. Evidencia digital</h2>
+<p>Los archivos completos van adjuntos a este PDF (panel de adjuntos del visor) y en el repositorio. Los logs incluyen todas las respuestas, no una selección.</p>
+<table>
+  <tr><th>Evidencia</th><th>Ubicación</th></tr>
+  <tr><td>Corpus completo con etiqueta y árbol esperado</td><td><code>fase2/corpus.csv</code></td></tr>
+  <tr><td>Cinco logs completos</td><td><code>fase2/logs/</code>: <code>parser.json</code>, <code>spacy.json</code>, <code>nltk.json</code>, <code>llm_zero_shot.json</code>, <code>llm_few_shot.json</code></td></tr>
+  <tr><td>Prompts y respuestas con timestamp</td><td>Campos <code>prompt</code>, <code>respuesta_completa</code>, <code>respuesta_http</code>, <code>timestamp</code> y <code>timestamp_fin</code> de cada resultado en los dos logs del LLM</td></tr>
+  <tr><td>Gramática, motor y evaluador</td><td><code>fase2/gramatica_es.py</code>, <code>gramatica_es.txt</code>; <code>fase1/motor.py</code>; <code>fase2/evaluar.py</code></td></tr>
+  <tr><td>Código del LLM</td><td><code>fase2/llm_experimento.py</code>, <code>preparar_prompts.py</code>, <code>validar_respuesta_llm.py</code>; <code>fase2/documentacion/04_llm.md</code></td></tr>
+  <tr><td>Tablas y gráficas</td><td><code>fase2/resultados/</code></td></tr>
+  <tr><td>Huellas SHA-256</td><td><code>fase2/documentacion/07_auditoria_corrida.json</code>; <code>MANIFIESTO_EVIDENCIA.txt</code> (adjunto)</td></tr>
+  <tr><td>Reproducción paso a paso</td><td><code>README.md</code>, <code>fase2/README.md</code>, <code>requirements.txt</code></td></tr>
+</table>
+</section>
+
+<section class="anexo">
+<h2>Anexo B. Corpus completo</h2>
+<p class="nota">La etiqueta indica corrección en español. Los árboles esperados están en el CSV. Las 49–52 son correctas en español pero no pertenecen a la CFG.</p>
+{{CORPUS}}
+</section>
+
+<section class="anexo">
+<h2>Anexo C. Prompt zero-shot exacto (ID 1)</h2>
+<p class="nota">Texto enviado para la oración 1. Los otros 59 prompts son iguales salvo la oración de entrada y están completos en el log.</p>
+<pre class="largo">{{PROMPT_ZERO}}</pre>
+<h3>Respuesta completa</h3>
+<p class="nota">{{TS_ZERO}}</p>
+<pre>{{RESP_ZERO}}</pre>
+</section>
+
+<section class="anexo">
+<h2>Anexo D. Prompt few-shot exacto (ID 1)</h2>
+<p class="nota">Mismo texto que el Anexo C más los cinco ejemplos resueltos. Se muestra completo.</p>
+<pre class="largo">{{PROMPT_FEW}}</pre>
+<h3>Respuesta completa</h3>
+<p class="nota">{{TS_FEW}}</p>
+<pre>{{RESP_FEW}}</pre>
+</section>
+
+</body>
+</html>

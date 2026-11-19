@@ -163,24 +163,25 @@ Con los mismos logs, `evaluar.py` produce siempre los mismos archivos. Si un log
 | Los dos logs del LLM | P4 | ✅ Completos: 60/60 por variante |
 | Documentación de P1, P2 y P3 | P1, P2, P3 | ✅ Listo en `documentacion/` |
 | Documentación de P4 | P4 | ✅ Lista en `documentacion/04_llm.md` |
-| Informe PDF y paquete de entrega | P4 | ✅ Listos en `output/pdf/`: 10 páginas principales + 9 de anexos y ZIP con código/evidencia |
+| Informe PDF y paquete de entrega | P4 | ✅ Listos en `output/pdf/`: 9 páginas de informe (portada incluida) + 9 de anexos y ZIP con código/evidencia |
 
 ## Informe y anexos de entrega
 
 PDF: `output/pdf/informe_fase2.pdf`. Paquete: `output/pdf/entrega_fase2.zip`
-(rutas relativas a la raíz). El PDF tiene 10 páginas principales y 9 de anexos:
-índice, corpus etiquetado y prompts exactos de ambas variantes para el ID 1.
+(rutas relativas a la raíz). El PDF tiene 9 páginas de informe (portada incluida) + 9 de anexos:
+índice de evidencia, corpus etiquetado y prompts exactos de ambas variantes para el ID 1.
 Incluye 16 archivos adjuntos con el corpus completo, cinco logs, gramática, motor,
 evaluador, tablas y huellas. El ZIP contiene el proyecto y toda la evidencia.
-La copia pública en Git debe actualizarse antes de enviar el correo.
 
 Para editar y regenerar el informe sin API:
 
 ```powershell
 python -m pip install -r informe/requirements-informe.txt
+playwright install chromium
 python informe/generar_fase2.py
 ```
 
-Editar primero `informe/informe_fase2.md`. El generador inserta las tablas oficiales
+Editar primero `informe/informe_fase2.html` (mismo formato que el informe de la Fase 1).
+El generador inserta las tablas oficiales de `resultados/tablas.md`, el corpus
 y utiliza las gráficas existentes; los prompts impresos se extraen de los logs.
 Los TXT de los prompts conservan bytes exactos y se adjuntan al PDF y al ZIP.

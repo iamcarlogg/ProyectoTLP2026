@@ -15,14 +15,14 @@ La Fase 1 se evaluó así: correctitud técnica 35 %, profundidad del análisis 
 
 ## Roles
 
-Cada persona mantiene el mismo eje en las dos fases. Completen la columna *Integrante*.
+Cada persona mantiene el mismo eje en las dos fases.
 
 | Rol | Integrante | Fase 1 | Fase 2 |
 | --- | --- | --- | --- |
-| **P1 — Parsers** | | Lexer y parser de mini-C, árbol, errores, motor genérico | Correr el parser propio sobre el corpus y guardar su log |
-| **P2 — Gramáticas** | | Extensión de la CFG al español y análisis formal de las fallas | CFG del español, reglas en texto para el prompt y corpus de 40+ oraciones etiquetadas |
-| **P3 — NLP** | | Demo con spaCy/NLTK sobre las oraciones de P2 | spaCy + NLTK o HuggingFace (logs), script de evaluación, tablas y gráfica |
-| **P4 — Teoría, LLM e integración** | | Marco teórico, tests del parser formal, README, informe | LLM zero-shot y few-shot (prompts, respuestas y timestamps) e informe final en PDF |
+| **P1 — Parsers** | Carlo Enrique Guerra Vega | Lexer y parser de mini-C, árbol, errores, motor genérico | Correr el parser propio sobre el corpus y guardar su log |
+| **P2 — Gramáticas** | Federico Josué Calderón Durán | Extensión de la CFG al español y análisis formal de las fallas | CFG del español, reglas en texto para el prompt y corpus de 40+ oraciones etiquetadas |
+| **P3 — NLP** | Kelvin Rodrigo Iraheta Morales | Demo con spaCy/NLTK sobre las oraciones de P2 | spaCy + NLTK o HuggingFace (logs), script de evaluación, tablas y gráfica |
+| **P4 — Teoría, LLM e integración** | Allan Josué López Escalante | Marco teórico, tests del parser formal, README, informe | LLM zero-shot y few-shot (prompts, respuestas y timestamps) e informe final en PDF |
 
 ## Estado (18 de noviembre de 2026)
 
@@ -58,19 +58,18 @@ python fase2/evaluar.py
 | Experimento Gemini `gemini-3.1-flash-lite` | P4 | ✅ 60 zero-shot + 60 few-shot |
 | Evaluación, tablas y dos gráficas | P3/P4 | ✅ Actualizadas con los cinco logs; reproducción verificada |
 | Documentación del LLM | P4 | ✅ [04_llm.md](fase2/documentacion/04_llm.md) |
-| Informe PDF y paquete de entrega | P4 | ✅ [PDF](output/pdf/informe_fase2.pdf): 10 páginas principales + 9 de anexos; [ZIP](output/pdf/entrega_fase2.zip) con evidencia y código |
+| Informe PDF y paquete de entrega | P4 | ✅ [PDF](output/pdf/informe_fase2.pdf): 9 páginas de informe (portada incluida) + 9 de anexos; [ZIP](output/pdf/entrega_fase2.zip) con evidencia y código |
 
-Few-shot frente a zero-shot: exactitud española 91,7 % frente a 90,0 %;
-fidelidad del veredicto a la CFG 98,3 % frente a 90,0 %. Las cifras oficiales y
+Few-shot frente a zero-shot: exactitud española 91.7 % frente a 90.0 %;
+fidelidad del veredicto a la CFG 98.3 % frente a 90.0 %. Las cifras oficiales y
 las demás métricas están en [tablas.md](fase2/resultados/tablas.md).
 La clave `GEMINI_API_KEY` vive en el entorno o `.env` local, ignorado por Git;
 no hace falta para evaluar los logs existentes.
 
 El PDF incorpora los archivos completos como adjuntos; el ZIP ofrece la misma evidencia
 y el proyecto reproducible sin `.env` ni `.venv`. Fuente editable del informe:
-`informe/informe_fase2.md`; generador `informe/generar_fase2.py` (dependencias
-de autoría en `informe/requirements-informe.txt`). La entrega completa de P4 está
-incluida en esta revisión. Queda enviar el correo institucional antes del 19 nov a las 17:30.
+`informe/informe_fase2.html` (mismo formato que el de la Fase 1); generador
+`informe/generar_fase2.py` (dependencias en `informe/requirements-informe.txt`).
 
 ## Mapa del repositorio
 
@@ -83,7 +82,9 @@ ProyectoTLP2026/
 │   ├── informe_fase1.pdf     ← informe entregable (7 páginas con portada)
 │   ├── generar_figuras.py    ← genera la Figura 1 del informe (correr antes de generar_pdf.py)
 │   ├── figuras/              ← figuras SVG del informe
-│   └── generar_pdf.py        ← HTML → PDF
+│   ├── generar_pdf.py        ← HTML → PDF (Fase 1)
+│   ├── informe_fase2.html    ← fuente del informe de la Fase 2 (editar aquí)
+│   └── generar_fase2.py      ← HTML → PDF de la Fase 2 con la evidencia adjunta y ZIP
 ├── docs/
 │   └── decisiones.md         ← convenciones del equipo, válidas para las dos fases
 └── fase1/

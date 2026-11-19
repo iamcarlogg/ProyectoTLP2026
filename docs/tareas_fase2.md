@@ -48,7 +48,7 @@ Todo va en `fase2/`, con los logs en `fase2/logs/`. Las fechas son propuestas y 
 - [x] **18 nov** — Dos prompts nuevos con las reglas completas de P2: zero-shot y few-shot con cinco ejemplos externos al corpus; salida JSON fija con veredicto y árbol. Ver `fase2/prompts/` y `fase2/preparar_prompts.py`.
 - [x] **18 nov** — `fase2/llm_experimento.py` (**por API, no por el chat**): corre todo el corpus con ambos prompts y guarda en `fase2/logs/llm_zero_shot.*` y `llm_few_shot.*`, por cada llamada, **el prompt exacto, la respuesta completa y el timestamp**.
 - [x] **18 nov** — Análisis del LLM: ¿respeta las reglas o se desvía hacia su conocimiento general? (la clave son las oraciones correctas en español que la gramática no acepta), y ¿few-shot mejora frente a zero-shot? → `fase2/documentacion/04_llm.md`; exactitud 90,0 % / 91,7 %, fidelidad CFG 90,0 % / 98,3 %.
-- [x] **18 nov** — Informe integrado en `output/pdf/informe_fase2.pdf`: 10 páginas principales más 9 de anexos; código y evidencia en `output/pdf/entrega_fase2.zip`:
+- [x] **18 nov** — Informe integrado en `output/pdf/informe_fase2.pdf`: 9 páginas de informe (portada incluida) + 9 de anexos; código y evidencia en `output/pdf/entrega_fase2.zip`:
   1. Parser y CFG (P1) · 2. Corpus (P2) · 3. Metodología (todos) · 4. Resultados (P3) · 5. Análisis de errores (todos; énfasis en el LLM) · 6. Conclusiones con datos.
   - Anexos: corpus, logs de los cuatro enfoques, prompts y respuestas con timestamp, `evaluar.py`.
 - [x] **18 nov** — README de `fase2/` actualizado: variable `GEMINI_API_KEY`, ejecución y reproducción desde los cinco logs, sin volver a consultar la API.

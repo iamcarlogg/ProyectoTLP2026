@@ -65,4 +65,4 @@ Sirve para demostrar que el experimento se corrió de verdad y no se armó a pos
 - [x] Logs brutos de cada uno de los cuatro enfoques sobre el corpus completo (`.txt`, `.json` o `.csv`; nada de capturas). → `fase2/logs/`: los cinco logs completos; LLM zero-shot y few-shot con 60 resultados cada uno
 - [x] Prompts exactos del LLM (zero-shot y few-shot) y las respuestas completas; **cada llamada con su timestamp**.
 - [x] Script de evaluación en Python que lee los logs y calcula las métricas; reproducible: mismas entradas → mismas tablas del informe. → `fase2/evaluar.py`
-- [x] Repositorio Git (o zip) con código, corpus, logs y un README que explique paso a paso cómo reproducir los experimentos. → Código y anexos incluidos en esta revisión, ZIP en `output/pdf/entrega_fase2.zip` y README completo; envío del correo pendiente
+- [x] Repositorio Git (o zip) con código, corpus, logs y un README que explique paso a paso cómo reproducir los experimentos. → Código y anexos incluidos en esta revisión, ZIP en `output/pdf/entrega_fase2.zip` y README completo
