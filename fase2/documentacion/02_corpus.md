@@ -1,4 +1,4 @@
-# 2. Corpus de prueba — P2 (Federico)
+# 2. Corpus de prueba — P2
 
 Material para la **sección 2 del informe**: descripción del corpus de prueba y criterios de selección por nivel. El corpus completo es un **anexo obligatorio** (`fase2/corpus.csv`).
 
